@@ -3,6 +3,7 @@ package org.gestion.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
@@ -14,6 +15,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 @ComponentScan({"org.gestion.web.controller", "org.gestion.services"})
 @PropertySource(value = {"classpath:application.properties"})
+@Import(JpaConfig.class)
 public class ServicesConfig {
 
 	//this bean needed to resolve ${property.name} syntax

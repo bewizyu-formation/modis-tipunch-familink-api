@@ -19,12 +19,11 @@ public class ProfilServiceJpa implements IProfilService {
 
 	@Override
 	@Transactional
-	public Profil create(Profil nvProfil) {
+	public void create(Profil nouveauProfil) {
 		System.out.println("dsghgshdshsdhdshdsfh");
-		em.persist(nvProfil);
-		return nvProfil;
-	}
-
+		em.persist(nouveauProfil);
+	}	
+	
 	@Override
 	@Transactional
 	public void update(Profil profil) {

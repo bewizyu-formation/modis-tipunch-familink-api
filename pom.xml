@@ -143,6 +143,14 @@
    			<artifactId>json</artifactId>
     		<version>20151123</version>
 		</dependency>
+		
+		<!-- Dépendences envoie de MAIL -->
+        <dependency>
+             <groupId>com.sun.mail</groupId>
+             <artifactId>javax.mail</artifactId>
+             <version>1.6.0</version>
+        </dependency>
+		
 	</dependencies>
 
 	<dependencyManagement>

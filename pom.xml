@@ -182,8 +182,9 @@
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost/spring-test?useSSL=false</jdbc.url>
 				<jdbc.user>root</jdbc.user>
+				<jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
 				<jdbc.pass>root</jdbc.pass>
-				<!-- <jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl> -->
+
 				<jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>
 				<jdbc.connections.max.active>5</jdbc.connections.max.active>
 			</properties>

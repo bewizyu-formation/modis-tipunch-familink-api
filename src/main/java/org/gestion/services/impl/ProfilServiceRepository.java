@@ -28,8 +28,8 @@ public class ProfilServiceRepository implements IProfilService {
 	}
 
 	@Override
-	public Profil create(Profil nouveauProfil) {
-		return profilRepository.save(nouveauProfil);
+	public void create(Profil nouveauProfil) {
+		 profilRepository.save(nouveauProfil);
 	}
 
 	@Override

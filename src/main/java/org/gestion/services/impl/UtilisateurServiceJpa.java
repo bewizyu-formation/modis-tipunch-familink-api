@@ -2,6 +2,7 @@ package org.gestion.services.impl;
 
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IUtilisateurService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,13 +63,21 @@ public class UtilisateurServiceJpa implements IUtilisateurService {
 	    return utilisateur;
 	}
 
-	@Override
+	/**
+		 * Récupération d'un utilisateur par son email
+		 * @param email
+		 * @return utilisateur
+	 */
 	public Utilisateur getUtilisateurByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//@Query("select u from Utilisateur u where u.email = :Email")
+		//Utilisateur getUtilisateurByEmail(@Param("Email") String email);
+		TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u where u.email = :Email",Utilisateur.class);
+		return query.setParameter("Email", email).getSingleResult();
+		
 	}
 
-	@Override
+	
 	public Utilisateur getUtilisateurByMotDePasse(String motDePasse) {
 		// TODO Auto-generated method stub
 		return null;

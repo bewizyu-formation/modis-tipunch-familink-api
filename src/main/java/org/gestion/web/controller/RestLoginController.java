@@ -3,7 +3,11 @@ package org.gestion.web.controller;
 import java.util.List;
 
 import org.gestion.entite.Utilisateur;
+import org.gestion.entite.Token;
+import org.gestion.entite.Login;
 import org.gestion.services.IUtilisateurService;
+import org.gestion.services.impl.UtilisateurServiceJpa;
+import org.hibernate.query.criteria.internal.expression.ConcatExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +17,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/login")
+@CrossOrigin(origins = "*")
 public class RestLoginController {
 
 	@Autowired
@@ -26,91 +43,59 @@ public class RestLoginController {
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
 
-
-
-	// ********************************** //
-	// ******* GET LIST utilisateurs ********** //
-	// ********************************** //
-
-	@RequestMapping(path = "/withJpa", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public List<Utilisateur> getUtilisateursWithJPA() {
-		return utilisateurServiceJpa.getUtilisateurs();
-	}
-
-	@RequestMapping(path = "/withRepository", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public List<Utilisateur> getUtilisateursWithRepository() {
-		return utilisateurServiceRepository.getUtilisateurs();
-	}
-
+	private Utilisateur monUtilisateur;
+	
 	// *********************************** //
-	// ******* GET utilisateur BY ID ********** //
+	// ******* GET utilisateur BY EMAIL ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/{idUtilisateur}/path-param", method = RequestMethod.GET)
+	@RequestMapping( method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public Utilisateur getUtilisateurByIdWithPathParam(@PathVariable("idUtilisateur") String idUtilisateur) {
-		return utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
-	}
-
-	@RequestMapping(path = "/login", method = RequestMethod.GET)
-	@ResponseBody
-	public Utilisateur getUtilisateurByIdWithQueryParam(@RequestParam("email") String email,@RequestParam("MotDePasse") String motDePasse) {
-				
-		try {
-				Utilisateur monUtilisateur = utilisateurServiceRepository.getUtilisateurByEmail(email);
-				
-				if (!monUtilisateur.equals(null) && monUtilisateur.getMotDePasse().equals(motDePasse)) {
-					
-//					JSONObject jObj;
-//					jObj = new JSONObject(monAuteur);
-//					response.getWriter().append(jObj.toString());
-					return null;
-			}
-		} catch (RuntimeException e) {	
+	public String Login(@RequestBody Login newLogin) {
+			JSONObject jObj;
+			jObj = new JSONObject();
 			
-//			response.setStatus(HttpServletResponse.SC_NOT_FOUND,"Auteur inconnu");
-//			JSONObject jObj;
-//			jObj = new JSONObject();
-//			jObj.put("404", "auteur inconnu");
-//			response.getWriter().append(jObj.toString());
+			try {
+				 try {
+					
+					 monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail());
+					 
+				} catch (Exception e) {
+					
+					jObj.put("action", "login");
+					jObj.put("description", "Utilisateur inconnu");
+					monUtilisateur=new Utilisateur();
+					
+				}				
+			
+				if (monUtilisateur == null) {
+					
+					jObj.put("action", "login");
+					jObj.put("description", "Mot de Passe érroné");
 
-		}finally {
-			return null;
-			//entityManager.close();
-		}
-	}
-
-	// *********************************** //
-	// ********** CREATE utilisateurs ********** //
-	// *********************************** //
-
-	@RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
-	public Utilisateur utilisateur(@RequestBody Utilisateur newUtilisateur) {
-		return utilisateurServiceJpa.create(newUtilisateur);
-	}
-
-	// *********************************** //
-	// ******* UPDATE utilisateur BY ID ******** //
-	// *********************************** //
-
-	@RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
-	@ResponseBody
-	public void updateUtilisateur(@RequestBody Utilisateur updateUtilisateur) {
-		utilisateurServiceRepository.update(updateUtilisateur);
-	}
-
-
-	//
-	// *********************************** //
-	// ******* DELETE utilisateur BY ID ******** //
-	// *********************************** //
-
-	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteUtilisateur(@PathVariable("idUtilisateur") String idUtilisateur) {
-		utilisateurServiceRepository.deleteUtilisateur(Integer.parseInt(idUtilisateur));
-
+					return jObj.toString();
+					
+				} else {
+					
+					if (monUtilisateur.getMotDePasse().equals(newLogin.getMotDePasse())) {
+						
+						Token monToken = new Token();
+						String base64encodedString = monToken.creerToken(monUtilisateur.getIdUtilisateur());
+						jObj.put("action", "login");
+						jObj.put("description", "Connexion réussie");
+						jObj.put("token", base64encodedString);
+						jObj.put("userData", new JSONObject(monUtilisateur));
+						
+						return jObj.toString();
+						}
+					}
+					jObj.put("action", "login");
+					jObj.put("description", "Mot de passe érroné");
+									
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return jObj.toString();
+			
 	}
 }

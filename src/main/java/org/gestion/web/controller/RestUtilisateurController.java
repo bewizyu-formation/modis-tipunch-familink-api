@@ -60,6 +60,7 @@ public class RestUtilisateurController {
 
 	@RequestMapping(path = "/createutilisateur", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	public Utilisateur utilisateur(@RequestBody Utilisateur newUtilisateur) {
+		
 		return utilisateurServiceJpa.create(newUtilisateur);
 	}
 

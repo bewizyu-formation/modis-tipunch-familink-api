@@ -21,7 +21,9 @@ public class UtilisateurServiceJpa implements IUtilisateurService {
 	@Transactional
 	public Utilisateur create(Utilisateur nvUtilisateur) {
 		em.persist(nvUtilisateur);
+		System.out.println("coucou");
 		return nvUtilisateur;
+
 	}
 
 	@Override

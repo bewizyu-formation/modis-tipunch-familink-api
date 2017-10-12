@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.gestion.entite.Contact;
 
@@ -25,6 +26,16 @@ public class Utilisateur {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idUtilisateur;
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", email=" + email + ", motDePasse=" + motDePasse
+				+ ", idContact=" + idContact + ", listeFavoris=" + listeFavoris + ", newIdContact=" + newIdContact
+				+ "]";
+	}
+
 	/**
 	 * email : String
 	 */
@@ -43,6 +54,10 @@ public class Utilisateur {
 	@OneToMany
 	@JoinColumn(name="ID_UTILISATEUR")
     private Set<Favoris> listeFavoris ;
+	
+	
+	@Transient
+	private int newIdContact;
 	
 	public Utilisateur() {
 		super();
@@ -90,6 +105,21 @@ public class Utilisateur {
 
 	public int getIdUtilisateur() {
 		return idUtilisateur;
+	}
+
+	/**
+	 * @return the newIdContact
+	 */
+	@Transient
+	public int getNewIdContact() {
+		return newIdContact;
+	}
+
+	/**
+	 * @param newIdContact the newIdContact to set
+	 */
+	public void setNewIdContact(int newIdContact) {
+		this.newIdContact = newIdContact;
 	}
 	
 	

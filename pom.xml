@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.tipunch</groupId>
-	<artifactId>familink-api</artifactId>
+	<groupId>diginamic</groupId>
+	<artifactId>projet-modele</artifactId>
 
 	<packaging>war</packaging>
 
@@ -136,13 +136,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
-		
-		<!-- Dépendences JSON -->
-		<dependency>
-    		<groupId>org.json</groupId>
-   			<artifactId>json</artifactId>
-    		<version>20151123</version>
-		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -167,7 +161,7 @@
 				<jdbc.driver>org.h2.Driver</jdbc.driver>
 				<jdbc.url>jdbc:h2:mem:test</jdbc.url>
 				<jdbc.user>root</jdbc.user>
-				<jdbc.pass></jdbc.pass>
+				<jdbc.pass>4</jdbc.pass>
 				<jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
 				<jdbc.dialect>org.hibernate.dialect.H2Dialect</jdbc.dialect>
 				<jdbc.connections.max.active>5</jdbc.connections.max.active>
@@ -182,9 +176,8 @@
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost/spring-test?useSSL=false</jdbc.url>
 				<jdbc.user>root</jdbc.user>
-				<jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
-				<jdbc.pass>root</jdbc.pass>
-
+				<jdbc.pass>4311</jdbc.pass>
+				<jpa.hibernate.ddl>update</jpa.hibernate.ddl>
 				<jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>
 				<jdbc.connections.max.active>5</jdbc.connections.max.active>
 			</properties>

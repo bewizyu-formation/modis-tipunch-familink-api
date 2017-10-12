@@ -47,6 +47,8 @@ public class ContactServiceRepository implements IContactService {
 			toUpdate.setProfil(contact.getProfil());
 			toUpdate.setVille(contact.getVille());
 			contactRepository.save(toUpdate);
+			System.out.println("tata");
+			System.out.println(toUpdate);
 		}
 
 	}

@@ -106,19 +106,19 @@ public class Contact {
 		this.profil = profil;
 	}
 
-	public Contact(String email, String nom, String prenom, String gravatar, String numTel, String adresse,
-			String codePostal, String ville, int idProfil) {
-		super();
-		this.email = email;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.gravatar = gravatar;
-		this.numTel = numTel;
-		this.adresse = adresse;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.idProfil = idProfil;
-	}
+//	public Contact(String email, String nom, String prenom, String gravatar, String numTel, String adresse,
+//			String codePostal, String ville, int idProfil) {
+//		super();
+//		this.email = email;
+//		this.nom = nom;
+//		this.prenom = prenom;
+//		this.gravatar = gravatar;
+//		this.numTel = numTel;
+//		this.adresse = adresse;
+//		this.codePostal = codePostal;
+//		this.ville = ville;
+//		this.idProfil = idProfil;
+//	}
 
 	public Contact(int idContact, String email, String nom, String prenom, String gravatar, String numTel, String adresse,
 			String codePostal, String ville, Profil profil) {

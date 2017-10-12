@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>diginamic</groupId>
-	<artifactId>projet-modele</artifactId>
+	<groupId>com.tipunch</groupId>
+	<artifactId>familink-api</artifactId>
 
 	<packaging>war</packaging>
 
@@ -161,7 +161,7 @@
 				<jdbc.driver>org.h2.Driver</jdbc.driver>
 				<jdbc.url>jdbc:h2:mem:test</jdbc.url>
 				<jdbc.user>root</jdbc.user>
-				<jdbc.pass>4</jdbc.pass>
+				<jdbc.pass></jdbc.pass>
 				<jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
 				<jdbc.dialect>org.hibernate.dialect.H2Dialect</jdbc.dialect>
 				<jdbc.connections.max.active>5</jdbc.connections.max.active>

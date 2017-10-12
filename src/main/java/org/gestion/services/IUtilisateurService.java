@@ -15,7 +15,7 @@ public interface IUtilisateurService {
 	/**
 	 * Sauvegarde un nouveau utilisateur
 	 *
-	 * @param nouveauGrade nouveau utilisateur
+	 * @param Utilisateur nouveau utilisateur
 	 */
 	Utilisateur create(Utilisateur nouveauUtilisateur);
 

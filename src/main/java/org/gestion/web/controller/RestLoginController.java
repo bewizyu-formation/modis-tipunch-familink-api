@@ -86,7 +86,7 @@ public class RestLoginController {
 	// ********** CREATE utilisateurs ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "/", method = RequestMethod.POST, produces  = "application/json;charset=UTF-8")
 	public Utilisateur utilisateur(@RequestBody Utilisateur newUtilisateur) {
 		return utilisateurServiceJpa.create(newUtilisateur);
 	}

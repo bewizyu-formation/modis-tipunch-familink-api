@@ -228,15 +228,6 @@ public class Contact {
 	 @Transient
 	public int getIdProfil() {
 		return idProfil;
-	}
-
-	/**
-	 * @param idProfil
-	 *            the idProfil to set
-	 */
-	 @Transient
-	public void setIdProfil(int idProfil) {
-		this.idProfil = idProfil;
-	}
+	 }
 
 }

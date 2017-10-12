@@ -1,5 +1,4 @@
 package org.gestion.web.controller;
-
 import org.gestion.entite.EmailSender;
 import org.gestion.entite.Token;
 import org.gestion.entite.Utilisateur;
@@ -12,13 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -49,13 +46,12 @@ public class RestReinitialisationMotDePasseController {
 			try {
 					
 				  monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(email);
-	
-				  EmailSender.envoyerMailSMTP("10.10.50.8",true);
+
+				  //EmailSender.envoyerMailSMTP("10.10.50.8",true);
 
 				  Token monToken = new Token();
 				  String base64encodedString = monToken.creerToken(monUtilisateur.getIdUtilisateur());
-				  jObj.put("tokenReinitialisation", base64encodedString);
-				  
+				  jObj.put("tokenReinitialisation", base64encodedString);				  
 					 
 				} catch (Exception e) {
 					
@@ -64,7 +60,6 @@ public class RestReinitialisationMotDePasseController {
 					
 				}				
 			monUtilisateur=new Utilisateur();
-			return jObj.toString();
-			
+			return jObj.toString();			
 	}
 }

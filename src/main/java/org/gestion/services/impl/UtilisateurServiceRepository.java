@@ -64,5 +64,4 @@ public class UtilisateurServiceRepository implements IUtilisateurService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

@@ -16,26 +16,27 @@ public class Token {
 
 	public Token() {
 		super();
-	}
-
-	
+  }
 	
 	public Token(int idUtilisateur) {
 		super();
-
 	}
-
 
 	public boolean isValide() {
 		return isValide;
 	}
 
-
-
 	public void setValide(boolean isValide) {
 		this.isValide = isValide;
 	}
+	
+	public String getCorps() {
+		return corps;
+	}
 
+	public void setCorps(String corps) {
+		this.corps = corps;
+	}
 
 
 	public String creerToken(int idUtilisateur) {
@@ -43,14 +44,11 @@ public class Token {
 		try {
 			
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			Date date = new Date();
-			
-			System.out.println("date : " +date);
+			Date date = new Date();		
 			
 			date.setTime(timestamp.getTime());
 			
 			String formattedDate = new SimpleDateFormat("yyMMddHHmmss").format(date);
-			System.out.println("formattedDate " + formattedDate);
 			String aCoder = Integer.toString(idUtilisateur)+"-"+formattedDate;
 			corps = Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));
 			
@@ -58,13 +56,36 @@ public class Token {
 			
 		}catch(Exception e){
 			
-			System.out.println("Error :" + e.getMessage());
-			
+		
 		}finally {
 			
 			return corps;
 		}
 		
+	}  
+	
+	public String creerToken() {
+		
+		try {
+			
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			Date date = new Date();			
+			date.setTime(timestamp.getTime());
+			
+			String formattedDate = new SimpleDateFormat("yyMMddHHmmss").format(date);
+			
+			String aCoder = formattedDate;
+			corps = "1-"+Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));
+			
+			return corps;
+			
+		}catch(Exception e){
+			
+			System.out.println("Error :" + e.getMessage());
+      
+		}finally {			
+			return corps;
+		}		
 	}  
      
 	public boolean tokenIsValide(String monToken) {
@@ -77,7 +98,6 @@ public class Token {
 	        byte[] base64decodedBytes = Base64.getDecoder().decode(monToken);
 			String monTokenDecode = new String(base64decodedBytes, "utf-8");
 	        try {
-				System.out.println("Original String: " + monTokenDecode);
 				Date date = new Date();
 				date.setTime(date.getTime()+ 2*60*1000);
 		        Date date2 = formatter.parse(monTokenDecode);

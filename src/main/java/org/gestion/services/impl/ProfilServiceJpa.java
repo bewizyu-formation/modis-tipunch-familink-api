@@ -20,7 +20,6 @@ public class ProfilServiceJpa implements IProfilService {
 	@Override
 	@Transactional
 	public void create(Profil nouveauProfil) {
-		System.out.println("dsghgshdshsdhdshdsfh");
 		em.persist(nouveauProfil);
 	}	
 	
@@ -46,17 +45,13 @@ public class ProfilServiceJpa implements IProfilService {
 
 	@Override
 	public void deleteProfil(int id) {
-		//em.getTransaction().begin();
 		Profil profil = getProfilById(id);
 		em.remove(profil);
-		//em.getTransaction().commit();
 	}
 
 	@Override
 	public Profil getProfilById(int id) {
-		//em.getTransaction().begin();
 		Profil profil = em.find(Profil.class, id);
-		//em.getTransaction().commit();
 	    return profil;
 	}
 

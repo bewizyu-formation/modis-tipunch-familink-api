@@ -39,6 +39,7 @@ public class ProfilServiceRepository implements IProfilService {
 
 		if (toUpdate != null) {
 			toUpdate.setCouleur(profil.getCouleur());
+			toUpdate.setNom(profil.getNom());
 			profilRepository.save(toUpdate);
 		}
 

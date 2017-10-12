@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Damien Pickel
+ */
+
 @RestController
 @RequestMapping("/profil")
 public class RestProfileController {
@@ -31,7 +35,7 @@ public class RestProfileController {
 
 	@RequestMapping(path = "/profils", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public List<Profil> getUtilisateursWithJPA() {
+	public List<Profil> getProfilList() {
 		return profilServiceJpa.getProfils();
 	}
 	
@@ -41,8 +45,7 @@ public class RestProfileController {
 
 	@RequestMapping(path = "/createProfil", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	public void CreateProfil(@RequestBody Profil newProfil) {
-		
-		System.out.println("coucou");
+
 		profilServiceJpa.create(new Profil(newProfil.getNom(), newProfil.getCouleur()));
 
 	}
@@ -55,6 +58,16 @@ public class RestProfileController {
 	@ResponseBody
 	public Profil getProfilById(@PathVariable("idProfil") String idProfil) {
 		return profilServiceRepository.getProfilById(Integer.parseInt(idProfil));
+	}
+	
+	// *********************************** //
+	// ******* UPDATE utilisateur BY ID ******** //
+	// *********************************** //
+
+	@RequestMapping(path = "/update/{idProfil}", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@ResponseBody
+	public void updateProfil(@RequestBody Profil updateProfil) {
+		profilServiceRepository.update(updateProfil);
 	}
 	
 	// *********************************** //

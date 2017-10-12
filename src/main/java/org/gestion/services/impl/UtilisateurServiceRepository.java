@@ -40,9 +40,7 @@ public class UtilisateurServiceRepository implements IUtilisateurService {
 		final Utilisateur toUpdate = utilisateurRepository.findOne(utilisateur.getIdUtilisateur());
 
 		if (toUpdate != null) {
-			toUpdate.setEmail(utilisateur.getEmail());
-			toUpdate.setEmail(utilisateur.getEmail());
-			toUpdate.setEmail(utilisateur.getEmail());			
+			toUpdate.setEmail(utilisateur.getEmail());		
 			toUpdate.setMotDePasse(utilisateur.getMotDePasse());
 			utilisateurRepository.save(toUpdate);
 		}

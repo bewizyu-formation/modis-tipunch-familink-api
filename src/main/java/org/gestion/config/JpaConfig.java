@@ -46,7 +46,7 @@ public class JpaConfig {
 		factory.setDataSource(dataSource);
 
 		Properties jpaProperties = new Properties();
-		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "update");
+		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "update"); //"drop-and-create"
 		factory.setJpaProperties(jpaProperties);
 
 		factory.afterPropertiesSet();

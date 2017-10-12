@@ -20,15 +20,14 @@ public class ProfilServiceJpa implements IProfilService {
 	@Override
 	@Transactional
 	public void create(Profil nouveauProfil) {
-		System.out.println("dsghgshdshsdhdshdsfh");
 		em.persist(nouveauProfil);
 	}	
 	
 	@Override
 	@Transactional
 	public void update(Profil profil) {
-		Query query = em.createQuery("FROM Profil c WHERE c.nom=:nom");
-		query.setParameter("email", profil.getNom());
+		Query query = em.createQuery("FROM Profil c WHERE c.nom=:NOM");
+		query.setParameter("NOM", profil.getNom());
 
 		Profil oldProfil = (Profil) query.getSingleResult();
 		if (!oldProfil.equals(null)) {
@@ -46,17 +45,13 @@ public class ProfilServiceJpa implements IProfilService {
 
 	@Override
 	public void deleteProfil(int id) {
-		//em.getTransaction().begin();
 		Profil profil = getProfilById(id);
 		em.remove(profil);
-		//em.getTransaction().commit();
 	}
 
 	@Override
 	public Profil getProfilById(int id) {
-		//em.getTransaction().begin();
 		Profil profil = em.find(Profil.class, id);
-		//em.getTransaction().commit();
 	    return profil;
 	}
 

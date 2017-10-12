@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 import org.gestion.entite.Profil;
 
@@ -32,9 +32,6 @@ public class Contact {
 	@Column(name = "NOM", nullable = false, length = 40)
 	private String nom;
 	
-	
-	
-
 	/**
 	 * nom : String
 	 */
@@ -82,8 +79,7 @@ public class Contact {
 
 	@OneToMany
 	@JoinColumn(name = "ID_CONTACT")	
-	private Set<Favoris> listeFavorisContact;
-	
+	private Set<Favoris> listeFavorisContact;	
 
 	@Transient
 	private int idProfil;
@@ -95,6 +91,7 @@ public class Contact {
 	public Contact(String email, String nom, String prenom, String gravatar, String numTel, String adresse,
 			String codePostal, String ville, Profil profil) {
 		super();
+
 		this.email = email;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -105,6 +102,7 @@ public class Contact {
 		this.ville = ville;
 		this.profil = profil;
 	}
+
 
 //	public Contact(String email, String nom, String prenom, String gravatar, String numTel, String adresse,
 //			String codePostal, String ville, int idProfil) {
@@ -135,7 +133,6 @@ public class Contact {
 		this.profil = profil;
 	}
 	
-
 	public String getEmail() {
 		return email;
 	}
@@ -212,6 +209,7 @@ public class Contact {
 		return idContact;
 	}
 
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -231,3 +229,4 @@ public class Contact {
 	 }
 
 }
+

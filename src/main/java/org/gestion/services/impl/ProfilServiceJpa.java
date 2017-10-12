@@ -28,7 +28,6 @@ public class ProfilServiceJpa implements IProfilService {
 	public void update(Profil profil) {
 		Query query = em.createQuery("FROM Profil c WHERE c.nom=:NOM");
 		query.setParameter("NOM", profil.getNom());
-
 		Profil oldProfil = (Profil) query.getSingleResult();
 		if (!oldProfil.equals(null)) {
 			oldProfil.setCouleur(profil.getCouleur());

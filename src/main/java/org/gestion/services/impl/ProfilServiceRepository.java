@@ -30,6 +30,7 @@ public class ProfilServiceRepository implements IProfilService {
 	@Override
 	public void create(Profil nouveauProfil) {
 		 profilRepository.save(nouveauProfil);
+
 	}
 
 	@Override
@@ -39,7 +40,9 @@ public class ProfilServiceRepository implements IProfilService {
 
 		if (toUpdate != null) {
 			toUpdate.setCouleur(profil.getCouleur());
+
 			toUpdate.setNom(profil.getNom());
+
 			profilRepository.save(toUpdate);
 		}
 

@@ -34,12 +34,13 @@ public class Profil {
 		super();
 	}
 
-	  
+
 	public Profil(String nom, String couleur) {
 		super();
 		this.nom = nom;
 		this.couleur = couleur;
 	}
+
 	
 	public Profil(int idProfile, String nom, String couleur) {
 		super();
@@ -59,10 +60,10 @@ public class Profil {
 	/**
 	 * @return the nom
 	 */
+
 	public String getNom() {
 		return nom;
 	}
-
 
 	/**
 	 * @param nom the nom to set
@@ -71,10 +72,10 @@ public class Profil {
 		this.nom = nom;
 	}
 
-
 	/**
 	 * @return the couleur
 	 */
+
 	public String getCouleur() {
 		return couleur;
 	}
@@ -83,6 +84,7 @@ public class Profil {
 	/**
 	 * @param couleur the couleur to set
 	 */
+
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;
 	}

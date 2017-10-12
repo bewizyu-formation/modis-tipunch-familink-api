@@ -1,11 +1,12 @@
 package org.gestion.web.controller;
 
-import java.util.List;
 
+import java.util.List;
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IUtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/utilisateur")
+
 public class RestUtilisateurController {
 
 	@Autowired
@@ -24,6 +26,7 @@ public class RestUtilisateurController {
 	@Autowired
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
+
 	
 	@Autowired
 	private RestContactController restContactController;
@@ -35,23 +38,26 @@ public class RestUtilisateurController {
 	// ******* GET LIST utilisateurS ********** //
 	// ********************************** //
 
+
 	@RequestMapping(path = "/utilisateurs", method = RequestMethod.GET, produces = "application/json")
+
 	@ResponseBody
 	public List<Utilisateur> getUtilisateursWithJPA() {
 		return utilisateurServiceJpa.getUtilisateurs();
 	}
 
-
-
 	// *********************************** //
 	// ******* GET utilisateur BY ID ********** //
 	// *********************************** //
 
+
 	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.GET)
+
 	@ResponseBody
 	public Utilisateur getUtilisateurByIdWithPathParam(@PathVariable("idUtilisateur") String idUtilisateur) {
 		return utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
 	}
+
 
 
 	// *********************************** //
@@ -85,6 +91,7 @@ public class RestUtilisateurController {
 	// *********************************** //
 	// ******* DELETE utilisateur BY ID ******** //
 	// *********************************** //
+
 
 	@RequestMapping(path = "/delete/{idUtilisateur}", method = RequestMethod.DELETE)
 	@ResponseBody

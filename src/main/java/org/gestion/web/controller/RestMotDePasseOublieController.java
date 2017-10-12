@@ -1,9 +1,7 @@
 package org.gestion.web.controller;
 
-
+import org.gestion.entite.EmailSender;
 import org.gestion.entite.Utilisateur;
-import org.gestion.entite.Token;
-import org.gestion.entite.Login;
 import org.gestion.services.IUtilisateurService;
 import org.gestion.services.impl.UtilisateurServiceJpa;
 import org.hibernate.query.criteria.internal.expression.ConcatExpression;
@@ -23,10 +21,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/login")
-@CrossOrigin(origins = "*")
-
-public class RestLoginController {
+@RequestMapping("/DemandeMDP")
+public class RestMotDePasseOublieController {
 
 	@Autowired
 	@Qualifier("utilisateurServiceJpa")
@@ -36,59 +32,44 @@ public class RestLoginController {
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
 
-
 	private Utilisateur monUtilisateur;
 	
 	// *********************************** //
 	// ******* GET utilisateur BY EMAIL ********** //
 	// *********************************** //
 
-	@RequestMapping( method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String Login(@RequestBody Login newLogin) {
+	public String getUtilisateurByIdWithQueryParam(@RequestParam("email") String email) {
+			
 			JSONObject jObj;
 			jObj = new JSONObject();
 			
 			try {
-				 try {
 					
-					 monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail());
+				  monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(email);
+	
+				  //EmailSender.envoyerMailSMTP("10.10.50.8",true);
+				  
+				  Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+				  /*Date date = new Date();
+				  date.setTime(timestamp.getTime());
+				  String formattedDate = new SimpleDateFormat("yyyyMMdd").format(date);
+				  String aCoder = Integer.toString(monUtilisateur.getIdUtilisateur())+"-"+formattedDate;
+				  String base64encodedString = Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));*/
+				  String base64encodedString = Base64.getEncoder().encodeToString("HELLO".getBytes("utf-8"));
+				  //String token = "http://localhost:8080/atelier/mvc/ReinitialisationMDP/"+base64encodedString;
+				  //jObj.put("action", "login");
+				  //jObj.put("description", "email connu, envoie d'un mail");
+				  jObj.put("tokenReinitialisation", base64encodedString);
 					 
 				} catch (Exception e) {
 					
 					jObj.put("action", "login");
-					jObj.put("description", "Utilisateur inconnu");
-					monUtilisateur=new Utilisateur();
+					jObj.put("description", "email inconnu");
 					
 				}				
-			
-				if (monUtilisateur == null) {
-					
-					jObj.put("action", "login");
-					jObj.put("description", "Mot de Passe érroné");
-
-					return jObj.toString();
-					
-				} else {
-					
-					if (monUtilisateur.getMotDePasse().equals(newLogin.getMotDePasse())) {
-						
-						Token monToken = new Token();
-						String base64encodedString = monToken.creerToken(monUtilisateur.getIdUtilisateur());
-						jObj.put("action", "login");
-						jObj.put("description", "Connexion réussie");
-						jObj.put("token", base64encodedString);
-						jObj.put("userData", new JSONObject(monUtilisateur));
-						
-						return jObj.toString();
-						}
-					}
-					jObj.put("action", "login");
-					jObj.put("description", "Mot de passe érroné");
-									
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			monUtilisateur=new Utilisateur();
 			return jObj.toString();
 			
 	}

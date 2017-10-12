@@ -34,7 +34,7 @@ public class Profil {
 		super();
 	}
 
-	
+	  
 	public Profil(String nom, String couleur) {
 		super();
 		this.nom = nom;

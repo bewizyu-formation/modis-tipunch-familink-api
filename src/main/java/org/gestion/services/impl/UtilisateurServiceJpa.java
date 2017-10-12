@@ -22,7 +22,9 @@ public class UtilisateurServiceJpa implements IUtilisateurService {
 	@Transactional
 	public Utilisateur create(Utilisateur nvUtilisateur) {
 		em.persist(nvUtilisateur);
+
 		return nvUtilisateur;
+
 	}
 
 	@Override
@@ -49,37 +51,32 @@ public class UtilisateurServiceJpa implements IUtilisateurService {
 
 	@Override
 	public void deleteUtilisateur(int id) {
-		//em.getTransaction().begin();
+		
 		Utilisateur utilisateur = getUtilisateurById(id);
 		em.remove(utilisateur);
-		//em.getTransaction().commit();
+		
 	}
 
 	@Override
 	public Utilisateur getUtilisateurById(int id) {
-		//em.getTransaction().begin();
-		Utilisateur utilisateur = em.find(Utilisateur.class, id);
-		//em.getTransaction().commit();
-	    return utilisateur;
+		  Utilisateur utilisateur = em.find(Utilisateur.class, id);
+			    return utilisateur;
 	}
+
 
 	/**
 		 * Récupération d'un utilisateur par son email
 		 * @param email
 		 * @return utilisateur
 	 */
+	@Override
 	public Utilisateur getUtilisateurByEmail(String email) {
-		
-		//@Query("select u from Utilisateur u where u.email = :Email")
-		//Utilisateur getUtilisateurByEmail(@Param("Email") String email);
 		TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u where u.email = :Email",Utilisateur.class);
 		return query.setParameter("Email", email).getSingleResult();
 		
 	}
-
 	
 	public Utilisateur getUtilisateurByMotDePasse(String motDePasse) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

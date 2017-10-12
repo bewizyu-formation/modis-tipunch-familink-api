@@ -1,32 +1,25 @@
 package org.gestion.entite;
 
+
 public class Login {
 	
-	private String email;
-	
+	private String email;	
 	private String motDePasse;
-
 	
 	public Login() {
-		super();
-		// TODO Auto-generated constructor stub
+		super();		
 	}
 
-	
-	
 	public Login(String email) {
 		super();
 		this.email = email;
 	}
-
-
-
+  
 	public Login(String email, String motDePasse) {
 		super();
 		this.email = email;
 		this.motDePasse = motDePasse;
 	}
-
 
 	public String getEmail() {
 		return email;

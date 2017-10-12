@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -40,7 +38,6 @@ public class RestMotDePasseOublieController {
 	// ******* GET utilisateur BY EMAIL ********** //
 	// *********************************** //
 
-
 	@RequestMapping( method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String MotDePasse(@RequestBody Login newLogin) {
@@ -49,8 +46,7 @@ public class RestMotDePasseOublieController {
 			jObj = new JSONObject();
 			
 			try {
-				  System.out.println("Appel appli");
-				  System.out.println("email : "+newLogin.getEmail());
+        
 				  monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail());
 				  System.out.println(monUtilisateur);
 

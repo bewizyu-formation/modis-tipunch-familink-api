@@ -29,7 +29,9 @@ public class UtilisateurServiceRepository implements IUtilisateurService {
 
 	@Override
 	public Utilisateur create(Utilisateur nouveauUtilisateur) {
+
 		return utilisateurRepository.save(nouveauUtilisateur);
+
 	}
 
 	@Override
@@ -38,9 +40,8 @@ public class UtilisateurServiceRepository implements IUtilisateurService {
 		final Utilisateur toUpdate = utilisateurRepository.findOne(utilisateur.getIdUtilisateur());
 
 		if (toUpdate != null) {
-			toUpdate.setEmail(utilisateur.getEmail());
-			toUpdate.setEmail(utilisateur.getEmail());
-			toUpdate.setEmail(utilisateur.getEmail());			
+
+			toUpdate.setEmail(utilisateur.getEmail());		
 			toUpdate.setMotDePasse(utilisateur.getMotDePasse());
 			utilisateurRepository.save(toUpdate);
 		}
@@ -63,5 +64,4 @@ public class UtilisateurServiceRepository implements IUtilisateurService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

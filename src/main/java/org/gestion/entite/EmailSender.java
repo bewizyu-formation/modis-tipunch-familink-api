@@ -1,6 +1,4 @@
 package org.gestion.entite;
-
-
 import java.util.Date;
 import java.util.Properties;
 import javax.mail.Message;
@@ -16,8 +14,10 @@ public class EmailSender {
 
 	private final static String MAILER_VERSION = "Java";
 
-	//public static boolean envoyerMailSMTP(String serveur, boolean debug) {
+
 	public static boolean envoyerMailSMTP() {
+
+
 		boolean result = false;
 
 		try {
@@ -32,7 +32,6 @@ public class EmailSender {
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.port", "587");
 			props.put("mail.smtp.starttls.enable", "true");
-
 
 			Session session = Session.getInstance(props,
 			  new javax.mail.Authenticator() {
@@ -49,23 +48,19 @@ public class EmailSender {
 
 			internetAddresses[0] = new InternetAddress("elboy62@gmail.com");
 
+
 			message.setRecipients(Message.RecipientType.TO, internetAddresses);
 
 			message.setSubject("Demande de nouveau mot de passe");
+
 			
 			Token monToken = new Token();
 			monToken.creerToken();
 
 			message.setText("http://localhost:4200/ReinitialisationMDP/"+monToken.getCorps());
 
-			//message.setHeader("X-Mailer", MAILER_VERSION);
-
 			message.setSentDate(new Date());
 			
-			// à enlever en prod 
-			//session.setDebug(debug);
-			
-
 			Transport.send(message);
 
 			result = true;

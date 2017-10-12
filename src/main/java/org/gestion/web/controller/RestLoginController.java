@@ -1,7 +1,4 @@
 package org.gestion.web.controller;
-
-import java.util.List;
-
 import org.gestion.entite.Utilisateur;
 import org.gestion.entite.Token;
 import org.gestion.entite.Groupe;
@@ -23,13 +20,11 @@ import org.springframework.web.bind.annotation.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -49,9 +44,8 @@ public class RestLoginController {
 	@Autowired
 	@Qualifier("groupeServiceJpa")
 	private IGroupeService groupeServiceJpa;
-
-	private Utilisateur monUtilisateur;
-	
+  
+	private Utilisateur monUtilisateur;	
 	private Groupe monGroupe;
 	
 	// *********************************** //
@@ -59,7 +53,6 @@ public class RestLoginController {
 	// *********************************** //
 
 	@RequestMapping( method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
-	@ResponseBody
 	public String Login(@RequestBody Login newLogin) {
 			JSONObject jObj;
 			jObj = new JSONObject();
@@ -93,11 +86,8 @@ public class RestLoginController {
 						jObj.put("action", "login");
 						jObj.put("description", "Connexion réussie");
 						jObj.put("token", base64encodedString);
-						//jObj.put("userInfos", new JSONObject(monUtilisateur));
-						
-						System.out.println("monUtilisateur.getIdUtilisateur() "+monUtilisateur.getIdUtilisateur());
-						//monGroupe = groupeServiceJpa.getGroupeByIdUtilisateur(monUtilisateur.getIdUtilisateur());
-						
+
+											
 						try {
 							
 							monGroupe = groupeServiceJpa.getGroupeByUtilisateur(monUtilisateur);
@@ -109,11 +99,7 @@ public class RestLoginController {
 							jObj.put("userGroup", "");
 							
 						}			
-						
-						
-						
-						//jObj.put("userGroup", new JSONObject(monGroupe));
-						
+											
 						return jObj.toString();
 						}
 					}

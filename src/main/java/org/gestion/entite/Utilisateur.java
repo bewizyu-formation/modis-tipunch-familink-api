@@ -32,12 +32,12 @@ public class Utilisateur {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
-		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", email=" + email + ", motDePasse=" + motDePasse
-				+ ", idContact=" + idContact + ", listeFavoris=" + listeFavoris + ", newIdContact=" + newIdContact
-				+ "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", email=" + email + ", motDePasse=" + motDePasse
+//				+ ", idContact=" + idContact + ", listeFavoris=" + listeFavoris + ", newIdContact=" + newIdContact
+//				+ "]";
+//	}
 
 	/**
 	 * email : String

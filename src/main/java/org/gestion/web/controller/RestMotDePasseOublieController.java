@@ -46,16 +46,15 @@ public class RestMotDePasseOublieController {
 			jObj = new JSONObject();
 			
 			try {
-        
+				
 				  monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail());
-				  System.out.println(monUtilisateur);
 
 				  EmailSender.envoyerMailSMTP();
 				 
 				  jObj.put("description", "Email reconnu");
 					 
 				} catch (Exception e) {
-					
+					System.out.println(e.getMessage());
 					jObj.put("action", "login");
 					jObj.put("description", "Email inconnu");
 					

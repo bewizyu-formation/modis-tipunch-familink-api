@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
 
 import org.gestion.entite.Profil;
 
@@ -77,7 +78,7 @@ public class Contact {
 	@OneToOne
 	private Profil profil;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_CONTACT")	
 	private Set<Favoris> listeFavorisContact;	
 
@@ -213,12 +214,12 @@ public class Contact {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
-		return "Contact [nom=" + nom + ", prenom=" + prenom + ", gravatar=" + gravatar
-				+ ", numTel=" + numTel + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville
-				+ ", email=" + email + ", profil=" + profil + ", listeFavorisContact=" + listeFavorisContact + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Contact [nom=" + nom + ", prenom=" + prenom + ", gravatar=" + gravatar
+//				+ ", numTel=" + numTel + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville
+//				+ ", email=" + email + ", profil=" + profil + ", listeFavorisContact=" + listeFavorisContact + "]";
+//	}
 
 	/**
 	 * @return the idProfil

@@ -34,7 +34,7 @@ public class Groupe {
 	 * nomGroupe : String
 	 */
 	@Column(name = "NOM_GROUPE", nullable = false, length = 40)
-	private String nomGroupe;
+	private String nom;
 	
 	/**
 	 * dateDeCreation : Date
@@ -53,10 +53,10 @@ public class Groupe {
 		super();
 	}
 
-	public Groupe(Utilisateur idUtilisateur, String nomGroupe, Date dateDeCreation) {
+	public Groupe(Utilisateur idUtilisateur, String nom, Date dateDeCreation) {
 		super();
 		this.idUtilisateur = idUtilisateur;
-		this.nomGroupe = nomGroupe;
+		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
 	}
 
@@ -68,12 +68,12 @@ public class Groupe {
 		this.idUtilisateur = idUtilisateur;
 	}
 
-	public String getNomGroupe() {
-		return nomGroupe;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setNomGroupe(String nomGroupe) {
-		this.nomGroupe = nomGroupe;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public Date getDateDeCreation() {

@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.gestion.entite.Utilisateur;
 import org.gestion.entite.Token;
+import org.gestion.entite.Groupe;
 import org.gestion.entite.Login;
+import org.gestion.services.IGroupeService;
 import org.gestion.services.IUtilisateurService;
 import org.gestion.services.impl.UtilisateurServiceJpa;
 import org.hibernate.query.criteria.internal.expression.ConcatExpression;
@@ -33,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/login")
 @CrossOrigin(origins = "*")
+
 public class RestLoginController {
 
 	@Autowired
@@ -42,14 +45,20 @@ public class RestLoginController {
 	@Autowired
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
+	
+	@Autowired
+	@Qualifier("groupeServiceJpa")
+	private IGroupeService groupeServiceJpa;
 
 	private Utilisateur monUtilisateur;
+	
+	private Groupe monGroupe;
 	
 	// *********************************** //
 	// ******* GET utilisateur BY EMAIL ********** //
 	// *********************************** //
 
-	@RequestMapping( method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping( method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String Login(@RequestBody Login newLogin) {
 			JSONObject jObj;
@@ -84,7 +93,26 @@ public class RestLoginController {
 						jObj.put("action", "login");
 						jObj.put("description", "Connexion réussie");
 						jObj.put("token", base64encodedString);
-						jObj.put("userData", new JSONObject(monUtilisateur));
+						//jObj.put("userInfos", new JSONObject(monUtilisateur));
+						
+						System.out.println("monUtilisateur.getIdUtilisateur() "+monUtilisateur.getIdUtilisateur());
+						//monGroupe = groupeServiceJpa.getGroupeByIdUtilisateur(monUtilisateur.getIdUtilisateur());
+						
+						try {
+							
+							monGroupe = groupeServiceJpa.getGroupeByUtilisateur(monUtilisateur);
+							
+							jObj.put("userData", new JSONObject(monGroupe));
+							 
+						} catch (Exception e) {
+							
+							jObj.put("userGroup", "");
+							
+						}			
+						
+						
+						
+						//jObj.put("userGroup", new JSONObject(monGroupe));
 						
 						return jObj.toString();
 						}

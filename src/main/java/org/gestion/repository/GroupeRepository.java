@@ -25,6 +25,6 @@ public interface GroupeRepository extends JpaRepository<Groupe, Integer> {
 	
 // création d'une méthode update au lieu d'utiliser save	
 	@Modifying
-	@Query("update Groupe u set u.nomGroupe = ?1, u.dateDeCreation = ?2 where u.idGroupe = ?9")
+	@Query("update Groupe u set u.nom = ?1, u.dateDeCreation = ?2 where u.idGroupe = ?9")
 	int setUpdate(String nomGroupe, String dateDeCreation, int idGroupe);
 }

@@ -1,6 +1,8 @@
 package org.gestion.web.controller;
 
 import org.gestion.entite.EmailSender;
+import org.gestion.entite.Login;
+import org.gestion.entite.Token;
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IUtilisateurService;
 import org.gestion.services.impl.UtilisateurServiceJpa;
@@ -21,7 +23,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/DemandeMDP")
+@RequestMapping("/forgot-password")
 public class RestMotDePasseOublieController {
 
 	@Autowired
@@ -38,35 +40,28 @@ public class RestMotDePasseOublieController {
 	// ******* GET utilisateur BY EMAIL ********** //
 	// *********************************** //
 
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+
+	@RequestMapping( method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String getUtilisateurByIdWithQueryParam(@RequestParam("email") String email) {
+	public String MotDePasse(@RequestBody Login newLogin) {
 			
 			JSONObject jObj;
 			jObj = new JSONObject();
 			
 			try {
-					
-				  monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(email);
-	
-				  //EmailSender.envoyerMailSMTP("10.10.50.8",true);
-				  
-				  Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-				  /*Date date = new Date();
-				  date.setTime(timestamp.getTime());
-				  String formattedDate = new SimpleDateFormat("yyyyMMdd").format(date);
-				  String aCoder = Integer.toString(monUtilisateur.getIdUtilisateur())+"-"+formattedDate;
-				  String base64encodedString = Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));*/
-				  String base64encodedString = Base64.getEncoder().encodeToString("HELLO".getBytes("utf-8"));
-				  //String token = "http://localhost:8080/atelier/mvc/ReinitialisationMDP/"+base64encodedString;
-				  //jObj.put("action", "login");
-				  //jObj.put("description", "email connu, envoie d'un mail");
-				  jObj.put("tokenReinitialisation", base64encodedString);
+				  System.out.println("Appel appli");
+				  System.out.println("email : "+newLogin.getEmail());
+				  monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail());
+				  System.out.println(monUtilisateur);
+
+				  EmailSender.envoyerMailSMTP();
+				 
+				  jObj.put("description", "Email reconnu");
 					 
 				} catch (Exception e) {
 					
 					jObj.put("action", "login");
-					jObj.put("description", "email inconnu");
+					jObj.put("description", "Email inconnu");
 					
 				}				
 			monUtilisateur=new Utilisateur();

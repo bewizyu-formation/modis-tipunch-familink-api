@@ -13,6 +13,14 @@ public class Login {
 	}
 
 	
+	
+	public Login(String email) {
+		super();
+		this.email = email;
+	}
+
+
+
 	public Login(String email, String motDePasse) {
 		super();
 		this.email = email;

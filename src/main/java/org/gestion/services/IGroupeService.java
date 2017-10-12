@@ -3,6 +3,7 @@ package org.gestion.services;
 import java.util.List;
 
 import org.gestion.entite.Groupe;
+import org.gestion.entite.Utilisateur;
 
 /**
  * Interface qui liste les méthodes de persistence pour la classe {@link Groupe} que doit posséder une classe
@@ -45,4 +46,13 @@ public interface IGroupeService {
 	 * @param id
 	 */
 	void deleteGroupe(final int id);
+	
+	/**
+	 * Récupération d'un groupe par son idUtilisateur
+	 * @param id
+	 * @return
+	 */
+	Groupe getGroupeByUtilisateur (final Utilisateur utilisateur);
+
+
 }

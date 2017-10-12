@@ -51,11 +51,11 @@ public class BDDRepositoryJPATest {
 	
 		{
 			
-			Profil monProfil= new Profil("MEDECIN","ROUGE");
+			Profil monProfil= new Profil("MEDECIN","#ff0000");
 			
 			profilService.save(monProfil);
 			
-			Contact monContact = new Contact("vr.you@hotmail.fr","Van", "RYU", "www.google.com", "0762729266", "37 rue du progres", "69100",
+			Contact monContact = new Contact("vr.you@hotmail.fr","Van", "YOU", "https://www.gravatar.com/avatar/19c519f177768c3ce57ebf0cf160b157", "0762729266", "37 rue du progres", "69100",
 					"Villeurbanne", monProfil);
 			contactService.save(monContact);
 			
@@ -64,7 +64,7 @@ public class BDDRepositoryJPATest {
 			utilisateurRepository.save(utilisateur);
 			
 			
-			Contact monContact2 = new Contact("blabla@hotmail.fr","Julien", "BERTRAND", "www.google.com", "0000000000", "Dans le caca", "69100",
+			Contact monContact2 = new Contact("blabla@hotmail.fr","Julien", "BERTRAND", "https://www.gravatar.com/avatar/19c519f177768c3ce57ebf0cf160b157", "0000000000", "NOMOD", "69100",
 					"Villeurbanne", monProfil);
 			contactService.save(monContact2);
 			

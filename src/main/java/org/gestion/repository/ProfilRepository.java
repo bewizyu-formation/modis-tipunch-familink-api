@@ -25,6 +25,6 @@ public interface ProfilRepository extends JpaRepository<Profil, Integer> {
 	
 // création d'une méthode update au lieu d'utiliser save	
 	@Modifying
-	@Query("update Profil u set u.nom = ?1, u.nom = ?2, u.couleur = ?3 where u.idProfil = ?4")
+	@Query("update Profil u set u.nom = ?1, u.couleur = ?2 where u.idProfil = ?3")
 	int setUpdate(String nom, String couleur, int id);
 }

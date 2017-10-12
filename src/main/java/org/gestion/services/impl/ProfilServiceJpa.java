@@ -20,15 +20,15 @@ public class ProfilServiceJpa implements IProfilService {
 	@Override
 	@Transactional
 	public void create(Profil nouveauProfil) {
-		System.out.println("dsghgshdshsdhdshdsfh");
+
 		em.persist(nouveauProfil);
 	}	
 	
 	@Override
 	@Transactional
 	public void update(Profil profil) {
-		Query query = em.createQuery("FROM Profil c WHERE c.nom=:nom");
-		query.setParameter("email", profil.getNom());
+		Query query = em.createQuery("FROM Profil c WHERE c.nom=:Nom");
+		query.setParameter("Nom", profil.getNom());
 
 		Profil oldProfil = (Profil) query.getSingleResult();
 		if (!oldProfil.equals(null)) {

@@ -1,15 +1,22 @@
 package org.gestion.web.controller;
 
+
+import java.util.List;
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IUtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/utilisateurs")
+@RequestMapping("/utilisateur")
+
 public class RestUtilisateurController {
 
 	@Autowired
@@ -20,48 +27,53 @@ public class RestUtilisateurController {
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
 
+	
+	@Autowired
+	private RestContactController restContactController;
+
+
 
 
 	// ********************************** //
 	// ******* GET LIST utilisateurS ********** //
 	// ********************************** //
 
-	@RequestMapping(path = "/withJpa", method = RequestMethod.GET, produces = "application/json")
+
+	@RequestMapping(path = "/utilisateurs", method = RequestMethod.GET, produces = "application/json")
+
 	@ResponseBody
 	public List<Utilisateur> getUtilisateursWithJPA() {
 		return utilisateurServiceJpa.getUtilisateurs();
-	}
-
-	@RequestMapping(path = "/withRepository", method = RequestMethod.GET, produces = "application/json")
-	@ResponseBody
-	public List<Utilisateur> getUtilisateursWithRepository() {
-		return utilisateurServiceRepository.getUtilisateurs();
 	}
 
 	// *********************************** //
 	// ******* GET utilisateur BY ID ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/{idUtilisateur}/path-param", method = RequestMethod.GET)
+
+	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.GET)
+
 	@ResponseBody
 	public Utilisateur getUtilisateurByIdWithPathParam(@PathVariable("idUtilisateur") String idUtilisateur) {
 		return utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
 	}
 
-	@RequestMapping(path = "/query-param", method = RequestMethod.GET)
-	@ResponseBody
-	public Utilisateur getUtilisateurByIdWithQueryParam(@RequestParam("idUtilisateur") String idUtilisateur) {
-		return utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
-	}
+
 
 	// *********************************** //
 	// ********** CREATE utilisateurs ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/createutilisateur", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
-	public Utilisateur utilisateur(@RequestBody Utilisateur newUtilisateur) {
-		
-		return utilisateurServiceJpa.create(newUtilisateur);
+
+    @RequestMapping(path="/createUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public void createUser (@RequestBody Utilisateur nouvelUtilisateur) {
+      
+    	Utilisateur newUtilisateur= new Utilisateur(nouvelUtilisateur.getEmail(), nouvelUtilisateur.getMotDePasse(), restContactController.getContactById(Integer.toString(nouvelUtilisateur.getNewIdContact())));
+      
+    	//restContactController.getContactById(Integer.toString(nouvelUtilisateur.getIdContact())
+    
+         utilisateurServiceRepository.create(newUtilisateur);
 	}
 
 	// *********************************** //
@@ -80,7 +92,8 @@ public class RestUtilisateurController {
 	// ******* DELETE utilisateur BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.DELETE)
+
+	@RequestMapping(path = "/delete/{idUtilisateur}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteUtilisateur(@PathVariable("idUtilisateur") String idUtilisateur) {
 		utilisateurServiceRepository.deleteUtilisateur(Integer.parseInt(idUtilisateur));

@@ -12,19 +12,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
 import org.gestion.entite.Profil;
 
 @Entity
 @Table(name = "CONTACT")
 public class Contact {
-	
+
 	/**
 	 * idContact : Int
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idContact;
-	
+
 	/**
 	 * nom : String
 	 */
@@ -36,50 +37,52 @@ public class Contact {
 	 */
 	@Column(name = "PRENOM", nullable = false, length = 40)
 	private String prenom;
-	
+
 	/**
 	 * gravatar : String
 	 */
 	@Column(name = "GRAVATAR", length = 255)
 	private String gravatar;
-	
+
 	/**
 	 * numTel : String
 	 */
 	@Column(name = "NUMTEL", nullable = false, length = 10)
 	private String numTel;
-	
+
 	/**
 	 * adresse : String
 	 */
 	@Column(name = "ADRESSE", length = 100)
 	private String adresse;
-	
+
 	/**
 	 * codePostal : String
 	 */
 	@Column(name = "CODE_POSTAL", length = 5)
 	private String codePostal;
-	
+
 	/**
 	 * ville : String
 	 */
 	@Column(name = "VILLE", length = 50)
 	private String ville;
-	
+
 	/**
 	 * email : String
 	 */
 	@Column(name = "EMAIL", length = 40)
 	private String email;
-	
+
 	@OneToOne
 	private Profil profil;
-	
+
 	@OneToMany
-	@JoinColumn(name="ID_CONTACT")
-    private Set<Favoris> listeFavorisContact ;
-	
+	@JoinColumn(name = "ID_CONTACT")	
+	private Set<Favoris> listeFavorisContact;	
+
+	@Transient
+	private int idProfil;
 
 	public Contact() {
 		super();
@@ -88,7 +91,8 @@ public class Contact {
 	public Contact(String email, String nom, String prenom, String gravatar, String numTel, String adresse,
 			String codePostal, String ville, Profil profil) {
 		super();
-		this.email=email;
+
+		this.email = email;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.gravatar = gravatar;
@@ -99,6 +103,35 @@ public class Contact {
 		this.profil = profil;
 	}
 
+
+//	public Contact(String email, String nom, String prenom, String gravatar, String numTel, String adresse,
+//			String codePostal, String ville, int idProfil) {
+//		super();
+//		this.email = email;
+//		this.nom = nom;
+//		this.prenom = prenom;
+//		this.gravatar = gravatar;
+//		this.numTel = numTel;
+//		this.adresse = adresse;
+//		this.codePostal = codePostal;
+//		this.ville = ville;
+//		this.idProfil = idProfil;
+//	}
+
+	public Contact(int idContact, String email, String nom, String prenom, String gravatar, String numTel, String adresse,
+			String codePostal, String ville, Profil profil) {
+		super();
+		this.idContact=idContact;
+		this.email = email;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.gravatar = gravatar;
+		this.numTel = numTel;
+		this.adresse = adresse;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.profil = profil;
+	}
 	
 	public String getEmail() {
 		return email;
@@ -175,7 +208,25 @@ public class Contact {
 	public int getIdContact() {
 		return idContact;
 	}
-	
-	
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Contact [nom=" + nom + ", prenom=" + prenom + ", gravatar=" + gravatar
+				+ ", numTel=" + numTel + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville
+				+ ", email=" + email + ", profil=" + profil + ", listeFavorisContact=" + listeFavorisContact + "]";
+	}
+
+	/**
+	 * @return the idProfil
+	 */
+	 @Transient
+	public int getIdProfil() {
+		return idProfil;
+	 }
 
 }
+

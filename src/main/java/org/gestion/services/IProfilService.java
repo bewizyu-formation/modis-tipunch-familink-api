@@ -16,8 +16,10 @@ public interface IProfilService {
 	 * Sauvegarde un nouveau Profil
 	 *
 	 * @param nouveauGrade nouveau Profil
+
+	 * @return 
 	 */
-	Profil create(Profil nouveauProfil);
+	void create(Profil nouveauProfil);
 
 	/**
 	 * Mise à jour d'un Profil

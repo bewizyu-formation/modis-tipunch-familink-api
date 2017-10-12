@@ -1,5 +1,6 @@
 package org.gestion.entite;
 
+
 public class Login {
 	
 	private String email;
@@ -35,7 +36,6 @@ public class Login {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
-	
 	
 
 }

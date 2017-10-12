@@ -1,15 +1,15 @@
 package org.gestion.repository;
 
-import java.math.BigDecimal;
+
 import java.util.List;
 
 import org.gestion.entite.Contact;
+import org.gestion.entite.Profil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.gestion.entite.Profil;
 
 @Transactional
 public interface ContactRepository extends JpaRepository<Contact, Integer> {

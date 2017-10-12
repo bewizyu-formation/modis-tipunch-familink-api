@@ -56,15 +56,6 @@ public class Profil {
 		return idProfil;
 	}
 
-
-	/**
-	 * @param idProfil the idProfil to set
-	 */
-	public void setIdProfil(int idProfil) {
-		this.idProfil = idProfil;
-	}
-
-
 	/**
 	 * @return the nom
 	 */

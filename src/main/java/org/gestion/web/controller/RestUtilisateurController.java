@@ -1,5 +1,7 @@
 package org.gestion.web.controller;
+
 import java.util.List;
+
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IUtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Julien Bertrand
+ */
+
 @RestController
-@RequestMapping("/utilisateur")
+@RequestMapping("/utilisateurs")
 
 public class RestUtilisateurController {
 
@@ -23,16 +29,15 @@ public class RestUtilisateurController {
 	@Autowired
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
-	
+
 	@Autowired
 	private RestContactController restContactController;
-  
+
 	// ********************************** //
 	// ******* GET LIST utilisateurS ********** //
 	// ********************************** //
 
-
-	@RequestMapping(path = "/utilisateurs", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Utilisateur> getUtilisateursWithJPA() {
 		return utilisateurServiceJpa.getUtilisateurs();
@@ -41,7 +46,6 @@ public class RestUtilisateurController {
 	// *********************************** //
 	// ******* GET utilisateur BY ID ********** //
 	// *********************************** //
-
 
 	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.GET)
 	@ResponseBody
@@ -53,13 +57,14 @@ public class RestUtilisateurController {
 	// ********** CREATE utilisateurs ********** //
 	// *********************************** //
 
-    @RequestMapping(path="/createUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public void createUser (@RequestBody Utilisateur nouvelUtilisateur) {
-      
-    	Utilisateur newUtilisateur= new Utilisateur(nouvelUtilisateur.getEmail(), nouvelUtilisateur.getMotDePasse(), restContactController.getContactById(Integer.toString(nouvelUtilisateur.getNewIdContact())));
-          
-         utilisateurServiceRepository.create(newUtilisateur);
+	@RequestMapping(path = "/", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public void createUser(@RequestBody Utilisateur nouvelUtilisateur) {
+
+		Utilisateur newUtilisateur = new Utilisateur(nouvelUtilisateur.getEmail(), nouvelUtilisateur.getMotDePasse(),
+				restContactController.getContactById(Integer.toString(nouvelUtilisateur.getNewIdContact())));
+
+		utilisateurServiceRepository.create(newUtilisateur);
 	}
 
 	// *********************************** //
@@ -77,7 +82,7 @@ public class RestUtilisateurController {
 	// ******* DELETE utilisateur BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "/delete/{idUtilisateur}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteUtilisateur(@PathVariable("idUtilisateur") String idUtilisateur) {
 		utilisateurServiceRepository.deleteUtilisateur(Integer.parseInt(idUtilisateur));

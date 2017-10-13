@@ -17,7 +17,6 @@ import org.gestion.entite.Utilisateur;
 @Entity
 @Table(name = "FAVORIS")
 public class Favoris {
-	
 
 	/**
 	 * idGroupe : Int
@@ -25,14 +24,14 @@ public class Favoris {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idFavoris;
-	
-	@OneToMany(mappedBy="listeFavorisGroupe")
+
+	@OneToMany(mappedBy = "listeFavorisGroupe")
 	private Set<Groupe> listeGroupes;
-	
-	@OneToMany(mappedBy="listeFavoris")
+
+	@OneToMany(mappedBy = "listeFavoris")
 	private Set<Utilisateur> ListeUtilisateurs;
-	
-	@OneToMany(mappedBy="listeFavorisContact")
+
+	@OneToMany(mappedBy = "listeFavorisContact")
 	private Set<Contact> ListeContacts;
 
 	public Favoris() {
@@ -54,7 +53,7 @@ public class Favoris {
 		this.listeGroupes = listeGroupes;
 	}
 
-	public Set<Utilisateur>  getUtilisateur() {
+	public Set<Utilisateur> getUtilisateur() {
 		return ListeUtilisateurs;
 	}
 
@@ -73,8 +72,5 @@ public class Favoris {
 	public int getIdFavoris() {
 		return idFavoris;
 	}
-	
-	
-	
-	
+
 }

@@ -15,7 +15,7 @@ import java.util.List;
 public class ProfilServiceRepository implements IProfilService {
 
 	@Autowired
-	private static ProfilRepository profilRepository;
+	private ProfilRepository profilRepository;
 
 	@Override
 	public void deleteProfil(int id) {

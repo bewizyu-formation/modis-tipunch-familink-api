@@ -1,7 +1,6 @@
 package org.gestion.entite;
 
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,8 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import org.gestion.entite.Profil;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "CONTACT")
@@ -32,7 +32,7 @@ public class Contact {
 	 */
 	@Column(name = "NOM", nullable = false, length = 40)
 	private String nom;
-	
+
 	/**
 	 * prenom : String
 	 */
@@ -79,10 +79,11 @@ public class Contact {
 	private Profil profil;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ID_CONTACT")	
-	private Set<Favoris> listeFavorisContact;	
+	@JoinColumn(name = "ID_CONTACT")
+	private Set<Favoris> listeFavorisContact;
 
 	@Transient
+	@JsonIgnore
 	private int idProfil;
 
 	public Contact() {
@@ -104,25 +105,10 @@ public class Contact {
 		this.profil = profil;
 	}
 
-
-//	public Contact(String email, String nom, String prenom, String gravatar, String numTel, String adresse,
-//			String codePostal, String ville, int idProfil) {
-//		super();
-//		this.email = email;
-//		this.nom = nom;
-//		this.prenom = prenom;
-//		this.gravatar = gravatar;
-//		this.numTel = numTel;
-//		this.adresse = adresse;
-//		this.codePostal = codePostal;
-//		this.ville = ville;
-//		this.idProfil = idProfil;
-//	}
-
-	public Contact(int idContact, String email, String nom, String prenom, String gravatar, String numTel, String adresse,
-			String codePostal, String ville, Profil profil) {
+	public Contact(int idContact, String email, String nom, String prenom, String gravatar, String numTel,
+			String adresse, String codePostal, String ville, Profil profil) {
 		super();
-		this.idContact=idContact;
+		this.idContact = idContact;
 		this.email = email;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -133,7 +119,7 @@ public class Contact {
 		this.ville = ville;
 		this.profil = profil;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -210,24 +196,8 @@ public class Contact {
 		return idContact;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-//	@Override
-//	public String toString() {
-//		return "Contact [nom=" + nom + ", prenom=" + prenom + ", gravatar=" + gravatar
-//				+ ", numTel=" + numTel + ", adresse=" + adresse + ", codePostal=" + codePostal + ", ville=" + ville
-//				+ ", email=" + email + ", profil=" + profil + ", listeFavorisContact=" + listeFavorisContact + "]";
-//	}
-
-	/**
-	 * @return the idProfil
-	 */
-	 @Transient
+	@Transient
 	public int getIdProfil() {
 		return idProfil;
-	 }
-
+	}
 }
-

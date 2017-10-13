@@ -65,7 +65,7 @@ public class RestContactController {
 				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
 				nouveauContact.getCodePostal(), nouveauContact.getVille(),
 				restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
-		contactServiceRepository.create(nouveauContact);
+		contactServiceRepository.create(newContact);
 
 	}
 

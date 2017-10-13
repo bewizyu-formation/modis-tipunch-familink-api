@@ -13,8 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
+
+/**
+ * @author Julien Bertrand
+ */
+
 @RestController
-@RequestMapping("/contact")
+@RequestMapping("/contacts")
 public class RestContactController {
 
 	@Autowired
@@ -32,14 +39,13 @@ public class RestContactController {
 	// ******* GET LIST contacts ********** //
 	// ********************************** //
 
-	@RequestMapping(path = "/contacts", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Contact> getContactsWithJPA() {
 
 		return contactServiceJpa.getContacts();
 	}
 
-	
 	// *********************************** //
 	// ******* GET contact BY ID ********** //
 	// *********************************** //
@@ -54,11 +60,10 @@ public class RestContactController {
 	// ********** CREATE contacts ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/createContact", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(path = "/", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void createContact(@RequestBody Contact nouveauContact) {
 
-		System.out.println(nouveauContact.getIdProfil());
 
 		Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
 				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
@@ -73,27 +78,18 @@ public class RestContactController {
 	// ******* UPDATE contact BY ID ******** //
 	// *********************************** //
 
-	
-	
-	
-	//Update= la requete est bonne et on recupère bien les infos modifiées mais celles-ci ne s'inscrivent pas en base.
-	
-	@RequestMapping(path = "/update/{idContact}", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+
+	@RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void updateContact(@RequestBody Contact updateContact) {
-		
-		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(), updateContact.getPrenom(),
-				updateContact.getGravatar(), updateContact.getNumTel(), updateContact.getAdresse(),
-				updateContact.getCodePostal(),updateContact .getVille(),
+
+		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
+				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
+				updateContact.getAdresse(), updateContact.getCodePostal(), updateContact.getVille(),
 				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));
 
 		contactServiceRepository.update(upContact);
-		System.out.println(upContact);
-		
-		
-		
-		
-		
+
 	}
 
 	//
@@ -101,7 +97,7 @@ public class RestContactController {
 	// ******* DELETE contact BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "/delete/{idContact}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/{idContact}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteContact(@PathVariable("idContact") String idContact) {
 		contactServiceRepository.deleteContact(Integer.parseInt(idContact));

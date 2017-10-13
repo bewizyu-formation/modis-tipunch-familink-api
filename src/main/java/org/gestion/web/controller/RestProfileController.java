@@ -18,38 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/profil")
+@RequestMapping("/profils")
 public class RestProfileController {
-	
+
 	@Autowired
 	@Qualifier("profilServiceJpa")
 	private IProfilService profilServiceJpa;
-	
+
 	@Autowired
 	@Qualifier("profilServiceRepository")
 	private IProfilService profilServiceRepository;
-	
+
 	// ********************************** //
 	// ******** GET LIST profils ******** //
 	// ********************************** //
 
-	@RequestMapping(path = "/profils", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Profil> getProfilList() {
 		return profilServiceJpa.getProfils();
 	}
-	
-	// *********************************** //
-	// ********** CREATE profil ********** //
-	// *********************************** //
 
-	@RequestMapping(path = "/createProfil", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
-	public void CreateProfil(@RequestBody Profil newProfil) {
-
-		profilServiceJpa.create(new Profil(newProfil.getNom(), newProfil.getCouleur()));
-
-	}
-	
 	// *********************************** //
 	// ******* GET utilisateur BY ID ********** //
 	// *********************************** //
@@ -59,22 +48,33 @@ public class RestProfileController {
 	public Profil getProfilById(@PathVariable("idProfil") String idProfil) {
 		return profilServiceRepository.getProfilById(Integer.parseInt(idProfil));
 	}
-	
+
+	// *********************************** //
+	// ********** CREATE profil ********** //
+	// *********************************** //
+
+	@RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	public void CreateProfil(@RequestBody Profil newProfil) {
+
+		profilServiceJpa.create(new Profil(newProfil.getNom(), newProfil.getCouleur()));
+
+	}
+
 	// *********************************** //
 	// ******* UPDATE utilisateur BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "/update/{idProfil}", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void updateProfil(@RequestBody Profil updateProfil) {
 		profilServiceRepository.update(updateProfil);
 	}
-	
+
 	// *********************************** //
 	// ******* DELETE utilisateur BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "/delete/{idProfil}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/{idProfil}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteProfil(@PathVariable("idProfil") String idProfil) {
 		profilServiceRepository.deleteProfil(Integer.parseInt(idProfil));

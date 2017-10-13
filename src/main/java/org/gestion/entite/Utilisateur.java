@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import javax.persistence.Transient;
 
-
 import org.gestion.entite.Contact;
 
 @Entity
@@ -27,41 +26,30 @@ public class Utilisateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idUtilisateur;
-	
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-//	@Override
-//	public String toString() {
-//		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", email=" + email + ", motDePasse=" + motDePasse
-//				+ ", idContact=" + idContact + ", listeFavoris=" + listeFavoris + ", newIdContact=" + newIdContact
-//				+ "]";
-//	}
 
 	/**
 	 * email : String
 	 */
 	@Column(name = "EMAIL", nullable = false, length = 20)
 	private String email;
-	
+
 	/**
 	 * mot_de_passe : String
 	 */
 	@Column(name = "MOT_DE_PASSE")
 	private String motDePasse;
-	
+
 	@OneToOne
 	private Contact idContact;
-	
+
 	@OneToMany
-	@JoinColumn(name="ID_UTILISATEUR")
-    private Set<Favoris> listeFavoris ;
-	
+	@JoinColumn(name = "ID_UTILISATEUR")
+	private Set<Favoris> listeFavoris;
 
 	@Transient
 	private int newIdContact;
-	
+
 	public Utilisateur() {
 		super();
 	}
@@ -73,43 +61,33 @@ public class Utilisateur {
 		this.idContact = idContact;
 	}
 
-
-
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getMotDePasse() {
 		return motDePasse;
 	}
-
 
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
 
-
 	public Contact getContact() {
 		return idContact;
 	}
 
-
 	public void setContact(Contact idContact) {
 		this.idContact = idContact;
 	}
-	
 
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
-
 
 	/**
 	 * @return the newIdContact
@@ -120,13 +98,11 @@ public class Utilisateur {
 	}
 
 	/**
-	 * @param newIdContact the newIdContact to set
+	 * @param newIdContact
+	 *            the newIdContact to set
 	 */
 	public void setNewIdContact(int newIdContact) {
 		this.newIdContact = newIdContact;
 	}
 
-	
-	
-	
 }

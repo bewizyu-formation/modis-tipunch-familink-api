@@ -104,5 +104,5 @@ public class Utilisateur {
 	public void setNewIdContact(int newIdContact) {
 		this.newIdContact = newIdContact;
 	}
-	
+	 
 }

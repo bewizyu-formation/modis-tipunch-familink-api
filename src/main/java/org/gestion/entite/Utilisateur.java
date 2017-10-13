@@ -31,7 +31,7 @@ public class Utilisateur {
 	/**
 	 * email : String
 	 */
-	@Column(name = "EMAIL", nullable = false, length = 20)
+	@Column(name = "EMAIL", nullable = false, length = 50)
 	private String email;
 
 	/**
@@ -104,5 +104,5 @@ public class Utilisateur {
 	public void setNewIdContact(int newIdContact) {
 		this.newIdContact = newIdContact;
 	}
-
+	 
 }

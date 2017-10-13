@@ -33,7 +33,7 @@ public class RestProfileController {
 	// ******** GET LIST profils ******** //
 	// ********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Profil> getProfilList() {
 		return profilServiceJpa.getProfils();
@@ -53,7 +53,7 @@ public class RestProfileController {
 	// ********** CREATE profil ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	public void CreateProfil(@RequestBody Profil newProfil) {
 
 		profilServiceJpa.create(new Profil(newProfil.getNom(), newProfil.getCouleur()));
@@ -64,7 +64,7 @@ public class RestProfileController {
 	// ******* UPDATE utilisateur BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void updateProfil(@RequestBody Profil updateProfil) {
 		profilServiceRepository.update(updateProfil);

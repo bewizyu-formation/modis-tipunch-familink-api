@@ -37,7 +37,7 @@ public class RestUtilisateurController {
 	// ******* GET LIST utilisateurS ********** //
 	// ********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Utilisateur> getUtilisateursWithJPA() {
 		return utilisateurServiceJpa.getUtilisateurs();
@@ -57,7 +57,7 @@ public class RestUtilisateurController {
 	// ********** CREATE utilisateurs ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void createUser(@RequestBody Utilisateur nouvelUtilisateur) {
 
@@ -71,7 +71,7 @@ public class RestUtilisateurController {
 	// ******* UPDATE utilisateur BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void updateUtilisateur(@RequestBody Utilisateur updateUtilisateur) {
 		utilisateurServiceRepository.update(updateUtilisateur);

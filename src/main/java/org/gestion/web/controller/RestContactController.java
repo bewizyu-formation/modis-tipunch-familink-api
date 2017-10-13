@@ -39,7 +39,7 @@ public class RestContactController {
 	// ******* GET LIST contacts ********** //
 	// ********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Contact> getContactsWithJPA() {
 
@@ -60,7 +60,7 @@ public class RestContactController {
 	// ********** CREATE contacts ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void createContact(@RequestBody Contact nouveauContact) {
 
@@ -79,7 +79,7 @@ public class RestContactController {
 	// *********************************** //
 
 
-	@RequestMapping(path = "/", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void updateContact(@RequestBody Contact updateContact) {
 

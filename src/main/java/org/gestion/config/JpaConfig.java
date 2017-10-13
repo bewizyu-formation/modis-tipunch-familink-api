@@ -1,8 +1,10 @@
 package org.gestion.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,8 +19,12 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories({"org.gestion.repository"})
-@Import({DataSourceMySQLConfig.class})
+@Import(DataSourceMySQLConfig.class)
+@PropertySource(value = {"classpath:application.properties"})
 public class JpaConfig {
+
+	@Value("${spring.jpa.hibernate.ddl-auto}")
+	private String ddl;
 
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
@@ -47,7 +53,7 @@ public class JpaConfig {
 
 		Properties jpaProperties = new Properties();
 
-		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "drop-and-create"); //"drop-and-create", "update"
+		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", ddl);
 
 		factory.setJpaProperties(jpaProperties);
 

@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
-
 /**
  * @author Julien Bertrand
  */
@@ -64,20 +61,17 @@ public class RestContactController {
 	@ResponseBody
 	public void createContact(@RequestBody Contact nouveauContact) {
 
-
 		Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
 				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
 				nouveauContact.getCodePostal(), nouveauContact.getVille(),
 				restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
-		System.out.println(newContact);
-		contactServiceRepository.create(newContact);
+		contactServiceRepository.create(nouveauContact);
 
 	}
 
 	// *********************************** //
 	// ******* UPDATE contact BY ID ******** //
 	// *********************************** //
-
 
 	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
 	@ResponseBody

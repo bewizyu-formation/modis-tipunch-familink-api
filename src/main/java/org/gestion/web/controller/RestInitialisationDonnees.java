@@ -32,9 +32,7 @@ public class RestInitialisationDonnees  extends ContextRefreshedEvent{
 	@EventListener
 	public void initialisationDonneesBDD(ContextRefreshedEvent event){
 		
-		System.out.println("\n");
-		System.out.println("coucou");
-		System.out.println("\n");
+		
 		initialisationDonnees.initialiserProfils();
 		initialisationDonnees.initialiserContact();		
 		initialisationDonnees.initialiserUtilisateur();

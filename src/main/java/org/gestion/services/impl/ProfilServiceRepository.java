@@ -15,13 +15,12 @@ import java.util.List;
 public class ProfilServiceRepository implements IProfilService {
 
 	@Autowired
-	private ProfilRepository profilRepository;
+	private static ProfilRepository profilRepository;
 
 	@Override
 	public void deleteProfil(int id) {
 		profilRepository.delete(id);
 	}
-
 	@Override
 	public Profil getProfilById(int id) {
 		return profilRepository.findOne(id);

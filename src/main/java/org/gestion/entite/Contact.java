@@ -34,7 +34,7 @@ public class Contact {
 	private String nom;
 	
 	/**
-	 * nom : String
+	 * prenom : String
 	 */
 	@Column(name = "PRENOM", nullable = false, length = 40)
 	private String prenom;

@@ -35,7 +35,7 @@ public class RestProfileController {
 	// ******** GET LIST profils ******** //
 	// ********************************** //
 
-	@RequestMapping(path = "/GET", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Profil> getProfilList() {
 		return profilServiceJpa.getProfils();
@@ -55,7 +55,7 @@ public class RestProfileController {
 	// ********** CREATE profil ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	public void CreateProfil(@RequestBody Profil newProfil) {
 		
 		/////////////////////////////

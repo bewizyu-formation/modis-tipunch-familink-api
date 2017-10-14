@@ -6,6 +6,7 @@ import org.gestion.entite.Utilisateur;
 import org.gestion.services.IUtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/utilisateurs")
-
+@CrossOrigin(origins = "*", allowedHeaders = "authorization")
 public class RestUtilisateurController {
 
 	@Autowired
@@ -49,7 +50,7 @@ public class RestUtilisateurController {
 
 	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.GET)
 	@ResponseBody
-	public Utilisateur getUtilisateurByIdWithPathParam(@PathVariable("idUtilisateur") String idUtilisateur) {
+	public Utilisateur getUtilisateurById(@PathVariable("idUtilisateur") String idUtilisateur) {
 		return utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
 	}
 

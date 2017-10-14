@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,10 +43,10 @@ public class Groupe {
 	@Column(name = "DATE_DE_CREATION", nullable = false)
 	private Date dateDeCreation;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
     private Set<Contact> contactsDuGroupe ;
 		
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_GROUPE")
     private Set<Favoris> listeFavorisGroupe ;
 	

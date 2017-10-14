@@ -6,8 +6,8 @@ import org.gestion.entite.Groupe;
 import org.gestion.entite.Utilisateur;
 
 /**
- * Interface qui liste les méthodes de persistence pour la classe {@link Groupe} que doit posséder une classe
- * d'implémentation
+ * Interface qui liste les méthodes de persistence pour la classe {@link Groupe}
+ * que doit posséder une classe d'implémentation
  *
  * @author van-rottana YOU
  */
@@ -16,7 +16,8 @@ public interface IGroupeService {
 	/**
 	 * Sauvegarde un nouveau Groupe
 	 *
-	 * @param nouveauGrade nouveau Groupe
+	 * @param nouveauGrade
+	 *            nouveau Groupe
 	 */
 	Groupe create(Groupe nouveauGroupe);
 
@@ -36,23 +37,25 @@ public interface IGroupeService {
 
 	/**
 	 * Récupération d'un Groupe par son id
+	 * 
 	 * @param id
 	 * @return
 	 */
-	Groupe getGroupeById (final int id);
+	Groupe getGroupeById(final int id);
 
 	/**
 	 * Suppression d'un Groupe
+	 * 
 	 * @param id
 	 */
 	void deleteGroupe(final int id);
-	
+
 	/**
 	 * Récupération d'un groupe par son idUtilisateur
+	 * 
 	 * @param id
 	 * @return
 	 */
-	Groupe getGroupeByUtilisateur (final Utilisateur utilisateur);
-
+	Groupe getGroupeByUtilisateur(final Utilisateur utilisateur);
 
 }

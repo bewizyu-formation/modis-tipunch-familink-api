@@ -7,6 +7,7 @@ import org.gestion.entite.ContactForm;
 import org.gestion.services.IContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/contacts")
+@CrossOrigin(origins = "*", allowedHeaders = "authorization")
 public class RestContactController {
 
 	@Autowired
@@ -66,7 +68,7 @@ public class RestContactController {
 				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
 				nouveauContact.getCodePostal(), nouveauContact.getVille(),
 				restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
-		contactServiceRepository.create(newContact);		
+		contactServiceRepository.create(newContact);
 	}
 
 	// *********************************** //

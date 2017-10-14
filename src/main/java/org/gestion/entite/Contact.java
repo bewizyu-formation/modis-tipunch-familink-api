@@ -12,9 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import org.gestion.entite.Profil;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "CONTACT")
@@ -82,9 +82,9 @@ public class Contact {
 	@JoinColumn(name = "ID_CONTACT")
 	private Set<Favoris> listeFavorisContact;
 
-	@Transient
-	@JsonIgnore
-	private int idProfil;
+//	@Transient
+//	@JsonIgnore
+//	private int idProfil;
 
 	public Contact() {
 		super();
@@ -196,8 +196,8 @@ public class Contact {
 		return idContact;
 	}
 
-	@Transient
-	public int getIdProfil() {
-		return idProfil;
-	}
+//	@Transient
+//	public int getIdProfil() {
+//		return idProfil;
+//	}
 }

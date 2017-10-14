@@ -61,11 +61,11 @@ public class RestContactController {
 	@ResponseBody
 	public void createContact(@RequestBody Contact nouveauContact) {
 
-		Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
-				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
-				nouveauContact.getCodePostal(), nouveauContact.getVille(),
-				restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
-		contactServiceRepository.create(newContact);
+//		Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
+//				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
+//				nouveauContact.getCodePostal(), nouveauContact.getVille(),
+//				restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
+//		contactServiceRepository.create(newContact);
 
 	}
 
@@ -77,12 +77,12 @@ public class RestContactController {
 	@ResponseBody
 	public void updateContact(@RequestBody Contact updateContact) {
 
-		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
-				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
-				updateContact.getAdresse(), updateContact.getCodePostal(), updateContact.getVille(),
-				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));
-
-		contactServiceRepository.update(upContact);
+//		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
+//				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
+//				updateContact.getAdresse(), updateContact.getCodePostal(), updateContact.getVille(),
+//				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));
+//
+//		contactServiceRepository.update(upContact);
 
 	}
 

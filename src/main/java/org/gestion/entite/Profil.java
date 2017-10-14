@@ -21,7 +21,7 @@ public class Profil {
 	/**
 	 * nom : String
 	 */
-	@Column(name = "NOM", nullable = false, length = 40)
+	@Column(name = "NOM", nullable = false, length = 40, unique = true)
 	private String nom;
 	
 	/**

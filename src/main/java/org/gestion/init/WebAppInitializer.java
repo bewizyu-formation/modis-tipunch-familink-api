@@ -42,5 +42,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		 * </listener>
 		 */
 		servletContext.addListener(new ContextLoaderListener(webContext));
+				
 	}
 }

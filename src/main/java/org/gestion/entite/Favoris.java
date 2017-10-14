@@ -7,12 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.gestion.entite.Contact;
-import org.gestion.entite.Groupe;
-import org.gestion.entite.Utilisateur;
 
 @Entity
 @Table(name = "FAVORIS")

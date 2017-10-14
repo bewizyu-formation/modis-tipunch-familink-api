@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/utilisateurs")
-@CrossOrigin(origins = "*")
+
+@CrossOrigin(origins = "*", allowedHeaders = "authorization")
+
 public class RestUtilisateurController {
 
 	@Autowired
@@ -61,7 +63,7 @@ public class RestUtilisateurController {
 
 	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.GET)
 	@ResponseBody
-	public Utilisateur getUtilisateurByIdWithPathParam(@PathVariable("idUtilisateur") String idUtilisateur) {
+	public Utilisateur getUtilisateurById(@PathVariable("idUtilisateur") String idUtilisateur) {
 		return utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
 	}
 

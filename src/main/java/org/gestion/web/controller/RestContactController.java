@@ -3,9 +3,11 @@ package org.gestion.web.controller;
 import java.util.List;
 
 import org.gestion.entite.Contact;
+import org.gestion.entite.ContactForm;
 import org.gestion.services.IContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/contacts")
+@CrossOrigin(origins = "*", allowedHeaders = "authorization")
 public class RestContactController {
 
 	@Autowired
@@ -57,16 +60,16 @@ public class RestContactController {
 	// ********** CREATE contacts ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void createContact(@RequestBody Contact nouveauContact) {
+	public void createContact(@RequestBody ContactForm nouveauContact) {
 
-//		Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
-//				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
-//				nouveauContact.getCodePostal(), nouveauContact.getVille(),
-//				restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
-//		contactServiceRepository.create(newContact);
 
+		Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
+				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
+				nouveauContact.getCodePostal(), nouveauContact.getVille(),
+				restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
+		contactServiceRepository.create(newContact);
 	}
 
 	// *********************************** //
@@ -75,14 +78,14 @@ public class RestContactController {
 
 	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void updateContact(@RequestBody Contact updateContact) {
+	public void updateContact(@RequestBody ContactForm updateContact) {
 
-//		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
-//				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
-//				updateContact.getAdresse(), updateContact.getCodePostal(), updateContact.getVille(),
-//				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));
-//
-//		contactServiceRepository.update(upContact);
+   		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
+				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
+				updateContact.getAdresse(), updateContact.getCodePostal(), updateContact.getVille(),
+				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));
+
+		contactServiceRepository.update(upContact);
 
 	}
 

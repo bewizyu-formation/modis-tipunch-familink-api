@@ -53,6 +53,8 @@ public class RestGroupesController {
 			@RequestHeader(value = "Authorization", required = true) String requestToken) {
 
 		/* TODO : vérifier la validiée du token */
+		
+		
 		// System.out.println("requestToken = " + requestToken);
 
 		// ********************************** //
@@ -67,21 +69,21 @@ public class RestGroupesController {
 	}
 
 	// ********************************** //
-	// ******* GET LIST group ********** //
+	// ******* GET LIST group by id****** //
 	// ********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "/{idGroupe}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Groupe> getGroupes() {
-
-		return groupeServiceJpa.getGroupes();
+	public Groupe getGroupeById(@PathVariable("idGroupe") String idGroupe) {
+		return groupeServiceRepository.getGroupeById(Integer.parseInt(idGroupe));
 	}
+	
 
 	// *********************************** //
 	// ********** CREATE Group ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void createGroupe(@RequestBody GroupeForm nouveauGroupe) {
 
@@ -94,14 +96,14 @@ public class RestGroupesController {
 
 	}
 	// *********************************** //
-	// ******* UPDATE contact BY ID ******** //
+	// ******* UPDATE group BY ID ******** //
 	// *********************************** //
 
 	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void updateGroupe(@RequestBody GroupeForm updateGroupe) {
 
-		Groupe newGroupe = new Groupe(
+		Groupe newGroupe = new Groupe(updateGroupe.getIdGroupe(),
 				restUtilisateurController
 						.getUtilisateurById(Integer.toString(updateGroupe.getIdUtilisateurProprietaire())),
 				updateGroupe.getNom(), updateGroupe.getDateDeCreation());
@@ -112,12 +114,12 @@ public class RestGroupesController {
 
 	//
 	// *********************************** //
-	// ******* DELETE contact BY ID ******** //
+	// ******* DELETE group BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "/{idContact}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/{idGroupe}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteContact(@PathVariable("idContact") String idGroupe) {
+	public void deleteGroupe(@PathVariable("idGroupe") String idGroupe) {
 		groupeServiceRepository.deleteGroupe(Integer.parseInt(idGroupe));
 
 	}

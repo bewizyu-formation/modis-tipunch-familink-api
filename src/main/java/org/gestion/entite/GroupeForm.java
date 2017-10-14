@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class GroupeForm {
 
-	private int idContact;
+	private int idGroupe;
 	private int idUtilisateurProprietaire;
 	private String nom;
 	private Date dateDeCreation;
@@ -23,9 +23,9 @@ public class GroupeForm {
 		this.dateDeCreation = dateDeCreation;
 	}
 
-	public GroupeForm(int idContact, int idUtilisateurProprietaire, String nom, Date dateDeCreation) {
+	public GroupeForm(int idGroupe, int idUtilisateurProprietaire, String nom, Date dateDeCreation) {
 		super();
-		this.idContact = idContact;
+		this.idGroupe = idGroupe;
 		this.idUtilisateurProprietaire = idUtilisateurProprietaire;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
@@ -71,7 +71,7 @@ public class GroupeForm {
 	/**
 	 * @return the idContact
 	 */
-	public int getIdContact() {
-		return idContact;
+	public int getIdGroupe() {
+		return idGroupe;
 	}
 }

@@ -71,7 +71,7 @@ public class RestUtilisateurController {
 	// ********** CREATE utilisateurs ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/POST", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String createUser(@RequestBody FormUtilisateur monFormUtilisateur) {
 		

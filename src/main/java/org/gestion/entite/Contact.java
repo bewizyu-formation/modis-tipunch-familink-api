@@ -83,7 +83,6 @@ public class Contact {
 	private Set<Favoris> listeFavorisContact;
 
 	@Transient
-	@JsonIgnore
 	private int idProfil;
 
 	public Contact() {

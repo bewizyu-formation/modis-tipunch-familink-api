@@ -56,8 +56,7 @@ public class RestProfileController {
 	// *********************************** //
 
 	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
-	public void CreateProfil(@RequestBody Profil newProfil) {
-
+	public void CreateProfil(@RequestBody Profil newProfil) {		
 		profilServiceJpa.create(new Profil(newProfil.getNom(), newProfil.getCouleur()));
 
 	}

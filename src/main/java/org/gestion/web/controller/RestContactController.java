@@ -64,6 +64,7 @@ public class RestContactController {
 	@ResponseBody
 	public void createContact(@RequestBody ContactForm nouveauContact) {
 
+
 		Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
 				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
 				nouveauContact.getCodePostal(), nouveauContact.getVille(),
@@ -79,7 +80,7 @@ public class RestContactController {
 	@ResponseBody
 	public void updateContact(@RequestBody ContactForm updateContact) {
 
-		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
+   		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
 				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
 				updateContact.getAdresse(), updateContact.getCodePostal(), updateContact.getVille(),
 				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));

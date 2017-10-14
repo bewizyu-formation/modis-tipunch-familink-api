@@ -77,7 +77,6 @@ public class Contact {
 	@JoinColumn(name = "ID_CONTACT")
 	private Set<Favoris> listeFavorisContact;
 
-
 	public Contact() {
 		super();
 	}
@@ -187,4 +186,5 @@ public class Contact {
 	public int getIdContact() {
 		return idContact;
 	}
+
 }

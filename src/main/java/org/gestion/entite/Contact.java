@@ -1,5 +1,4 @@
 package org.gestion.entite;
-
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import org.gestion.entite.Profil;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "CONTACT")
@@ -82,8 +77,6 @@ public class Contact {
 	@JoinColumn(name = "ID_CONTACT")
 	private Set<Favoris> listeFavorisContact;
 
-	@Transient
-	private int idProfil;
 
 	public Contact() {
 		super();
@@ -193,10 +186,5 @@ public class Contact {
 
 	public int getIdContact() {
 		return idContact;
-	}
-
-	@Transient
-	public int getIdProfil() {
-		return idProfil;
 	}
 }

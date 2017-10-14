@@ -61,6 +61,14 @@ public class Groupe {
 		this.dateDeCreation = dateDeCreation;
 	}
 
+	public Groupe(int idGroupe, Utilisateur idUtilisateur, String nom, Date dateDeCreation) {
+		super();
+		this.idGroupe = idGroupe;
+		this.idUtilisateur = idUtilisateur;
+		this.nom = nom;
+		this.dateDeCreation = dateDeCreation;
+	}
+
 	public Utilisateur getIdUtilisateur() {
 		return idUtilisateur;
 	}

@@ -35,7 +35,7 @@ public class GroupeServiceJpa implements IGroupeService {
 		if (!oldGroupe.equals(null)) {
 			oldGroupe.setContactsDuGroupe(groupe.getContactsDuGroupe());
 			oldGroupe.setDateDeCreation(groupe.getDateDeCreation());
-			oldGroupe.setIdUtilisateur(groupe.getIdUtilisateur());
+			oldGroupe.setProprietaire(groupe.getProprietaire());
 			oldGroupe.setNom(groupe.getNom());
 			em.merge(oldGroupe);
 			em.flush();

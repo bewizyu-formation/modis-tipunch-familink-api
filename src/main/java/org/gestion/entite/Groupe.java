@@ -29,7 +29,7 @@ public class Groupe {
 	private int idGroupe;
 	
 	@OneToOne
-	private Utilisateur idUtilisateur;
+	private Utilisateur proprietaire;
 	
 	/**
 	 * nomGroupe : String
@@ -54,27 +54,27 @@ public class Groupe {
 		super();
 	}
 
-	public Groupe(Utilisateur idUtilisateur, String nom, Date dateDeCreation) {
+	public Groupe(Utilisateur proprietaire, String nom, Date dateDeCreation) {
 		super();
-		this.idUtilisateur = idUtilisateur;
+		this.proprietaire = proprietaire;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
 	}
 
-	public Groupe(int idGroupe, Utilisateur idUtilisateur, String nom, Date dateDeCreation) {
+	public Groupe(int idGroupe, Utilisateur proprietaire, String nom, Date dateDeCreation) {
 		super();
 		this.idGroupe = idGroupe;
-		this.idUtilisateur = idUtilisateur;
+		this.proprietaire = proprietaire;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
 	}
 
-	public Utilisateur getIdUtilisateur() {
-		return idUtilisateur;
+	public Utilisateur getProprietaire() {
+		return proprietaire;
 	}
 
-	public void setIdUtilisateur(Utilisateur idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
+	public void setProprietaire(Utilisateur proprietaire) {
+		this.proprietaire = proprietaire;
 	}
 
 	public String getNom() {

@@ -42,7 +42,7 @@ public class RestUtilisateurController {
 	@Autowired
 	@Qualifier("contactServiceRepository")
 	private IContactService contactServiceRepository;
-	
+
 	@Autowired
 	@Qualifier("profilServiceRepository")
 	private IProfilService profilServiceRepository;
@@ -69,37 +69,38 @@ public class RestUtilisateurController {
 
 	// *********************************** //
 	// ********** CREATE utilisateurs ********** //
-	// *********************************** //
 
 	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String createUser(@RequestBody FormUtilisateur monFormUtilisateur) {
-		
+
 		JSONObject jObj;
 		jObj = new JSONObject();
 		try {
-					Profil monProfil = new Profil();
-					monProfil = profilServiceRepository.getProfilById(monFormUtilisateur.getIdProfil());
-					
-					Contact monContact = new Contact(monFormUtilisateur.getEmail(), monFormUtilisateur.getNom(), monFormUtilisateur.getPrenom(), 
-							monFormUtilisateur.getGravatar(), monFormUtilisateur.getNumTel(), monFormUtilisateur.getAdresse(),
-							monFormUtilisateur.getCodePostal(), monFormUtilisateur.getVille(), monProfil);
-					
-					monContact = contactServiceRepository.create(monContact);
-					
-					Utilisateur newUtilisateur = new Utilisateur(monFormUtilisateur.getEmail(), monFormUtilisateur.getPassword(),monContact);
-										
-					utilisateurServiceRepository.create(newUtilisateur);
-					
-					jObj.put("action", "creation utilisateur");
-					jObj.put("description", "Utilisateur créé");
-					
-			} catch (Exception e) {
+			Profil monProfil = new Profil();
+			monProfil = profilServiceRepository.getProfilById(monFormUtilisateur.getIdProfil());
 
-				jObj.put("action", "creation utilisateur");
-				jObj.put("description", "Echec creation utilisateur");
+			Contact monContact = new Contact(monFormUtilisateur.getEmail(), monFormUtilisateur.getNom(),
+					monFormUtilisateur.getPrenom(), monFormUtilisateur.getGravatar(), monFormUtilisateur.getNumTel(),
+					monFormUtilisateur.getAdresse(), monFormUtilisateur.getCodePostal(), monFormUtilisateur.getVille(),
+					monProfil);
 
-			}
+			monContact = contactServiceRepository.create(monContact);
+
+			Utilisateur newUtilisateur = new Utilisateur(monFormUtilisateur.getEmail(),
+					monFormUtilisateur.getPassword(), monContact);
+
+			utilisateurServiceRepository.create(newUtilisateur);
+
+			jObj.put("action", "creation utilisateur");
+			jObj.put("description", "Utilisateur créé");
+
+		} catch (Exception e) {
+
+			jObj.put("action", "creation utilisateur");
+			jObj.put("description", "Echec creation utilisateur");
+
+		}
 		return jObj.toString();
 	}
 

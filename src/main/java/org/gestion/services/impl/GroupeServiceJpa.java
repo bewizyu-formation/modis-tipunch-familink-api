@@ -1,16 +1,18 @@
 package org.gestion.services.impl;
 
-import org.gestion.entite.Groupe;
-import org.gestion.entite.Utilisateur;
-import org.gestion.services.IGroupeService;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.util.List;
+
+import org.gestion.entite.Contact;
+import org.gestion.entite.Groupe;
+import org.gestion.entite.Utilisateur;
+import org.gestion.services.IGroupeService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service(value = "groupeServiceJpa")
 public class GroupeServiceJpa implements IGroupeService {
@@ -33,13 +35,16 @@ public class GroupeServiceJpa implements IGroupeService {
 
 		Groupe oldGroupe = (Groupe) query.getSingleResult();
 		if (!oldGroupe.equals(null)) {
-			oldGroupe.setContactsDuGroupe(groupe.getContactsDuGroupe());
-			oldGroupe.setDateDeCreation(groupe.getDateDeCreation());
-			oldGroupe.setIdUtilisateur(groupe.getIdUtilisateur());
 			oldGroupe.setNom(groupe.getNom());
 			em.merge(oldGroupe);
 			em.flush();
 		}
+	}
+
+	@Override
+	@Transactional
+	public void addContactToGroup(Contact nouveauContact, int idGroupe) {
+
 	}
 
 	@Override
@@ -50,31 +55,31 @@ public class GroupeServiceJpa implements IGroupeService {
 
 	@Override
 	public void deleteGroupe(int id) {
-		//em.getTransaction().begin();
+		// em.getTransaction().begin();
 		Groupe groupe = getGroupeById(id);
 		em.remove(groupe);
-		//em.getTransaction().commit();
+		// em.getTransaction().commit();
 	}
 
 	@Override
 	public Groupe getGroupeById(int id) {
-		//em.getTransaction().begin();
+		// em.getTransaction().begin();
 		Groupe groupe = em.find(Groupe.class, id);
-		//em.getTransaction().commit();
-	    return groupe;
+		// em.getTransaction().commit();
+		return groupe;
 	}
 
 	/**
 	 * Récupération d'un groupe par son idUtlisateur
+	 * 
 	 * @param IdUtilisateur
 	 * @return groupe
- */
+	 */
 	public Groupe getGroupeByUtilisateur(Utilisateur utilisateur) {
-		
-		TypedQuery<Groupe> query = em.createQuery("select u from Groupe u where u.idUtilisateur = :IdUtilisateur",Groupe.class);					
+
+		TypedQuery<Groupe> query = em.createQuery("select u from Groupe u where u.idUtilisateur = :IdUtilisateur",
+				Groupe.class);
 		return query.setParameter("IdUtilisateur", utilisateur).getSingleResult();
-		
-		
 
 	}
 

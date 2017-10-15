@@ -16,13 +16,37 @@ public class ContactForm {
 	private Profil profil;
 	private Set<Favoris> listeFavorisContact;
 	private Integer idProfil;
+	private int idGroupe;
 
 	public ContactForm() {
 		super();
 	}
 
+//	public ContactForm(int idContact, String nom, String prenom, String gravatar, String numTel, String adresse,
+//			String codePostal, String ville, String email, Profil profil, Integer idProfil) {
+//		super();
+//		this.idContact = idContact;
+//		this.nom = nom;
+//		this.prenom = prenom;
+//		this.gravatar = gravatar;
+//		this.numTel = numTel;
+//		this.adresse = adresse;
+//		this.codePostal = codePostal;
+//		this.ville = ville;
+//		this.email = email;
+//		this.profil = profil;
+//		this.idProfil = idProfil;
+//	}
+	
+	
+	
+
+	/**
+	 *constructeur pour l'ajout d'un contact en base et dans la liste de groupe depuis l'IHM "ajout-contact"
+	 */
 	public ContactForm(int idContact, String nom, String prenom, String gravatar, String numTel, String adresse,
-			String codePostal, String ville, String email, Profil profil, Integer idProfil) {
+			String codePostal, String ville, String email, Profil profil, Set<Favoris> listeFavorisContact,
+			Integer idProfil, int idGroupe) {
 		super();
 		this.idContact = idContact;
 		this.nom = nom;
@@ -34,7 +58,9 @@ public class ContactForm {
 		this.ville = ville;
 		this.email = email;
 		this.profil = profil;
+		this.listeFavorisContact = listeFavorisContact;
 		this.idProfil = idProfil;
+		this.idGroupe = idGroupe;
 	}
 
 	/**
@@ -207,6 +233,13 @@ public class ContactForm {
 	 */
 	public int getIdContact() {
 		return idContact;
+	}
+
+	/**
+	 * @return the idGroupe
+	 */
+	public int getIdGroupe() {
+		return idGroupe;
 	}
 
 }

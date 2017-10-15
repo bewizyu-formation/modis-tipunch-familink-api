@@ -1,9 +1,15 @@
 package org.gestion.services.impl;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.gestion.entite.Contact;
+import org.gestion.entite.Groupe;
 import org.gestion.entite.Profil;
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IContactService;
+import org.gestion.services.IGroupeService;
 import org.gestion.services.IInitialisationDonnees;
 import org.gestion.services.IProfilService;
 import org.gestion.services.IUtilisateurService;
@@ -25,6 +31,10 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 	@Autowired
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
+	
+	@Autowired
+	@Qualifier("groupeServiceRepository")
+	private IGroupeService groupeServiceRepository;
 	
 	@Override
 	public void initialiserProfils() {
@@ -75,6 +85,29 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		utilisateurServiceRepository.create( new Utilisateur( "julien.bertrand6384@gmail.com", "2288f19af4174ba13c653f1cef8d98f3", contactServiceRepository.getContactById(4) ) );
 		utilisateurServiceRepository.create( new Utilisateur( "cestmavraieadressepoubelle@gmail.com", "9187e41a6995d859f23f4276035de75a", contactServiceRepository.getContactById(6) ) );
 
+	}
+
+	@Override
+	public void initialiserGroupe() {
+		// TODO Auto-generated method stub
+		
+		Set<Contact> listeDeContacts = new HashSet<Contact>();
+		listeDeContacts.add( contactServiceRepository.getContactById( utilisateurServiceRepository.getUtilisateurById(2).getContact().getIdContact() ) );
+		Date date = new Date();
+		date.toInstant();
+		
+		groupeServiceRepository.create( new Groupe( utilisateurServiceRepository.getUtilisateurById(2),
+				"Papy Mougeot", date, listeDeContacts  ) );
+		
+		listeDeContacts.clear();
+		listeDeContacts.add( contactServiceRepository.getContactById( utilisateurServiceRepository.getUtilisateurById(3).getContact().getIdContact() ) );
+		listeDeContacts.add( contactServiceRepository.getContactById(1) ); 
+		listeDeContacts.add( contactServiceRepository.getContactById(6) ); 
+		date.toInstant();
+		
+		groupeServiceRepository.create( new Groupe( utilisateurServiceRepository.getUtilisateurById(3),
+				"Mère Theresa", date, listeDeContacts  ) );
+		
 	}
 
 }

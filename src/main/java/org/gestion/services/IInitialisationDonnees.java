@@ -5,5 +5,6 @@ public interface IInitialisationDonnees {
 	void initialiserProfils(); 
 	void initialiserContact();
 	void initialiserUtilisateur();
+	void initialiserGroupe();
 
 }

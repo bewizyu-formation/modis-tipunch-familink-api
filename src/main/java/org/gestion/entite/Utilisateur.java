@@ -27,7 +27,6 @@ public class Utilisateur {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idUtilisateur;
 
-
 	/**
 	 * email : String
 	 */

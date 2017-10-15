@@ -36,6 +36,7 @@ public class RestInitialisationDonnees  extends ContextRefreshedEvent{
 		initialisationDonnees.initialiserProfils();
 		initialisationDonnees.initialiserContact();		
 		initialisationDonnees.initialiserUtilisateur();
+		initialisationDonnees.initialiserGroupe();
 		
 	}
 

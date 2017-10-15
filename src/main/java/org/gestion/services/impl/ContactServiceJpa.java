@@ -66,5 +66,13 @@ public class ContactServiceJpa implements IContactService {
 		//em.getTransaction().commit();
 	    return contact;
 	}
+	
+	@Override
+	public List<Contact> getContactsByGroupId(){
+		TypedQuery<Contact> query = em.createQuery("SELECT idContact FROM Contact c WHERE c.idGroupe=:IdGroupe", Contact.class );
+		return query.getResultList();
+		
+		
+	}
 
 }

@@ -1,5 +1,8 @@
 package org.gestion.services.impl;
 
+import java.util.List;
+
+import org.gestion.entite.Contact;
 import org.gestion.entite.Groupe;
 import org.gestion.entite.Utilisateur;
 import org.gestion.repository.GroupeRepository;
@@ -7,11 +10,7 @@ import org.gestion.services.IGroupeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
-/**
- * @author Van-Rottana YOU
- */
 @Service(value = "groupeServiceRepository")
 public class GroupeServiceRepository implements IGroupeService {
 
@@ -39,7 +38,6 @@ public class GroupeServiceRepository implements IGroupeService {
 		final Groupe toUpdate = groupeRepository.findOne(groupe.getIdGroupe());
 
 		if (toUpdate != null) {
-			toUpdate.setContactsDuGroupe(groupe.getContactsDuGroupe());
 			toUpdate.setDateDeCreation(groupe.getDateDeCreation());
 			toUpdate.setIdUtilisateur(groupe.getIdUtilisateur());
 			toUpdate.setNom(groupe.getNom());
@@ -57,5 +55,17 @@ public class GroupeServiceRepository implements IGroupeService {
 	public Groupe getGroupeByUtilisateur(Utilisateur utilisateur) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addContactToGroup(Contact nouveauContact, int idGroupe) {
+
+		Groupe groupeToUpdate = getGroupeById(idGroupe);
+		groupeToUpdate.getContactsDuGroupe().add(nouveauContact);
+
+		if (groupeToUpdate != null) {
+			groupeToUpdate.setContactsDuGroupe(groupeToUpdate.getContactsDuGroupe());
+			groupeRepository.save(groupeToUpdate);
+		}
 	}
 }

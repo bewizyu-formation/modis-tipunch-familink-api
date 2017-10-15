@@ -1,7 +1,9 @@
 package org.gestion.web.controller;
 
 import java.util.List;
+import java.util.Set;
 
+import org.gestion.entite.Contact;
 import org.gestion.entite.Groupe;
 import org.gestion.entite.GroupeForm;
 import org.gestion.entite.Token;
@@ -42,6 +44,8 @@ public class RestGroupesController {
 
 	@Autowired
 	UtilisateurServiceRepository utilisateurService;
+	
+	Groupe monGroupe ;
 
 	// ********************************** //
 	// ******* GET LIST groupes ********** //
@@ -53,8 +57,7 @@ public class RestGroupesController {
 			@RequestHeader(value = "Authorization", required = true) String requestToken) {
 
 		/* TODO : vérifier la validiée du token */
-		
-		
+
 		// System.out.println("requestToken = " + requestToken);
 
 		// ********************************** //
@@ -77,7 +80,6 @@ public class RestGroupesController {
 	public Groupe getGroupeById(@PathVariable("idGroupe") String idGroupe) {
 		return groupeServiceRepository.getGroupeById(Integer.parseInt(idGroupe));
 	}
-	
 
 	// *********************************** //
 	// ********** CREATE Group ********** //
@@ -122,5 +124,20 @@ public class RestGroupesController {
 	public void deleteGroupe(@PathVariable("idGroupe") String idGroupe) {
 		groupeServiceRepository.deleteGroupe(Integer.parseInt(idGroupe));
 
+	}
+
+	// ********************************** //
+	// ******* GET LIST contacts d'un groupe ********** //
+	// ********************************** //
+
+	@RequestMapping(path = "/{idGroupe}/contacts", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Set<Contact> getContactsByIdGroupe(@PathVariable("idGroupe") String idGroupe,
+			@RequestHeader(value = "Authorization", required = true) String requestToken) {
+
+		Groupe monGroupe = new Groupe();
+		monGroupe=groupeServiceRepository.getGroupeById(Integer.parseInt(idGroupe));
+		return monGroupe.getContactsDuGroupe();
+		
 	}
 }

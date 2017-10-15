@@ -45,4 +45,11 @@ public interface IContactService {
 	 * @param id
 	 */
 	void deleteContact(final int id);
+	
+	/**
+	 * Récupération des Contacts d'un groupe
+	 * @param id
+	 * @return
+	 */
+	List<Contact> getContactByIdGroupe (final int id);
 }

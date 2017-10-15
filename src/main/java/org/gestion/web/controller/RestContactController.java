@@ -5,6 +5,7 @@ import java.util.List;
 import org.gestion.entite.Contact;
 import org.gestion.entite.ContactForm;
 import org.gestion.services.IContactService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -62,14 +63,28 @@ public class RestContactController {
 
 	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void createContact(@RequestBody ContactForm nouveauContact) {
+	public String createContact(@RequestBody ContactForm nouveauContact) {
 
-
-		Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
-				nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
-				nouveauContact.getCodePostal(), nouveauContact.getVille(),
-				restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
-		contactServiceRepository.create(newContact);
+		JSONObject jObj;
+		jObj = new JSONObject();
+		
+		try {
+			Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
+					nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
+					nouveauContact.getCodePostal(), nouveauContact.getVille(),
+					restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
+			contactServiceRepository.create(newContact);
+			
+			jObj.put("action", "creation contact");
+			jObj.put("description", "Contact créé");
+			
+			} catch (Exception e) {
+		
+				jObj.put("action", "creation contact");
+				jObj.put("description", "Echec creation contact");
+		
+			}
+			return jObj.toString();
 	}
 
 	// *********************************** //

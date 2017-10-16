@@ -27,6 +27,8 @@ public class Groupe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idGroupe;
+	
+	@OneToOne
 	private Utilisateur utilisateur;
 
 	

@@ -13,10 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import javax.persistence.Transient;
-
-import org.gestion.entite.Contact;
-
 @Entity
 @Table(name = "UTILISATEUR")
 public class Utilisateur {

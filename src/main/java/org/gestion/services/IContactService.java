@@ -51,7 +51,7 @@ public interface IContactService {
 
 
 	/**
-	 * Suppression d'un Contact
+	 * Récupération d
 	 * 
 	 * @param id
 	 */

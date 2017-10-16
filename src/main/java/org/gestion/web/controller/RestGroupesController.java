@@ -59,6 +59,8 @@ public class RestGroupesController {
 
 	@Autowired
 	UtilisateurServiceRepository utilisateurService;
+	
+	Groupe monGroupe ;
 
 	// ********************************** //
 	// ******* GET LIST groupes ********** //
@@ -178,4 +180,5 @@ public class RestGroupesController {
 			return monGroupe.getContactsDuGroupe();
 
 	}
+
 }

@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,10 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-
 import org.gestion.entite.Contact;
 
 @Entity
@@ -42,14 +40,12 @@ public class Utilisateur {
 	private String motDePasse;
 
 	@OneToOne
-	private Contact idContact;
+	private Contact contact;
 
 	@OneToMany
 	@JoinColumn(name = "ID_UTILISATEUR")
 	private Set<Favoris> listeFavoris;
 
-//	@Transient
-//	private int newIdContact;
 	
 	@OneToOne(mappedBy="utilisateur")  // référence la relation dans la classe Commune
     private Groupe groupe ;
@@ -58,11 +54,11 @@ public class Utilisateur {
 		super();
 	}
 
-	public Utilisateur(String email, String motDePasse, Contact idContact) {
+	public Utilisateur(String email, String motDePasse, Contact contact) {
 		super();
 		this.email = email;
 		this.motDePasse = motDePasse;
-		this.idContact = idContact;
+		this.contact = contact;
 	}
 
 	public String getEmail() {
@@ -82,19 +78,14 @@ public class Utilisateur {
 	}
 
 	public Contact getContact() {
-		return idContact;
+		return contact;
 	}
 
 	public void setContact(Contact idContact) {
-		this.idContact = idContact;
+		this.contact = idContact;
 	}
 
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
-
-
-
-	 
-	
 }

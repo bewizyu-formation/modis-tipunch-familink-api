@@ -49,10 +49,12 @@ public interface IContactService {
 	 */
 	void deleteContact(final int id);
 
+
 	/**
-	 * Suppression d'un Contact
+	 * Récupération d'une liste de contacts pour un groupe
 	 * 
 	 * @param id
 	 */
 	List<Contact> getContactsByGroupId();
+
 }

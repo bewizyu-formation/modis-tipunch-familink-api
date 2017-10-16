@@ -5,8 +5,8 @@ import java.util.List;
 import org.gestion.entite.Contact;
 
 /**
- * Interface qui liste les méthodes de persistence pour la classe {@link Contact} que doit posséder une classe
- * d'implémentation
+ * Interface qui liste les méthodes de persistence pour la classe
+ * {@link Contact} que doit posséder une classe d'implémentation
  *
  * @author van-rottana YOU
  */
@@ -15,7 +15,8 @@ public interface IContactService {
 	/**
 	 * Sauvegarde un nouveau Contact
 	 *
-	 * @param nouveauGrade nouveau Contact
+	 * @param nouveauGrade
+	 *            nouveau Contact
 	 */
 	Contact create(Contact nouveauContact);
 
@@ -35,21 +36,25 @@ public interface IContactService {
 
 	/**
 	 * Récupération d'un Contact par son id
+	 * 
 	 * @param id
 	 * @return
 	 */
-	Contact getContactById (final int id);
+	Contact getContactById(final int id);
 
 	/**
 	 * Suppression d'un Contact
+	 * 
 	 * @param id
 	 */
 	void deleteContact(final int id);
-	
+
+
 	/**
-	 * Récupération des Contacts d'un groupe
+	 * Suppression d'un Contact
+	 * 
 	 * @param id
-	 * @return
 	 */
-	List<Contact> getContactByIdGroupe (final int id);
+	List<Contact> getContactsByGroupId();
+
 }

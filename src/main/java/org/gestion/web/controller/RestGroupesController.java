@@ -1,13 +1,18 @@
 package org.gestion.web.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.gestion.entite.Contact;
+import org.gestion.entite.ContactForm;
 import org.gestion.entite.Groupe;
 import org.gestion.entite.GroupeForm;
 import org.gestion.entite.Token;
+import org.gestion.entite.Utilisateur;
+import org.gestion.services.IContactService;
 import org.gestion.services.IGroupeService;
+import org.gestion.services.impl.ContactServiceRepository;
 import org.gestion.services.impl.UtilisateurServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,7 +45,17 @@ public class RestGroupesController {
 	private IGroupeService groupeServiceRepository;
 
 	@Autowired
+	@Qualifier("contactServiceRepository")
+	private IContactService contactServiceRepository;
+
+	@Autowired
 	private RestUtilisateurController restUtilisateurController;
+
+	@Autowired
+	private RestContactController restContactController;
+
+	@Autowired
+	private RestProfileController restProfileController;
 
 	@Autowired
 	UtilisateurServiceRepository utilisateurService;
@@ -89,10 +104,18 @@ public class RestGroupesController {
 	@ResponseBody
 	public void createGroupe(@RequestBody GroupeForm nouveauGroupe) {
 
+		Set<Contact> listeContactGroupe = new HashSet<Contact>();
+
+		Utilisateur utilisateurTemp = restUtilisateurController
+				.getUtilisateurById(Integer.toString(nouveauGroupe.getIdUtilisateurProprietaire()));
+
+		listeContactGroupe.add(
+				restContactController.getContactById(Integer.toString(utilisateurTemp.getContact().getIdContact())));
+
 		Groupe newGroupe = new Groupe(
 				restUtilisateurController
 						.getUtilisateurById(Integer.toString(nouveauGroupe.getIdUtilisateurProprietaire())),
-				nouveauGroupe.getNom(), nouveauGroupe.getDateDeCreation());
+				nouveauGroupe.getNom(), nouveauGroupe.getDateDeCreation(), listeContactGroupe);
 
 		groupeServiceRepository.create(newGroupe);
 
@@ -108,9 +131,26 @@ public class RestGroupesController {
 		Groupe newGroupe = new Groupe(updateGroupe.getIdGroupe(),
 				restUtilisateurController
 						.getUtilisateurById(Integer.toString(updateGroupe.getIdUtilisateurProprietaire())),
-				updateGroupe.getNom(), updateGroupe.getDateDeCreation());
+				updateGroupe.getNom(), updateGroupe.getDateDeCreation(), updateGroupe.getContactsDuGroupe());
 
 		groupeServiceRepository.update(newGroupe);
+
+	}
+
+	// *********************************** //
+	// ******* UPDATE group BY ID ******** //
+	// *********************************** //
+
+	@RequestMapping(path = "/update_liste_contact", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@ResponseBody
+	public void updateGroupeListe(@RequestBody ContactForm contactForm) {
+
+		Contact nouveauContact = new Contact(contactForm.getIdContact(), contactForm.getEmail(), contactForm.getNom(),
+				contactForm.getPrenom(), contactForm.getGravatar(), contactForm.getNumTel(), contactForm.getAdresse(),
+				contactForm.getCodePostal(), contactForm.getVille(),
+				restProfileController.getProfilById(Integer.toString(contactForm.getIdProfil())));
+		contactServiceRepository.create(nouveauContact);
+		groupeServiceRepository.addContactToGroup(nouveauContact, contactForm.getIdGroupe());
 
 	}
 
@@ -140,4 +180,5 @@ public class RestGroupesController {
 		return monGroupe.getContactsDuGroupe();
 		
 	}
+
 }

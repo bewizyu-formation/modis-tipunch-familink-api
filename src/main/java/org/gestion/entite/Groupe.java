@@ -54,20 +54,25 @@ public class Groupe {
 		super();
 	}
 
-	public Groupe(Utilisateur proprietaire, String nom, Date dateDeCreation) {
+
+	public Groupe(Utilisateur idUtilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe) {
 		super();
 		this.proprietaire = proprietaire;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
+		this.contactsDuGroupe = contactsDuGroupe;
 	}
 
-	public Groupe(int idGroupe, Utilisateur proprietaire, String nom, Date dateDeCreation) {
+
+	public Groupe(int idGroupe, Utilisateur idUtilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe){
 		super();
 		this.idGroupe = idGroupe;
 		this.proprietaire = proprietaire;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
+		this.contactsDuGroupe = contactsDuGroupe;
 	}
+	
 
 	public Utilisateur getProprietaire() {
 		return proprietaire;
@@ -93,16 +98,17 @@ public class Groupe {
 		this.dateDeCreation = dateDeCreation;
 	}
 
+	public int getIdGroupe() {
+		return idGroupe;
+	}
+
+	
 	public Set<Contact> getContactsDuGroupe() {
 		return contactsDuGroupe;
 	}
 
 	public void setContactsDuGroupe(Set<Contact> contactsDuGroupe) {
 		this.contactsDuGroupe = contactsDuGroupe;
-	}
-
-	public int getIdGroupe() {
-		return idGroupe;
 	}
 	
 	

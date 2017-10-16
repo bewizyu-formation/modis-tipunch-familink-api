@@ -1,6 +1,7 @@
 package org.gestion.web.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.gestion.entite.Contact;
 import org.gestion.entite.ContactForm;
@@ -115,4 +116,12 @@ public class RestContactController {
 		contactServiceRepository.deleteContact(Integer.parseInt(idContact));
 
 	}
+	
+	@RequestMapping(path = "/group", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<Contact> getContactsByGroupId() {
+
+		return contactServiceJpa.getContactsByGroupId();
+	}
+	
 }

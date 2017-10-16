@@ -22,7 +22,7 @@ public class EmailSender {
 		try {
 
 			final String username = "elboy62@gmail.com";
-			final String password = "boyel6262";
+			final String password = "lexacono1";
 
 			String to = "elboy62@gmail.com";
 

@@ -45,7 +45,7 @@ public class Token {
 
 			date.setTime(timestamp.getTime());
 
-			String formattedDate = new SimpleDateFormat("yyMMddHHmmss").format(date);
+			String formattedDate = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
 			String aCoder = Integer.toString(idUtilisateur) + "-" + formattedDate;
 			corps = Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));
 
@@ -68,7 +68,7 @@ public class Token {
 			Date date = new Date();
 			date.setTime(timestamp.getTime());
 
-			String formattedDate = new SimpleDateFormat("yyMMddHHmmss").format(date);
+			String formattedDate = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
 
 			String aCoder = formattedDate;
 			corps = "1-" + Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));
@@ -87,17 +87,25 @@ public class Token {
 	public boolean tokenIsValide(String monToken) {
 
 		isValide = true;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmmss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 
 		try {
-
+			
 			byte[] base64decodedBytes = Base64.getDecoder().decode(monToken);
 			String monTokenDecode = new String(base64decodedBytes, "utf-8");
+			String[] parts = monTokenDecode.split("-");
+
+			
 			try {
 				Date date = new Date();
-				date.setTime(date.getTime() + 2 * 60 * 1000);
-				Date date2 = formatter.parse(monTokenDecode);
-				return isValide = (date2.before(date));
+				date.setTime(date.getTime());
+				String formattedDate = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
+				Date date1 = formatter.parse(formattedDate);
+				
+				Date date2 = formatter.parse(parts[1]);
+				date2.setTime(date2.getTime()+ 2 * 60 * 1000);
+
+				return isValide = (date1.before(date2));
 
 			} catch (Exception e) {
 				isValide = false;

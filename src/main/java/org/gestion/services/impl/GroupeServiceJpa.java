@@ -70,16 +70,36 @@ public class GroupeServiceJpa implements IGroupeService {
 	}
 
 	/**
-	 * Récupération d'un groupe par son idUtlisateur
+	 * Récupération d'un groupe par son utilisateur
 	 * 
 	 * @param IdUtilisateur
 	 * @return groupe
 	 */
 	public Groupe getGroupeByUtilisateur(Utilisateur utilisateur) {
 
-		TypedQuery<Groupe> query = em.createQuery("select u from Groupe u where u.idUtilisateur = :IdUtilisateur",
+		/*TypedQuery<Groupe> query = em.createQuery("select u from Groupe u ",
 				Groupe.class);
-		return query.setParameter("IdUtilisateur", utilisateur).getSingleResult();
+		return query.getResultList();*/
+		TypedQuery<Groupe> query = em.createQuery("select u from Groupe u where u.utilisateur = :Utilisateur",
+				Groupe.class);
+		return query.setParameter("Utilisateur", utilisateur).getSingleResult();
+
+	}
+	
+	/**
+	 * Récupération d'un groupe par l'idUtilisateur
+	 * 
+	 * @param IdUtilisateur
+	 * @return groupe
+	 */
+	public Groupe getGroupeByIdUtilisateur(Utilisateur utilisateur) {
+
+
+		Query query = em.createQuery("select u from Groupe u where u.utilisateur = :Utilisateur",
+				Groupe.class);
+		query.setParameter("Utilisateur", utilisateur).getSingleResult();
+		Groupe oldGroupe = (Groupe) query.getSingleResult();
+		return oldGroupe;
 
 	}
 

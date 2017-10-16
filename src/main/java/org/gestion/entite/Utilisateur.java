@@ -12,9 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import org.gestion.entite.Contact;
 
 @Entity
-@Table(name = "UTILISATEUR")
+@Table(name = "UTILISATEUR",uniqueConstraints={
+        @UniqueConstraint(name="email", columnNames={"email"})})
 public class Utilisateur {
 
 	/**
@@ -43,9 +46,9 @@ public class Utilisateur {
 	@JoinColumn(name = "ID_UTILISATEUR")
 	private Set<Favoris> listeFavoris;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ID_UTILISATEUR")
-	private Set<Groupe> listeGroupes;
+	
+	@OneToOne(mappedBy="utilisateur")  // référence la relation dans la classe Commune
+    private Groupe groupe ;
 
 	public Utilisateur() {
 		super();
@@ -85,14 +88,4 @@ public class Utilisateur {
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
-
-	public Set<Groupe> getListeGroupes() {
-		return listeGroupes;
-	}
-
-	public void setListeGroupes(Set<Groupe> listeGroupes) {
-		this.listeGroupes = listeGroupes;
-	}
-	 
-	
 }

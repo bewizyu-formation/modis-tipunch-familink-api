@@ -58,6 +58,7 @@ public interface IGroupeService {
 	 * @return
 	 */
 	Groupe getGroupeByUtilisateur(final Utilisateur utilisateur);
+	
 
 	/**
 	 *Ajout d'un contact à la liste de contact d'un groupe

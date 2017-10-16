@@ -27,9 +27,8 @@ public class Groupe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idGroupe;
-	
-	@OneToOne
-	private Utilisateur proprietaire;
+	private Utilisateur utilisateur;
+
 	
 	/**
 	 * nomGroupe : String
@@ -55,31 +54,31 @@ public class Groupe {
 	}
 
 
-	public Groupe(Utilisateur idUtilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe) {
+	public Groupe(Utilisateur utilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe) {
 		super();
-		this.proprietaire = proprietaire;
+		this.utilisateur = utilisateur;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
 		this.contactsDuGroupe = contactsDuGroupe;
 	}
 
 
-	public Groupe(int idGroupe, Utilisateur idUtilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe){
+	public Groupe(int idGroupe, Utilisateur utilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe){
 		super();
 		this.idGroupe = idGroupe;
-		this.proprietaire = proprietaire;
+		this.utilisateur = utilisateur;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
 		this.contactsDuGroupe = contactsDuGroupe;
 	}
 	
-
-	public Utilisateur getProprietaire() {
-		return proprietaire;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setProprietaire(Utilisateur proprietaire) {
-		this.proprietaire = proprietaire;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+
 	}
 
 	public String getNom() {
@@ -110,8 +109,4 @@ public class Groupe {
 	public void setContactsDuGroupe(Set<Contact> contactsDuGroupe) {
 		this.contactsDuGroupe = contactsDuGroupe;
 	}
-	
-	
-	
-
 }

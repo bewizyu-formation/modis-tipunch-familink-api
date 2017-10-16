@@ -51,7 +51,7 @@ public interface IContactService {
 
 
 	/**
-	 * Récupération d
+	 * Récupération d'une liste de contacts pour un groupe
 	 * 
 	 * @param id
 	 */

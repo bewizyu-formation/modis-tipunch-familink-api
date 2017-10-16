@@ -103,7 +103,7 @@ public class Token {
 				Date date1 = formatter.parse(formattedDate);
 				
 				Date date2 = formatter.parse(parts[1]);
-				date2.setTime(date2.getTime()+ 2 * 60 * 1000);
+				date2.setTime(date2.getTime()+ 10 * 60 * 1000);
 
 				return isValide = (date1.before(date2));
 

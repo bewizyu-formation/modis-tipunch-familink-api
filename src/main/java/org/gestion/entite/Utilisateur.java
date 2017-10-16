@@ -13,11 +13,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import org.gestion.entite.Contact;
 
 @Entity
-@Table(name = "UTILISATEUR")
+@Table(name = "UTILISATEUR",uniqueConstraints={
+        @UniqueConstraint(name="email", columnNames={"email"})})
 public class Utilisateur {
 
 	/**
@@ -46,8 +48,11 @@ public class Utilisateur {
 	@JoinColumn(name = "ID_UTILISATEUR")
 	private Set<Favoris> listeFavoris;
 
-	@Transient
-	private int newIdContact;
+//	@Transient
+//	private int newIdContact;
+	
+	@OneToOne(mappedBy="utilisateur")  // référence la relation dans la classe Commune
+    private Groupe groupe ;
 
 	public Utilisateur() {
 		super();
@@ -88,20 +93,8 @@ public class Utilisateur {
 		return idUtilisateur;
 	}
 
-	/**
-	 * @return the newIdContact
-	 */
-	@Transient
-	public int getNewIdContact() {
-		return newIdContact;
-	}
 
-	/**
-	 * @param newIdContact
-	 *            the newIdContact to set
-	 */
-	public void setNewIdContact(int newIdContact) {
-		this.newIdContact = newIdContact;
-	}
+
 	 
+	
 }

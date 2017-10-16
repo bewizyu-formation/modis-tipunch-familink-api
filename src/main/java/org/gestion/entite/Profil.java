@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "PROFIL")
+@Table(name = "PROFIL",uniqueConstraints={
+        @UniqueConstraint(name="nom_couleur", columnNames={"nom", "couleur"})})
 public class Profil {
 
 	/**

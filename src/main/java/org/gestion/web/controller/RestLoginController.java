@@ -1,5 +1,7 @@
 package org.gestion.web.controller;
 
+import java.util.List;
+
 import org.gestion.entite.Groupe;
 import org.gestion.entite.Login;
 import org.gestion.entite.Token;
@@ -76,7 +78,7 @@ public class RestLoginController {
 					jObj.put("token", base64encodedString);
 
 					try {
-
+						
 						monGroupe = groupeServiceJpa.getGroupeByUtilisateur(monUtilisateur);
 
 						jObj.put("userData", new JSONObject(monGroupe));

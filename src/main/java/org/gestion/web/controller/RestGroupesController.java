@@ -164,4 +164,18 @@ public class RestGroupesController {
 
 	}
 
+	// ********************************** //
+	// ******* GET LIST contacts d'un groupe ********** //
+	// ********************************** //
+
+	@RequestMapping(path = "/{idGroupe}/contacts", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public Set<Contact> getContactsByIdGroupe(@PathVariable("idGroupe") String idGroupe,
+				@RequestHeader(value = "Authorization", required = true) String requestToken) {
+
+			Groupe monGroupe = new Groupe();
+			monGroupe=groupeServiceRepository.getGroupeById(Integer.parseInt(idGroupe));
+			return monGroupe.getContactsDuGroupe();
+
+	}
 }

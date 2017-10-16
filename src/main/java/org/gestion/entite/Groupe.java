@@ -29,7 +29,7 @@ public class Groupe {
 	private int idGroupe;
 	
 	@OneToOne
-	private Utilisateur idUtilisateur;
+	private Utilisateur utilisateur;
 	
 	/**
 	 * nomGroupe : String
@@ -54,30 +54,30 @@ public class Groupe {
 		super();
 	}
 
-	public Groupe(Utilisateur idUtilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe) {
+	public Groupe(Utilisateur utilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe) {
 		super();
-		this.idUtilisateur = idUtilisateur;
+		this.utilisateur = utilisateur;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
 		this.contactsDuGroupe = contactsDuGroupe;
 	}
 
-	public Groupe(int idGroupe, Utilisateur idUtilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe){
+	public Groupe(int idGroupe, Utilisateur utilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe){
 		super();
 		this.idGroupe = idGroupe;
-		this.idUtilisateur = idUtilisateur;
+		this.utilisateur = utilisateur;
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
 		this.contactsDuGroupe = contactsDuGroupe;
 	}
 	
 
-	public Utilisateur getIdUtilisateur() {
-		return idUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setIdUtilisateur(Utilisateur idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public String getNom() {
@@ -108,6 +108,9 @@ public class Groupe {
 	public void setContactsDuGroupe(Set<Contact> contactsDuGroupe) {
 		this.contactsDuGroupe = contactsDuGroupe;
 	}
+
+	
+	
 	
 	
 	

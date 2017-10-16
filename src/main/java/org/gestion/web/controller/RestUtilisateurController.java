@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.gestion.entite.Contact;
 import org.gestion.entite.FormUtilisateur;
+import org.gestion.entite.Groupe;
 import org.gestion.entite.Profil;
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IContactService;
+import org.gestion.services.IGroupeService;
 import org.gestion.services.IProfilService;
 import org.gestion.services.IUtilisateurService;
 import org.json.JSONObject;
@@ -40,6 +42,10 @@ public class RestUtilisateurController {
 	private IUtilisateurService utilisateurServiceRepository;
 
 	@Autowired
+	@Qualifier("groupeServiceJpa")
+	private IGroupeService groupeServiceJpa;
+	
+	@Autowired
 	@Qualifier("contactServiceRepository")
 	private IContactService contactServiceRepository;
 
@@ -67,6 +73,30 @@ public class RestUtilisateurController {
 		return utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
 	}
 
+	// *********************************** //
+	// ******* GET groupe BY UTILISATEURID ********** //
+	// *********************************** //
+
+	@RequestMapping(path = "/{idUtilisateur}/groupe", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getGroupeByIdutilisateur(@PathVariable("idUtilisateur") String idUtilisateur) {
+		Utilisateur monUtilisateur =  utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
+		JSONObject jObj;
+		jObj = new JSONObject();
+		jObj.put("action", "Groupe de l'utlisateur");
+		
+		try {
+			jObj.put("description", "Fourni le groupe dont l'utilisateur est administrateur");
+			jObj.put("userOwnedGroup", new JSONObject(groupeServiceJpa.getGroupeByUtilisateur(monUtilisateur)));
+			return jObj.toString();
+		} catch (Exception e) {
+			jObj.put("description", "l'utiisateur n'est pas administrateur d'un groupe");
+			jObj.put("userOwnedGroup", "");
+			return jObj.toString();
+		}
+		
+	}
+	
 	// *********************************** //
 	// ********** CREATE utilisateurs ********** //
 

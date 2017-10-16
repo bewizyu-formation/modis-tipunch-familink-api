@@ -1,6 +1,7 @@
 package org.gestion.services.impl;
 
 import org.gestion.entite.Contact;
+import org.gestion.entite.Utilisateur;
 import org.gestion.services.IContactService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +73,14 @@ public class ContactServiceJpa implements IContactService {
 		TypedQuery<Contact> query = em.createQuery("SELECT idContact FROM Contact c WHERE c.idGroupe=:IdGroupe", Contact.class );
 		return query.getResultList();
 		
+		
+	}
+
+	@Override
+	public List<Contact> getContactByIdGroupe(int idGroupe) {
+
+		TypedQuery<Contact> query = em.createQuery("select u from Contact u where u.idGroupe = :IdGroupe", Contact.class);
+		return query.setParameter("IdGroupe", idGroupe).getResultList();
 		
 	}
 

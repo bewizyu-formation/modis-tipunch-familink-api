@@ -57,6 +57,7 @@ public class ContactServiceRepository implements IContactService {
 	}
 
 	@Override
+
 	public List<Contact> getContactsByGroupId() {
 		// TODO Auto-generated method stub
 		return contactRepository.findAll();

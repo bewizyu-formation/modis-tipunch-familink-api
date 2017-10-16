@@ -39,7 +39,7 @@ public class GroupeServiceRepository implements IGroupeService {
 
 		if (toUpdate != null) {
 			toUpdate.setDateDeCreation(groupe.getDateDeCreation());
-			toUpdate.setIdUtilisateur(groupe.getIdUtilisateur());
+			toUpdate.setProprietaire(groupe.getProprietaire());
 			toUpdate.setNom(groupe.getNom());
 			groupeRepository.save(toUpdate);
 		}

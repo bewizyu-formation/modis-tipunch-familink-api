@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,24 +41,25 @@ public class Utilisateur {
 	private String motDePasse;
 
 	@OneToOne
-	private Contact idContact;
+	private Contact contact;
 
 	@OneToMany
 	@JoinColumn(name = "ID_UTILISATEUR")
 	private Set<Favoris> listeFavoris;
 
-	@Transient
-	private int newIdContact;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_UTILISATEUR")
+	private Set<Groupe> listeGroupes;
 
 	public Utilisateur() {
 		super();
 	}
 
-	public Utilisateur(String email, String motDePasse, Contact idContact) {
+	public Utilisateur(String email, String motDePasse, Contact contact) {
 		super();
 		this.email = email;
 		this.motDePasse = motDePasse;
-		this.idContact = idContact;
+		this.contact = contact;
 	}
 
 	public String getEmail() {
@@ -77,31 +79,24 @@ public class Utilisateur {
 	}
 
 	public Contact getContact() {
-		return idContact;
+		return contact;
 	}
 
 	public void setContact(Contact idContact) {
-		this.idContact = idContact;
+		this.contact = idContact;
 	}
 
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
 
-	/**
-	 * @return the newIdContact
-	 */
-	@Transient
-	public int getNewIdContact() {
-		return newIdContact;
+	public Set<Groupe> getListeGroupes() {
+		return listeGroupes;
 	}
 
-	/**
-	 * @param newIdContact
-	 *            the newIdContact to set
-	 */
-	public void setNewIdContact(int newIdContact) {
-		this.newIdContact = newIdContact;
+	public void setListeGroupes(Set<Groupe> listeGroupes) {
+		this.listeGroupes = listeGroupes;
 	}
 	 
+	
 }

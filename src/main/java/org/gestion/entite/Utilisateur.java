@@ -42,10 +42,6 @@ public class Utilisateur {
 	@OneToOne
 	private Contact contact;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-    private Set<Groupe> groupesDeUtilisateur ;
-
-
 	public Utilisateur() {
 		super();
 	}

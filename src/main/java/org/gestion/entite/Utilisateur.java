@@ -45,9 +45,6 @@ public class Utilisateur {
 	@OneToMany(fetch = FetchType.EAGER)
     private Set<Groupe> groupesDeUtilisateur ;
 
-	@OneToMany
-	@JoinColumn(name = "ID_UTILISATEUR")
-	private Set<Favoris> listeFavoris;
 
 	public Utilisateur() {
 		super();

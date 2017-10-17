@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/utilisateurs")
 
-@CrossOrigin(origins = "*", allowedHeaders = "authorization")
+//@CrossOrigin(origins = "*", allowedHeaders = "authorization")
 
 public class RestUtilisateurController {
 

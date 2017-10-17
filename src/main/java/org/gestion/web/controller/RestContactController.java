@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.gestion.entite.Contact;
 import org.gestion.entite.ContactForm;
+import org.gestion.entite.Groupe;
 import org.gestion.services.IContactService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -68,24 +70,24 @@ public class RestContactController {
 
 		JSONObject jObj;
 		jObj = new JSONObject();
-		
+
 		try {
-			Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
-					nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
-					nouveauContact.getCodePostal(), nouveauContact.getVille(),
+			Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(),
+					nouveauContact.getPrenom(), nouveauContact.getGravatar(), nouveauContact.getNumTel(),
+					nouveauContact.getAdresse(), nouveauContact.getCodePostal(), nouveauContact.getVille(),
 					restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
 			contactServiceRepository.create(newContact);
-			
+
 			jObj.put("action", "creation contact");
 			jObj.put("description", "Contact créé");
-			
-			} catch (Exception e) {
-		
-				jObj.put("action", "creation contact");
-				jObj.put("description", "Echec creation contact");
-		
-			}
-			return jObj.toString();
+
+		} catch (Exception e) {
+
+			jObj.put("action", "creation contact");
+			jObj.put("description", "Echec creation contact");
+
+		}
+		return jObj.toString();
 	}
 
 	// *********************************** //
@@ -96,7 +98,7 @@ public class RestContactController {
 	@ResponseBody
 	public void updateContact(@RequestBody ContactForm updateContact) {
 
-   		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
+		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
 				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
 				updateContact.getAdresse(), updateContact.getCodePostal(), updateContact.getVille(),
 				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));
@@ -116,12 +118,27 @@ public class RestContactController {
 		contactServiceRepository.deleteContact(Integer.parseInt(idContact));
 
 	}
-	
+
 	@RequestMapping(path = "/group", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Contact> getContactsByGroupId() {
 
 		return contactServiceJpa.getContactsByGroupId();
 	}
-	
+
+//	// ********************************** //
+//	// ******* GET LIST groupes d'un contact ********** //
+//	// ********************************** //
+//
+//	@RequestMapping(path = "/{idContact}/groupes", method = RequestMethod.GET, produces = "application/json")
+//	@ResponseBody
+//	public Set<Groupe> getContactsByIdGroupe(@PathVariable("idContact") String idContact,
+//			@RequestHeader(value = "Authorization", required = true) String requestToken) {
+//
+//		Contact monContact = new Contact();
+//		monContact = contactServiceRepository.getContactById(Integer.parseInt(idContact));
+//		return monContact.getListeGroupesContact();
+//
+//	}
+
 }

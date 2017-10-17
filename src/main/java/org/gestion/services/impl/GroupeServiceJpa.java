@@ -1,6 +1,7 @@
 package org.gestion.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -101,6 +102,14 @@ public class GroupeServiceJpa implements IGroupeService {
 		Groupe oldGroupe = (Groupe) query.getSingleResult();
 		return oldGroupe;
 
+	}
+	
+	@Override
+	@Transactional
+	public void updateListeContacts(int idGroupe, Set<Contact> listeContactsDuGroupe) {
+		Groupe monGroupe = getGroupeById(idGroupe);
+		monGroupe.setContactsDuGroupe(listeContactsDuGroupe);
+		em.persist(monGroupe);
 	}
 
 }

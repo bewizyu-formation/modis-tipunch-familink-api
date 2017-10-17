@@ -1,6 +1,7 @@
 package org.gestion.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.gestion.entite.Contact;
+import org.gestion.entite.Groupe;
 import org.gestion.services.IContactService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,9 +73,15 @@ public class ContactServiceJpa implements IContactService {
 	@Override
 	public List<Contact> getContactsByGroupId(){
 		TypedQuery<Contact> query = em.createQuery("SELECT idContact FROM Contact c WHERE c.idGroupe=:IdGroupe", Contact.class );
-		return query.getResultList();
-		
-		
+		return query.getResultList();		
 	}
+	
+//	@Override
+//	@Transactional
+//	public void updateListeGroupes(int idcontact, Set<Groupe> listeGroupesContacts) {
+//		Contact contact = getContactById(idcontact);
+//		contact.setListeGroupesContact(listeGroupesContacts);
+//		em.persist(contact);
+//	}
 
 }

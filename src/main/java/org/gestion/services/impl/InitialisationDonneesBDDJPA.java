@@ -29,6 +29,10 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 	private IContactService contactServiceRepository;
 	
 	@Autowired
+	@Qualifier("contactServiceJpa")
+	private IContactService contactServiceJpa;
+	
+	@Autowired
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
 	
@@ -107,6 +111,20 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		
 		groupeServiceRepository.create( new Groupe( utilisateurServiceRepository.getUtilisateurById(3),
 				"Mère Theresa", date, listeDeContacts  ) );
+		
+	}
+	
+	@Override
+	public void initialiserGroupesD1Contact() {
+		
+		Set<Groupe> listeGroupeD1Contact = new HashSet<Groupe>();
+		listeGroupeD1Contact.add(groupeServiceRepository.getGroupeById(1));
+		listeGroupeD1Contact.add(groupeServiceRepository.getGroupeById(2));
+		
+		Contact monContact = contactServiceRepository.getContactById(4);
+		
+		//contactServiceJpa.updateListeGroupes(monContact.getIdContact(), listeGroupeD1Contact);
+		
 		
 	}
 

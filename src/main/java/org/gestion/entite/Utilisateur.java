@@ -43,8 +43,6 @@ public class Utilisateur {
 	private Contact contact;
 
 	
-	@OneToOne(mappedBy="utilisateur")  
-    private Groupe groupe ;
 
 	public Utilisateur() {
 		super();

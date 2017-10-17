@@ -14,6 +14,7 @@ import org.gestion.services.IContactService;
 import org.gestion.services.IGroupeService;
 import org.gestion.services.impl.ContactServiceRepository;
 import org.gestion.services.impl.UtilisateurServiceRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -71,18 +72,6 @@ public class RestGroupesController {
 	public List<Groupe> getGroupesWithJPA(
 			@RequestHeader(value = "Authorization", required = true) String requestToken) {
 
-		/* TODO : vérifier la validiée du token */
-
-		// System.out.println("requestToken = " + requestToken);
-
-		// ********************************** //
-		// *** GET LIST groupByUtilisateur*** //
-		// ********************************** //
-
-		/*
-		 * TODO : Retourner uniquement les groupes liés à l'utilisateur (IdUtilisateur
-		 * contenu dans le token)
-		 */
 		return groupeServiceJpa.getGroupes();
 	}
 
@@ -174,11 +163,48 @@ public class RestGroupesController {
 	@ResponseBody
 	public Set<Contact> getContactsByIdGroupe(@PathVariable("idGroupe") String idGroupe,
 				@RequestHeader(value = "Authorization", required = true) String requestToken) {
-
+			
 			Groupe monGroupe = new Groupe();
 			monGroupe=groupeServiceRepository.getGroupeById(Integer.parseInt(idGroupe));
 			return monGroupe.getContactsDuGroupe();
 
+	}
+	
+	// *********************************** //
+	// ********** CREATE contacts dans un groupe ********** //
+	// *********************************** //
+
+	@RequestMapping(path = "/{idGroupe}/contact", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String createContact(@RequestBody ContactForm nouveauContact,@PathVariable("idGroupe") String idGroupe,
+			@RequestHeader(value = "Authorization", required = true) String requestToken) {
+
+		JSONObject jObj;
+		jObj = new JSONObject();
+
+		try {
+			Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(),
+					nouveauContact.getPrenom(), nouveauContact.getGravatar(), nouveauContact.getNumTel(),
+					nouveauContact.getAdresse(), nouveauContact.getCodePostal(), nouveauContact.getVille(),
+					restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
+			contactServiceRepository.create(newContact);
+			
+			monGroupe = new Groupe();
+			monGroupe = groupeServiceRepository.getGroupeById(Integer.parseInt(idGroupe));
+			Set<Contact> listeDeContacts = monGroupe.getContactsDuGroupe();
+			listeDeContacts.add(newContact);
+			groupeServiceJpa.updateListeContacts(Integer.parseInt(idGroupe), listeDeContacts);
+
+			jObj.put("action", "creation contact");
+			jObj.put("description", "Contact créé");
+
+		} catch (Exception e) {
+
+			jObj.put("action", "creation contact");
+			jObj.put("description", "Echec creation contact");
+
+		}
+		return jObj.toString();
 	}
 
 }

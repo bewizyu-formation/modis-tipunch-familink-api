@@ -1,6 +1,7 @@
 package org.gestion.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.gestion.entite.Contact;
 import org.gestion.entite.Groupe;
@@ -67,5 +68,11 @@ public class GroupeServiceRepository implements IGroupeService {
 			groupeToUpdate.setContactsDuGroupe(groupeToUpdate.getContactsDuGroupe());
 			groupeRepository.save(groupeToUpdate);
 		}
+	}
+	
+	@Override
+	public void updateListeContacts(int idGroupe, Set<Contact> listeContactsGoupe) {
+		// TODO Auto-generated method stub
+		
 	}
 }

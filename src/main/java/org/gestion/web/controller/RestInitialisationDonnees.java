@@ -23,7 +23,6 @@ public class RestInitialisationDonnees  extends ContextRefreshedEvent{
 
 	public RestInitialisationDonnees(ApplicationContext source) {
 		super(source);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Autowired
@@ -37,6 +36,7 @@ public class RestInitialisationDonnees  extends ContextRefreshedEvent{
 		initialisationDonnees.initialiserContact();		
 		initialisationDonnees.initialiserUtilisateur();
 		initialisationDonnees.initialiserGroupe();
+		initialisationDonnees.initialiserGroupesD1Contact();
 		
 	}
 

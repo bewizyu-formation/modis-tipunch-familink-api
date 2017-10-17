@@ -1,4 +1,6 @@
+
 package org.gestion.entite;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -73,9 +76,9 @@ public class Contact {
 	@OneToOne
 	private Profil profil;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ID_CONTACT")
-	private Set<Favoris> listeFavorisContact;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Groupe> listeGroupesContact= new HashSet<Groupe>();
 
 	public Contact() {
 		super();
@@ -185,6 +188,14 @@ public class Contact {
 
 	public int getIdContact() {
 		return idContact;
+	}
+	
+	public Set<Groupe> getListeGroupesContact() {
+		return listeGroupesContact;
+	}
+
+	public void setListeGroupesContact(Set<Groupe> listeGroupesContact) {
+		this.listeGroupesContact = listeGroupesContact;
 	}
 
 }

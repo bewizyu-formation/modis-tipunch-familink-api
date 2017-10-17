@@ -1,6 +1,7 @@
 package org.gestion.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.gestion.entite.Contact;
+import org.gestion.entite.Groupe;
 import org.gestion.services.IContactService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,26 +56,43 @@ public class ContactServiceJpa implements IContactService {
 
 	@Override
 	public void deleteContact(int id) {
-		//em.getTransaction().begin();
+
 		Contact contact = getContactById(id);
 		em.remove(contact);
-		//em.getTransaction().commit();
+
 	}
 
 	@Override
 	public Contact getContactById(int id) {
-		//em.getTransaction().begin();
+
 		Contact contact = em.find(Contact.class, id);
-		//em.getTransaction().commit();
+
 	    return contact;
 	}
 	
 	@Override
 	public List<Contact> getContactsByGroupId(){
 		TypedQuery<Contact> query = em.createQuery("SELECT idContact FROM Contact c WHERE c.idGroupe=:IdGroupe", Contact.class );
-		return query.getResultList();
-		
-		
+		return query.getResultList();		
+	}
+
+	@Override
+	public List<Groupe> getListeGroupes(int IdUtilisateur) {
+
+		Query q = em.createNativeQuery("SELECT * FROM groupe INNER JOIN groupe_contact ON groupe.idGroupe = groupe_contact.Groupe_idGroupe "
+				+ "INNER JOIN utilisateur on groupe_contact.contactsDuGroupe_idContact = utilisateur.contact_idContact where utilisateur.idUtilisateur = ?"
+				);
+		q.setParameter(1, IdUtilisateur);
+		List<Groupe> groupes = q.getResultList();
+		return groupes;
+	}
+	
+	@Override
+	@Transactional
+	public void updateListeGroupes(int idcontact, Set<Groupe> listeGroupesContacts) {
+		Contact contact = getContactById(idcontact);
+		contact.setListeGroupesContact(listeGroupesContacts);
+		em.persist(contact);
 	}
 
 }

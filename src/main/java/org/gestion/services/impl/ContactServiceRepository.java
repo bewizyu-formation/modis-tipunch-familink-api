@@ -1,12 +1,14 @@
 package org.gestion.services.impl;
 
 import org.gestion.entite.Contact;
+import org.gestion.entite.Groupe;
 import org.gestion.repository.ContactRepository;
 import org.gestion.services.IContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Van-Rottana YOU
@@ -57,9 +59,20 @@ public class ContactServiceRepository implements IContactService {
 	}
 
 	@Override
-
 	public List<Contact> getContactsByGroupId() {
-		// TODO Auto-generated method stub
+
 		return contactRepository.findAll();
+	}
+
+	@Override
+	public List<Groupe> getListeGroupes(int idcontact) {
+
+		return null;
+	}
+	
+	@Override
+	public void updateListeGroupes(int idcontact, Set<Groupe> listeGroupesContacts) {
+		
+		
 	}
 }

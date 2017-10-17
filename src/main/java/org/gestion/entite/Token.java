@@ -71,7 +71,7 @@ public class Token {
 			String formattedDate = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
 
 			String aCoder = formattedDate;
-			corps = "1-" + Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));
+			corps = Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));
 
 			return corps;
 

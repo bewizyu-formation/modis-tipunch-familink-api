@@ -116,13 +116,5 @@ public class Profil {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Profil [idProfil=" + idProfil + ", nom=" + nom + ", couleur=" + couleur + "]";
-	}
-	
 	
 }

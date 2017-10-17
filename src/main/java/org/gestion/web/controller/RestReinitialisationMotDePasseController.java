@@ -43,8 +43,6 @@ public class RestReinitialisationMotDePasseController {
 
 			monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(email);
 
-			// EmailSender.envoyerMailSMTP("10.10.50.8",true);
-
 			Token monToken = new Token();
 			String base64encodedString = monToken.creerToken(monUtilisateur.getIdUtilisateur());
 			jObj.put("tokenReinitialisation", base64encodedString);

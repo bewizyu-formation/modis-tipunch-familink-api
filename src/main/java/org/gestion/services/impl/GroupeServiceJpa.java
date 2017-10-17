@@ -56,17 +56,17 @@ public class GroupeServiceJpa implements IGroupeService {
 
 	@Override
 	public void deleteGroupe(int id) {
-		// em.getTransaction().begin();
+		
 		Groupe groupe = getGroupeById(id);
 		em.remove(groupe);
-		// em.getTransaction().commit();
+	
 	}
 
 	@Override
 	public Groupe getGroupeById(int id) {
-		// em.getTransaction().begin();
+		
 		Groupe groupe = em.find(Groupe.class, id);
-		// em.getTransaction().commit();
+		
 		return groupe;
 	}
 
@@ -78,9 +78,6 @@ public class GroupeServiceJpa implements IGroupeService {
 	 */
 	public Groupe getGroupeByUtilisateur(Utilisateur utilisateur) {
 
-		/*TypedQuery<Groupe> query = em.createQuery("select u from Groupe u ",
-				Groupe.class);
-		return query.getResultList();*/
 		TypedQuery<Groupe> query = em.createQuery("select u from Groupe u where u.utilisateur = :Utilisateur",
 				Groupe.class);
 		return query.setParameter("Utilisateur", utilisateur).getSingleResult();

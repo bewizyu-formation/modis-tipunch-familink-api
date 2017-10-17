@@ -59,11 +59,18 @@ public interface IContactService {
 	 */
 	List<Contact> getContactsByGroupId();
 	
-//	/**
+	/**
 //	 * Récupération d'une liste de groupes pour un contact
 //	 * 
 //	 * @param id
 //	 */
-//	void updateListeGroupes(int idcontact, Set<Groupe> listeContactsGroupe);
+	List<Groupe> getListeGroupes(int idcontact);
+	
+	/**
+	 * Récupération d'une liste de groupes pour un contact
+	 * 
+	 * @param id
+	 */
+	void updateListeGroupes(int idcontact, Set<Groupe> listeContactsGroupe);
 
 }

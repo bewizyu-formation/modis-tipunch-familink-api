@@ -42,12 +42,8 @@ public class Utilisateur {
 	@OneToOne
 	private Contact contact;
 
-	@OneToMany
-	@JoinColumn(name = "ID_UTILISATEUR")
-	private Set<Favoris> listeFavoris;
-
 	
-	@OneToOne(mappedBy="utilisateur")  // référence la relation dans la classe Commune
+	@OneToOne(mappedBy="utilisateur")  
     private Groupe groupe ;
 
 	public Utilisateur() {

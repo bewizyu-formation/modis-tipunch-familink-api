@@ -72,18 +72,6 @@ public class RestGroupesController {
 	public List<Groupe> getGroupesWithJPA(
 			@RequestHeader(value = "Authorization", required = true) String requestToken) {
 
-		/* TODO : vérifier la validiée du token */
-
-		// System.out.println("requestToken = " + requestToken);
-
-		// ********************************** //
-		// *** GET LIST groupByUtilisateur*** //
-		// ********************************** //
-
-		/*
-		 * TODO : Retourner uniquement les groupes liés à l'utilisateur (IdUtilisateur
-		 * contenu dans le token)
-		 */
 		return groupeServiceJpa.getGroupes();
 	}
 

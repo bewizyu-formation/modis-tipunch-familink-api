@@ -42,7 +42,7 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 	
 	@Override
 	public void initialiserProfils() {
-		// TODO Auto-generated method stub
+
 		
 		profilServiceJpa.create(new Profil("SENIOR","#FFFF00"));
 		profilServiceJpa.create(new Profil("MEDECIN","#FFFFFF"));
@@ -52,7 +52,7 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 
 	@Override
 	public void initialiserContact() {
-		// TODO Auto-generated method stub
+
 		
 		contactServiceRepository.create(new Contact( "", "Martin", "Damien", 
 				"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50", "0612853748",
@@ -82,7 +82,6 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 
 	@Override
 	public void initialiserUtilisateur() {
-		// TODO Auto-generated method stub
 		
 		utilisateurServiceRepository.create( new Utilisateur( "vr.you@hotmail.fr", "71ec2af811cdf898bce6904a75a48d75", contactServiceRepository.getContactById(2) ) );
 		utilisateurServiceRepository.create( new Utilisateur( "celikbas.ahmet@gmail.com", "bd990c98217acc3fc01b58d119c878f4", contactServiceRepository.getContactById(3) ) );
@@ -93,7 +92,6 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 
 	@Override
 	public void initialiserGroupe() {
-		// TODO Auto-generated method stub
 		
 		Set<Contact> listeDeContacts = new HashSet<Contact>();
 		listeDeContacts.add( contactServiceRepository.getContactById( utilisateurServiceRepository.getUtilisateurById(2).getContact().getIdContact() ) );
@@ -123,7 +121,7 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		
 		Contact monContact = contactServiceRepository.getContactById(4);
 		
-		//contactServiceJpa.updateListeGroupes(monContact.getIdContact(), listeGroupeD1Contact);
+		contactServiceJpa.updateListeGroupes(monContact.getIdContact(), listeGroupeD1Contact);
 		
 		
 	}

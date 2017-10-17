@@ -158,7 +158,7 @@ public class RestContactController {
 			jObj.put("description", "liste non créée");
 	
 		}
-		
+
 		return jObj.toString();
 
 	}

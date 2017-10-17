@@ -1,9 +1,8 @@
 package org.gestion.web.controller;
 
-import org.gestion.entite.EmailSender;
 import org.gestion.entite.Login;
-import org.gestion.entite.Utilisateur;
 import org.gestion.services.IUtilisateurService;
+import org.gestion.services.impl.EmailSender;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,24 +26,20 @@ public class RestMotDePasseOublieController {
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
 
-	private Utilisateur monUtilisateur;
-
-	// *********************************** //
-	// ******* GET utilisateur BY EMAIL ********** //
-	// *********************************** //
+	// ******************************************* //
+	// ******* Envoie un email à l'utilisateur pour réinitialisaer le mdp ********** //
+	// ******************************************* //
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String MotDePasse(@RequestBody Login newLogin) {
+	public String Email(@RequestBody Login newLogin) {
 
 		JSONObject jObj;
 		jObj = new JSONObject();
 
 		try {
 
-			monUtilisateur = utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail());
-
-			EmailSender.envoyerMailSMTP();
+			EmailSender.envoyerMailSMTP( utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail()) );
 
 			jObj.put("description", "Email reconnu");
 
@@ -54,7 +49,6 @@ public class RestMotDePasseOublieController {
 			jObj.put("description", "Email inconnu");
 
 		}
-		monUtilisateur = new Utilisateur();
 		return jObj.toString();
 
 	}

@@ -1,16 +1,17 @@
 package org.gestion.services.impl;
 
-import org.gestion.entite.Utilisateur;
-import org.gestion.services.IUtilisateurService;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.util.List;
+
+import org.gestion.entite.Groupe;
+import org.gestion.entite.Utilisateur;
+import org.gestion.services.IUtilisateurService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service(value = "utilisateurServiceJpa")
 public class UtilisateurServiceJpa implements IUtilisateurService {
@@ -31,8 +32,6 @@ public class UtilisateurServiceJpa implements IUtilisateurService {
 	@Transactional
 	public void update(Utilisateur utilisateur) {
 		Query query = em.createQuery("FROM Utilisateur c WHERE c.email=:email");
-		query.setParameter("email", utilisateur.getEmail());
-
 		Utilisateur oldUtilisateur = (Utilisateur) query.getSingleResult();
 		if (!oldUtilisateur.equals(null)) {
 			oldUtilisateur.setEmail(utilisateur.getEmail());
@@ -78,6 +77,13 @@ public class UtilisateurServiceJpa implements IUtilisateurService {
 	
 	public Utilisateur getUtilisateurByMotDePasse(String motDePasse) {
 		return null;
+	}
+
+	@Override
+	public List<Groupe> getListeGroupeUtilisateur( Utilisateur utilisateur ) {
+		int idContact = utilisateur.getContact().getIdContact();
+		TypedQuery<Groupe> query = em.createQuery("SELECT u FROM groupe_contact u",Groupe.class);
+		return query.getResultList();
 	}
 
 }

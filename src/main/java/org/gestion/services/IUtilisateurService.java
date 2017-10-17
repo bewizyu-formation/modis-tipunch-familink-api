@@ -2,6 +2,7 @@ package org.gestion.services;
 
 import java.util.List;
 
+import org.gestion.entite.Groupe;
 import org.gestion.entite.Utilisateur;
 
 /**
@@ -15,7 +16,6 @@ public interface IUtilisateurService {
 	/**
 	 * Sauvegarde un nouveau utilisateur
 	 *
-
 	 * @param Utilisateur nouveau utilisateur
 	 */
 	Utilisateur create(Utilisateur nouveauUtilisateur);
@@ -42,6 +42,12 @@ public interface IUtilisateurService {
 	Utilisateur getUtilisateurById (final int id);
 	
 	/**
+	 * Suppression d'un utilisateur par son id
+	 * @param id
+	 */
+	void deleteUtilisateur(final int id);
+	
+	/**
 	 * Récupération d'un utilisateur par son email
 	 * @param id
 	 * @return
@@ -56,8 +62,10 @@ public interface IUtilisateurService {
 	Utilisateur getUtilisateurByMotDePasse (final String motDePasse);
 
 	/**
-	 * Suppression d'un utilisateur
-	 * @param id
+	 * Retourne la liste des groupes auxquels l'utilisateur appartient
+	 *
+	 * @return List<Utilisateur>
 	 */
-	void deleteUtilisateur(final int id);
+	List<Groupe> getListeGroupeUtilisateur( Utilisateur utilisateur );
+
 }

@@ -52,12 +52,10 @@ public class Token {
 			return corps;
 
 		} catch (Exception e) {
-
-		} finally {
-
-			return corps;
+			
+			return null;
+			
 		}
-
 	}
 
 	public String creerToken() {
@@ -71,17 +69,16 @@ public class Token {
 			String formattedDate = new SimpleDateFormat("yyyyMMddHHmmss").format(date);
 
 			String aCoder = formattedDate;
-			corps = "1-" + Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));
+			corps = Base64.getEncoder().encodeToString(aCoder.getBytes("utf-8"));
 
 			return corps;
 
 		} catch (Exception e) {
 
 			System.out.println("Error :" + e.getMessage());
+			return null;
 
-		} finally {
-			return corps;
-		}
+		} 
 	}
 
 	public boolean tokenIsValide(String monToken) {

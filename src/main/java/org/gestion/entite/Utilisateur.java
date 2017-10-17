@@ -41,14 +41,13 @@ public class Utilisateur {
 
 	@OneToOne
 	private Contact contact;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+    private Set<Groupe> groupesDeUtilisateur ;
 
 	@OneToMany
 	@JoinColumn(name = "ID_UTILISATEUR")
 	private Set<Favoris> listeFavoris;
-
-	
-	@OneToOne(mappedBy="utilisateur")  // référence la relation dans la classe Commune
-    private Groupe groupe ;
 
 	public Utilisateur() {
 		super();
@@ -87,5 +86,6 @@ public class Utilisateur {
 
 	public int getIdUtilisateur() {
 		return idUtilisateur;
-	}
+	}	
+	
 }

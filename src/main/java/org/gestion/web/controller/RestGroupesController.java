@@ -12,8 +12,8 @@ import org.gestion.entite.Token;
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IContactService;
 import org.gestion.services.IGroupeService;
-import org.gestion.services.impl.ContactServiceRepository;
 import org.gestion.services.impl.UtilisateurServiceRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -100,9 +100,9 @@ public class RestGroupesController {
 	// ********** CREATE Group ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void createGroupe(@RequestBody GroupeForm nouveauGroupe) {
+	public String createGroupe(@RequestBody GroupeForm nouveauGroupe) {
 
 		Set<Contact> listeContactGroupe = new HashSet<Contact>();
 
@@ -118,15 +118,16 @@ public class RestGroupesController {
 				nouveauGroupe.getNom(), nouveauGroupe.getDateDeCreation(), listeContactGroupe);
 
 		groupeServiceRepository.create(newGroupe);
+		return new JSONObject().toString();
 
 	}
 	// *********************************** //
 	// ******* UPDATE group BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void updateGroupe(@RequestBody GroupeForm updateGroupe) {
+	public String updateGroupe(@RequestBody GroupeForm updateGroupe) {
 
 		Groupe newGroupe = new Groupe(updateGroupe.getIdGroupe(),
 				restUtilisateurController
@@ -134,16 +135,17 @@ public class RestGroupesController {
 				updateGroupe.getNom(), updateGroupe.getDateDeCreation(), updateGroupe.getContactsDuGroupe());
 
 		groupeServiceRepository.update(newGroupe);
+		return new JSONObject().toString();
 
 	}
 
-	// *********************************** //
-	// ******* UPDATE group BY ID ******** //
-	// *********************************** //
+	// *********************************************************** //
+	// ******* Ajout contact à la liste d'un groupe BY ID ******** //
+	// *********************************************************** //
 
-	@RequestMapping(path = "/update_liste_contact", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "/update_liste_contact", method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void updateGroupeListe(@RequestBody ContactForm contactForm) {
+	public String updateGroupeListe(@RequestBody ContactForm contactForm) {
 
 		Contact nouveauContact = new Contact(contactForm.getIdContact(), contactForm.getEmail(), contactForm.getNom(),
 				contactForm.getPrenom(), contactForm.getGravatar(), contactForm.getNumTel(), contactForm.getAdresse(),
@@ -151,6 +153,7 @@ public class RestGroupesController {
 				restProfileController.getProfilById(Integer.toString(contactForm.getIdProfil())));
 		contactServiceRepository.create(nouveauContact);
 		groupeServiceRepository.addContactToGroup(nouveauContact, contactForm.getIdGroupe());
+		return new JSONObject().toString();
 
 	}
 
@@ -167,14 +170,14 @@ public class RestGroupesController {
 	}
 
 	// ********************************** //
-	// ******* GET LIST contacts d'un groupe ********** //
+	// ***** GET LIST contacts d'un groupe **** //
 	// ********************************** //
 
 	@RequestMapping(path = "/{idGroupe}/contacts", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Set<Contact> getContactsByIdGroupe(@PathVariable("idGroupe") String idGroupe,
 				@RequestHeader(value = "Authorization", required = true) String requestToken) {
-
+		
 			Groupe monGroupe = new Groupe();
 			monGroupe=groupeServiceRepository.getGroupeById(Integer.parseInt(idGroupe));
 			return monGroupe.getContactsDuGroupe();

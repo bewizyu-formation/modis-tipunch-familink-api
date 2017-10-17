@@ -108,6 +108,14 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		groupeServiceRepository.create( new Groupe( utilisateurServiceRepository.getUtilisateurById(3),
 				"Mère Theresa", date, listeDeContacts  ) );
 		
+//		listeDeContacts.clear();
+//		listeDeContacts.add( contactServiceRepository.getContactById( utilisateurServiceRepository.getUtilisateurById(3).getContact().getIdContact() ) );
+//		listeDeContacts.add( contactServiceRepository.getContactById(1) ); 
+//		date.toInstant();
+//		
+//		groupeServiceRepository.create( new Groupe( utilisateurServiceRepository.getUtilisateurById(4),
+//				"Réné Robert", date, listeDeContacts  ) );
+		
 	}
 
 }

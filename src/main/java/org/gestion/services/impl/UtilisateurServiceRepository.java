@@ -1,5 +1,6 @@
 package org.gestion.services.impl;
 
+import org.gestion.entite.Groupe;
 import org.gestion.entite.Utilisateur;
 import org.gestion.repository.UtilisateurRepository;
 import org.gestion.services.IUtilisateurService;
@@ -37,6 +38,8 @@ public class UtilisateurServiceRepository implements IUtilisateurService {
 	@Override
 	public void update(Utilisateur utilisateur) {
 
+		System.out.println(utilisateur.getEmail()+' '+utilisateur.getMotDePasse());
+		System.out.println("Il est passé par ici"+"\n");
 		final Utilisateur toUpdate = utilisateurRepository.findOne(utilisateur.getIdUtilisateur());
 
 		if (toUpdate != null) {
@@ -61,6 +64,12 @@ public class UtilisateurServiceRepository implements IUtilisateurService {
 
 	@Override
 	public Utilisateur getUtilisateurByMotDePasse(String motDePasse) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Groupe> getListeGroupeUtilisateur( Utilisateur utilisateur ) {
 		// TODO Auto-generated method stub
 		return null;
 	}

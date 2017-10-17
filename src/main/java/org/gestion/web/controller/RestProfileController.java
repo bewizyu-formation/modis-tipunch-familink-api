@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.gestion.entite.Profil;
 import org.gestion.services.IProfilService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -55,9 +56,10 @@ public class RestProfileController {
 	// ********** CREATE profil ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
-	public void CreateProfil(@RequestBody Profil newProfil) {		
+	@RequestMapping(path = "", method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
+	public String CreateProfil(@RequestBody Profil newProfil) {		
 		profilServiceJpa.create(new Profil(newProfil.getNom(), newProfil.getCouleur()));
+		return new JSONObject().toString();
 
 	}
 
@@ -65,10 +67,11 @@ public class RestProfileController {
 	// ******* UPDATE utilisateur BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void updateProfil(@RequestBody Profil updateProfil) {
+	public String updateProfil(@RequestBody Profil updateProfil) {
 		profilServiceRepository.update(updateProfil);
+		return new JSONObject().toString();
 	}
 
 	// *********************************** //

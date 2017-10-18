@@ -120,7 +120,7 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		utilisateurServiceRepository.create( new Utilisateur( "julien.bertrand6384@gmail.com", "2288f19af4174ba13c653f1cef8d98f3", contactServiceRepository.getContactById(4) ) );
 		utilisateurServiceRepository.create( new Utilisateur( "cestmavraieadressepoubelle@gmail.com", "9187e41a6995d859f23f4276035de75a", contactServiceRepository.getContactById(6) ) );
 		utilisateurServiceRepository.create( new Utilisateur( "molier_alexandre@gmail.com", "79b240acdaf445e99da9095d59d5c533", contactServiceRepository.getContactById(9) ) );
-		utilisateurServiceRepository.create( new Utilisateur( "vernier.anais@employe-sncf.fr", "933d80f211683fa3d839cbfdd61696d6b", contactServiceRepository.getContactById(11) ) );
+		utilisateurServiceRepository.create( new Utilisateur( "vernier.anais@employe-sncf.fr", "33d80f211683fa3d839cbfdd61696d6b", contactServiceRepository.getContactById(11) ) );
 		utilisateurServiceRepository.create( new Utilisateur( "robert.henry@gmail.com", "5fa453394911350c93a08e196112d33f", contactServiceRepository.getContactById(14) ) );
 
 	}
@@ -160,9 +160,9 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		listeDeContacts.add( contactServiceRepository.getContactById(13) ); 
 		listeDeContacts.add( contactServiceRepository.getContactById(6) ); 
 		listeDeContacts.add( contactServiceRepository.getContactById(8) );
-		listeDeContacts.add( contactServiceRepository.getContactById(4) );
+		listeDeContacts.add( contactServiceRepository.getContactById(2) );
 		listeDeContacts.add( contactServiceRepository.getContactById(9) );
-		listeDeContacts.add( contactServiceRepository.getContactById(7) );
+		listeDeContacts.add( contactServiceRepository.getContactById(10) );
 
 		date.toInstant();
 		
@@ -171,18 +171,4 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 				
 	}
 	
-	@Override
-	public void initialiserGroupesD1Contact() {
-		
-		Set<Groupe> listeGroupeD1Contact = new HashSet<Groupe>();
-		listeGroupeD1Contact.add(groupeServiceRepository.getGroupeById(1));
-		listeGroupeD1Contact.add(groupeServiceRepository.getGroupeById(2));
-		
-		Contact monContact = contactServiceRepository.getContactById(4);
-		
-		contactServiceJpa.updateListeGroupes(monContact.getIdContact(), listeGroupeD1Contact);
-		
-		
-	}
-
 }

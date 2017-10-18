@@ -67,26 +67,27 @@ public class ContactServiceJpa implements IContactService {
 
 		Contact contact = em.find(Contact.class, id);
 
-	    return contact;
+		return contact;
 	}
-	
+
 	@Override
-	public List<Contact> getContactsByGroupId(){
-		TypedQuery<Contact> query = em.createQuery("SELECT idContact FROM Contact c WHERE c.idGroupe=:IdGroupe", Contact.class );
-		return query.getResultList();		
+	public List<Contact> getContactsByGroupId() {
+		TypedQuery<Contact> query = em.createQuery("SELECT idContact FROM Contact c WHERE c.idGroupe=:IdGroupe",
+				Contact.class);
+		return query.getResultList();
 	}
 
 	@Override
 	public List<Groupe> getListeGroupes(int IdUtilisateur) {
 
-		Query q = em.createNativeQuery("SELECT * FROM groupe INNER JOIN groupe_contact ON groupe.idGroupe = groupe_contact.Groupe_idGroupe "
-				+ "INNER JOIN utilisateur on groupe_contact.contactsDuGroupe_idContact = utilisateur.contact_idContact where utilisateur.idUtilisateur = ?"
-				);
+		Query q = em.createNativeQuery(
+				"SELECT * FROM groupe INNER JOIN groupe_contact ON groupe.idGroupe = groupe_contact.Groupe_idGroupe "
+						+ "INNER JOIN utilisateur on groupe_contact.contactsDuGroupe_idContact = utilisateur.contact_idContact where utilisateur.idUtilisateur = ?");
 		q.setParameter(1, IdUtilisateur);
 		List<Groupe> groupes = q.getResultList();
 		return groupes;
 	}
-	
+
 	@Override
 	@Transactional
 	public void updateListeGroupes(int idcontact, Set<Groupe> listeGroupesContacts) {

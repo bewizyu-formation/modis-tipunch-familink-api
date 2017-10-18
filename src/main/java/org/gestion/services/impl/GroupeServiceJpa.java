@@ -56,17 +56,14 @@ public class GroupeServiceJpa implements IGroupeService {
 
 	@Override
 	public void deleteGroupe(int id) {
-		
 		Groupe groupe = getGroupeById(id);
 		em.remove(groupe);
-	
+
 	}
 
 	@Override
 	public Groupe getGroupeById(int id) {
-		
 		Groupe groupe = em.find(Groupe.class, id);
-		
 		return groupe;
 	}
 
@@ -83,7 +80,7 @@ public class GroupeServiceJpa implements IGroupeService {
 		return query.setParameter("Utilisateur", utilisateur).getSingleResult();
 
 	}
-	
+
 	/**
 	 * Récupération d'un groupe par l'idUtilisateur
 	 * 
@@ -92,15 +89,13 @@ public class GroupeServiceJpa implements IGroupeService {
 	 */
 	public Groupe getGroupeByIdUtilisateur(Utilisateur utilisateur) {
 
-
-		Query query = em.createQuery("select u from Groupe u where u.utilisateur = :Utilisateur",
-				Groupe.class);
+		Query query = em.createQuery("select u from Groupe u where u.utilisateur = :Utilisateur", Groupe.class);
 		query.setParameter("Utilisateur", utilisateur).getSingleResult();
 		Groupe oldGroupe = (Groupe) query.getSingleResult();
 		return oldGroupe;
 
 	}
-	
+
 	@Override
 	@Transactional
 	public void updateListeContacts(int idGroupe, Set<Contact> listeContactsDuGroupe) {
@@ -108,5 +103,4 @@ public class GroupeServiceJpa implements IGroupeService {
 		monGroupe.setContactsDuGroupe(listeContactsDuGroupe);
 		em.persist(monGroupe);
 	}
-
 }

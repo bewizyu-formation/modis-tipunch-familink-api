@@ -2,11 +2,12 @@ package org.gestion.services;
 
 import java.util.List;
 
+import org.gestion.entite.Groupe;
 import org.gestion.entite.Utilisateur;
 
 /**
- * Interface qui liste les méthodes de persistence pour la classe {@link Utilisateur} que doit posséder une classe
- * d'implémentation
+ * Interface qui liste les méthodes de persistence pour la classe
+ * {@link Utilisateur} que doit posséder une classe d'implémentation
  *
  * @author DIGINAMIC
  */
@@ -15,8 +16,8 @@ public interface IUtilisateurService {
 	/**
 	 * Sauvegarde un nouveau utilisateur
 	 *
-
-	 * @param Utilisateur nouveau utilisateur
+	 * @param Utilisateur
+	 *            nouveau utilisateur
 	 */
 	Utilisateur create(Utilisateur nouveauUtilisateur);
 
@@ -36,28 +37,33 @@ public interface IUtilisateurService {
 
 	/**
 	 * Récupération d'un utilisateur par son id
+	 * 
 	 * @param id
 	 * @return
 	 */
-	Utilisateur getUtilisateurById (final int id);
-	
-	/**
-	 * Récupération d'un utilisateur par son email
-	 * @param id
-	 * @return
-	 */
-	Utilisateur getUtilisateurByEmail (final String email);
-	
-	/**
-	 * Récupération d'un utilisateur par son mot de passe
-	 * @param id
-	 * @return
-	 */
-	Utilisateur getUtilisateurByMotDePasse (final String motDePasse);
+	Utilisateur getUtilisateurById(final int id);
 
 	/**
-	 * Suppression d'un utilisateur
+	 * Suppression d'un utilisateur par son id
+	 * 
 	 * @param id
 	 */
 	void deleteUtilisateur(final int id);
+
+	/**
+	 * Récupération d'un utilisateur par son email
+	 * 
+	 * @param id
+	 * @return
+	 */
+	Utilisateur getUtilisateurByEmail(final String email);
+
+	/**
+	 * Récupération d'un utilisateur par son mot de passe
+	 * 
+	 * @param id
+	 * @return
+	 */
+	Utilisateur getUtilisateurByMotDePasse(final String motDePasse);
+
 }

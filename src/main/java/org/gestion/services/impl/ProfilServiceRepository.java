@@ -21,6 +21,7 @@ public class ProfilServiceRepository implements IProfilService {
 	public void deleteProfil(int id) {
 		profilRepository.delete(id);
 	}
+
 	@Override
 	public Profil getProfilById(int id) {
 		return profilRepository.findOne(id);
@@ -28,7 +29,7 @@ public class ProfilServiceRepository implements IProfilService {
 
 	@Override
 	public void create(Profil nouveauProfil) {
-		 profilRepository.save(nouveauProfil);
+		profilRepository.save(nouveauProfil);
 
 	}
 

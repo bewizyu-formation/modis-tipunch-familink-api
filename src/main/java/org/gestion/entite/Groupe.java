@@ -59,7 +59,7 @@ public class Groupe {
 		this.nom = nom;
 		this.dateDeCreation = dateDeCreation;
 		this.contactsDuGroupe = contactsDuGroupe;
-	}
+	} 
 
 
 	public Groupe(int idGroupe, Utilisateur utilisateur, String nom, Date dateDeCreation, Set<Contact> contactsDuGroupe){

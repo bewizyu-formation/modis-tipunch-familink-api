@@ -51,21 +51,20 @@ public interface IContactService {
 	 */
 	void deleteContact(final int id);
 
-
 	/**
 	 * Récupération d'une liste de contacts pour un groupe
 	 * 
 	 * @param id
 	 */
 	List<Contact> getContactsByGroupId();
-	
+
 	/**
-//	 * Récupération d'une liste de groupes pour un contact
-//	 * 
-//	 * @param id
-//	 */
+	 * Récupération d'une liste de groupes pour un contact
+	 * 
+	 * @param id
+	 */
 	List<Groupe> getListeGroupes(int idcontact);
-	
+
 	/**
 	 * Récupération d'une liste de groupes pour un contact
 	 * 

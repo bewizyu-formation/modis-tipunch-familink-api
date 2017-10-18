@@ -1,4 +1,4 @@
-package org.gestion.entite;
+package org.gestion.services.impl;
 
 import java.util.Date;
 import java.util.Properties;
@@ -11,20 +11,19 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class EmailSender {
+import org.gestion.entite.Token;
+import org.gestion.entite.Utilisateur;
 
-	private final static String MAILER_VERSION = "Java";
+public class EmailSenderService {
 
-	public static boolean envoyerMailSMTP() {
+	public static boolean envoyerMailSMTP(Utilisateur utilisateur) {
 
 		boolean result = false;
 
 		try {
 
-			final String username = "elboy62@gmail.com";
-			final String password = "lexacono1";
-
-			String to = "elboy62@gmail.com";
+			final String username = "tipunchfamilink@gmail.com";
+			final String password = "familink";
 
 			Properties props = new Properties();
 			props.put("mail.smtp.host", "smtp.gmail.com");
@@ -40,20 +39,21 @@ public class EmailSender {
 
 			Message message = new MimeMessage(session);
 
-			message.setFrom(new InternetAddress("elboy62@gmail.com"));
+			message.setFrom(new InternetAddress("tipunchfamilink@gmail.com"));
 
-			InternetAddress[] internetAddresses = new InternetAddress[1];
+			InternetAddress internetAddresses = new InternetAddress();
 
-			internetAddresses[0] = new InternetAddress("elboy62@gmail.com");
+			internetAddresses = new InternetAddress(utilisateur.getEmail());
 
-			message.setRecipients(Message.RecipientType.TO, internetAddresses);
+			message.setRecipient(Message.RecipientType.TO, internetAddresses);
 
 			message.setSubject("Demande de nouveau mot de passe");
 
 			Token monToken = new Token();
-			monToken.creerToken();
+			monToken.creerToken(utilisateur.getIdUtilisateur());
 
-			message.setText("http://localhost:4200/ReinitialisationMDP/" + monToken.getCorps());
+			message.setText("Veuillez cliquer sur lien pour réinitialiser votre mot de passse:" + "\n"
+					+ "http://localhost:4200/update-password/" + monToken.getCorps());
 
 			message.setSentDate(new Date());
 

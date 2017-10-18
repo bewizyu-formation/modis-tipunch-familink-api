@@ -1,11 +1,9 @@
 package org.gestion.web.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import org.gestion.entite.Contact;
 import org.gestion.entite.ContactForm;
-import org.gestion.entite.Groupe;
 import org.gestion.services.IContactService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -65,7 +63,7 @@ public class RestContactController {
 	// ********** CREATE contacts ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String createContact(@RequestBody ContactForm nouveauContact) {
 
@@ -95,9 +93,9 @@ public class RestContactController {
 	// ******* UPDATE contact BY ID ******** //
 	// *********************************** //
 
-	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void updateContact(@RequestBody ContactForm updateContact) {
+	public String updateContact(@RequestBody ContactForm updateContact) {
 
 		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
 				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
@@ -105,6 +103,7 @@ public class RestContactController {
 				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));
 
 		contactServiceRepository.update(upContact);
+		return new JSONObject().toString();
 
 	}
 
@@ -119,6 +118,11 @@ public class RestContactController {
 		contactServiceRepository.deleteContact(Integer.parseInt(idContact));
 
 	}
+
+	//
+	// *********************************** //
+	// **** Get contact list by group **** //
+	// *********************************** //
 
 	@RequestMapping(path = "/group", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
@@ -144,19 +148,19 @@ public class RestContactController {
 			Contact monContact = new Contact();
 			monContact = contactServiceRepository.getContactById(Integer.parseInt(idUtilisateur));
 			contactServiceJpa.getListeGroupes(Integer.parseInt(idUtilisateur));
-			
+
 			jObj.put("action", "lister groupes du contact");
 			jObj.put("description", "liste créé");
-			for (int i=0;i<contactServiceJpa.getListeGroupes(Integer.parseInt(idUtilisateur)).size();i++ ) {
+			for (int i = 0; i < contactServiceJpa.getListeGroupes(Integer.parseInt(idUtilisateur)).size(); i++) {
 				jsonArrayResultat.put(contactServiceJpa.getListeGroupes(Integer.parseInt(idUtilisateur)).get(i));
 			}
 			jObj.put("groupes", jsonArrayResultat);
-	
+
 		} catch (Exception e) {
-	
+
 			jObj.put("action", "lister groupes du contact");
 			jObj.put("description", "liste non créée");
-	
+
 		}
 		return jObj.toString();
 

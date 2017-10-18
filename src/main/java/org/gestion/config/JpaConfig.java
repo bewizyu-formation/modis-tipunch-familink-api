@@ -16,8 +16,8 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories({"org.gestion.repository"})
-@Import({DataSourceMySQLConfig.class})
+@EnableJpaRepositories({ "org.gestion.repository" })
+@Import({ DataSourceMySQLConfig.class })
 public class JpaConfig {
 
 	@Bean
@@ -28,8 +28,9 @@ public class JpaConfig {
 	}
 
 	/**
-	 * Cette configuration nécessite une source de données configurée. Elle s'utilise donc en association avec un autre
-	 * fichier de configuration définissant un bean DataSource.
+	 * Cette configuration nécessite une source de données configurée. Elle
+	 * s'utilise donc en association avec un autre fichier de configuration
+	 * définissant un bean DataSource.
 	 */
 	@Bean
 	public EntityManagerFactory entityManagerFactory(DataSource dataSource) {
@@ -47,7 +48,8 @@ public class JpaConfig {
 
 		Properties jpaProperties = new Properties();
 
-		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "drop-and-create"); //"drop-and-create", "update"
+		jpaProperties.setProperty("javax.persistence.schema-generation.database.action", "drop-and-create"); // "drop-and-create",
+																												// "update"
 
 		factory.setJpaProperties(jpaProperties);
 
@@ -55,4 +57,3 @@ public class JpaConfig {
 		return factory.getObject();
 	}
 }
-

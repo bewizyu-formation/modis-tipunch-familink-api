@@ -51,18 +51,18 @@ public class MessageServiceJpa implements IMessageService {
 
 	@Override
 	public void deleteMessage(int id) {
-		//em.getTransaction().begin();
+
 		Message message = getMessageById(id);
 		em.remove(message);
-		//em.getTransaction().commit();
+
 	}
 
 	@Override
 	public Message getMessageById(int id) {
-		//em.getTransaction().begin();
+
 		Message message = em.find(Message.class, id);
-		//em.getTransaction().commit();
-	    return message;
+
+		return message;
 	}
 
 }

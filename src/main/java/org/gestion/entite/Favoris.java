@@ -1,13 +1,14 @@
 package org.gestion.entite;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
+//Cette classe est ajoutée pour la suite afin de rajouter des contacts favoris dans les groupes
+
 
 @Entity
 @Table(name = "FAVORIS")

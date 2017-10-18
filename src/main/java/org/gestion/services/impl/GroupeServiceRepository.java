@@ -11,7 +11,6 @@ import org.gestion.services.IGroupeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service(value = "groupeServiceRepository")
 public class GroupeServiceRepository implements IGroupeService {
 
@@ -54,7 +53,7 @@ public class GroupeServiceRepository implements IGroupeService {
 
 	@Override
 	public Groupe getGroupeByUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -69,10 +68,9 @@ public class GroupeServiceRepository implements IGroupeService {
 			groupeRepository.save(groupeToUpdate);
 		}
 	}
-	
+
 	@Override
 	public void updateListeContacts(int idGroupe, Set<Contact> listeContactsGoupe) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -52,12 +52,10 @@ public class Token {
 			return corps;
 
 		} catch (Exception e) {
-
-		} finally {
-
-			return corps;
+			
+			return null;
+			
 		}
-
 	}
 
 	public String creerToken() {
@@ -78,10 +76,9 @@ public class Token {
 		} catch (Exception e) {
 
 			System.out.println("Error :" + e.getMessage());
+			return null;
 
-		} finally {
-			return corps;
-		}
+		} 
 	}
 
 	public boolean tokenIsValide(String monToken) {

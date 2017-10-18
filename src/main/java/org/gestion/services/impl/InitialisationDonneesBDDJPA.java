@@ -110,6 +110,7 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		groupeServiceRepository.create( new Groupe( utilisateurServiceRepository.getUtilisateurById(3),
 				"Mère Theresa", date, listeDeContacts  ) );
 		
+		
 	}
 	
 	@Override

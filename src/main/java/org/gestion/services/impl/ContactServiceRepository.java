@@ -69,10 +69,9 @@ public class ContactServiceRepository implements IContactService {
 
 		return null;
 	}
-	
+
 	@Override
 	public void updateListeGroupes(int idcontact, Set<Groupe> listeGroupesContacts) {
-		
-		
+
 	}
 }

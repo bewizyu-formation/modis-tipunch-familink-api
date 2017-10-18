@@ -42,7 +42,7 @@ public class RestUtilisateurController {
 	@Autowired
 	@Qualifier("groupeServiceJpa")
 	private IGroupeService groupeServiceJpa;
-	
+
 	@Autowired
 	@Qualifier("contactServiceRepository")
 	private IContactService contactServiceRepository;
@@ -52,7 +52,7 @@ public class RestUtilisateurController {
 	private IProfilService profilServiceRepository;
 
 	// ********************************** //
-	// ******* GET LIST utilisateurS ********** //
+	// ****** GET LIST utilisateurs ***** //
 	// ********************************** //
 
 	@RequestMapping(path = "", method = RequestMethod.GET, produces = "application/json")
@@ -62,7 +62,7 @@ public class RestUtilisateurController {
 	}
 
 	// *********************************** //
-	// ******* GET utilisateur BY ID ********** //
+	// ****** GET utilisateur BY ID ****** //
 	// *********************************** //
 
 	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.GET)
@@ -72,17 +72,17 @@ public class RestUtilisateurController {
 	}
 
 	// *********************************** //
-	// ******* GET groupe BY UTILISATEURID ********** //
+	// *** GET groupe BY UTILISATEURID *** //
 	// *********************************** //
 
 	@RequestMapping(path = "/{idUtilisateur}/groupe", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getGroupeByIdutilisateur(@PathVariable("idUtilisateur") String idUtilisateur) {
-		Utilisateur monUtilisateur =  utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
+		Utilisateur monUtilisateur = utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
 		JSONObject jObj;
 		jObj = new JSONObject();
 		jObj.put("action", "Groupe de l'utlisateur");
-		
+
 		try {
 			jObj.put("description", "Fourni le groupe dont l'utilisateur est administrateur");
 			jObj.put("userOwnedGroup", new JSONObject(groupeServiceJpa.getGroupeByUtilisateur(monUtilisateur)));
@@ -92,13 +92,14 @@ public class RestUtilisateurController {
 			jObj.put("userOwnedGroup", "");
 			return jObj.toString();
 		}
-		
-	}
-	
-	// *********************************** //
-	// ********** CREATE utilisateurs ********** //
 
-	@RequestMapping(path = "", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	}
+
+	// *********************************** //
+	// ******* CREATE utilisateurs ******* //
+	// *********************************** //
+
+	@RequestMapping(path = "", method = RequestMethod.POST, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String createUser(@RequestBody FormUtilisateur monFormUtilisateur) {
 
@@ -133,18 +134,19 @@ public class RestUtilisateurController {
 	}
 
 	// *********************************** //
-	// ******* UPDATE utilisateur BY ID ******** //
+	// **** UPDATE utilisateur BY ID ***** //
 	// *********************************** //
 
-	@RequestMapping(path = "", method = RequestMethod.PUT, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "", method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
-	public void updateUtilisateur(@RequestBody Utilisateur updateUtilisateur) {
+	public String updateUtilisateur(@RequestBody Utilisateur updateUtilisateur) {
 		utilisateurServiceRepository.update(updateUtilisateur);
+		return new JSONObject().toString();
 	}
 
 	//
 	// *********************************** //
-	// ******* DELETE utilisateur BY ID ******** //
+	// ***** DELETE utilisateur BY ID **** //
 	// *********************************** //
 
 	@RequestMapping(path = "/{idUtilisateur}", method = RequestMethod.DELETE)
@@ -153,4 +155,5 @@ public class RestUtilisateurController {
 		utilisateurServiceRepository.deleteUtilisateur(Integer.parseInt(idUtilisateur));
 
 	}
+
 }

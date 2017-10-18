@@ -59,18 +59,17 @@ public interface IGroupeService {
 	 * @return
 	 */
 	Groupe getGroupeByUtilisateur(final Utilisateur utilisateur);
-	
 
 	/**
-	 *Ajout d'un contact à la liste de contact d'un groupe
+	 * Ajout d'un contact à la liste de contact d'un groupe
 	 * 
 	 * @param ContactForm
 	 * @return
 	 */
 	void addContactToGroup(Contact nouveauContact, int idGroupe);
-	
+
 	/**
-	 *Récupération d'une liste de contacts pour un groupe
+	 * Récupération d'une liste de contacts pour un groupe
 	 * 
 	 * @param ContactForm
 	 * @return

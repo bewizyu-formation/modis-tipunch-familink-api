@@ -176,7 +176,7 @@ public class RestGroupesController {
 	// ********** CREATE contacts dans un groupe ********** //
 	// *********************************** //
 
-	@RequestMapping(path = "/{idGroupe}/contact", method = RequestMethod.POST, consumes = "application/json;charset=UTF-8")
+	@RequestMapping(path = "/{idGroupe}/contact", method = RequestMethod.POST, produces = "application/json", consumes = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String createContact(@RequestBody ContactForm nouveauContact,@PathVariable("idGroupe") String idGroupe,
 			@RequestHeader(value = "Authorization", required = true) String requestToken) {

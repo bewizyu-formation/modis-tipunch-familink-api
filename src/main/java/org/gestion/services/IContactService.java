@@ -1,7 +1,6 @@
 package org.gestion.services;
 
 import java.util.List;
-import java.util.Set;
 
 import org.gestion.entite.Contact;
 import org.gestion.entite.Groupe;
@@ -64,12 +63,5 @@ public interface IContactService {
 	 * @param id
 	 */
 	List<Groupe> getListeGroupes(int idcontact);
-
-	/**
-	 * Récupération d'une liste de groupes pour un contact
-	 * 
-	 * @param id
-	 */
-	void updateListeGroupes(int idcontact, Set<Groupe> listeContactsGroupe);
 
 }

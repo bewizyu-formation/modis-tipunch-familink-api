@@ -46,7 +46,7 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		
 		profilServiceJpa.create(new Profil("SENIOR","#FFFF00"));
 		profilServiceJpa.create(new Profil("MEDECIN","#FFFFFF"));
-		profilServiceJpa.create(new Profil("FAMILLE","#00FF00"));
+		profilServiceJpa.create(new Profil("FAMILLE","#0000FF"));
 		
 	}
 

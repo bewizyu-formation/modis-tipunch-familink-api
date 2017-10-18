@@ -8,17 +8,18 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 /**
- * Classes de config pour les services et controleurs: - charge les services (@Service) - charge les contrôleurs REST
+ * Classes de config pour les services et controleurs: - charge les services
+ * (@Service) - charge les contrôleurs REST
  *
  * @author DIGINAMIC
  */
 @Configuration
-@ComponentScan({"org.gestion.web.controller", "org.gestion.services"})
-@PropertySource(value = {"classpath:application.properties"})
+@ComponentScan({ "org.gestion.web.controller", "org.gestion.services" })
+@PropertySource(value = { "classpath:application.properties" })
 @Import(JpaConfig.class)
 public class ServicesConfig {
 
-	//this bean needed to resolve ${property.name} syntax
+	// this bean needed to resolve ${property.name} syntax
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
 		return new PropertySourcesPlaceholderConfigurer();

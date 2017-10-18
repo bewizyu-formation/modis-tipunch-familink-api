@@ -68,9 +68,4 @@ public class UtilisateurServiceRepository implements IUtilisateurService {
 		return null;
 	}
 
-	@Override
-	public List<Groupe> getListeGroupeUtilisateur( Utilisateur utilisateur ) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

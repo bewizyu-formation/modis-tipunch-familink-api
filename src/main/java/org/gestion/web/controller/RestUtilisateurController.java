@@ -28,9 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/utilisateurs")
-
 @CrossOrigin(origins = "*", allowedHeaders = "authorization")
-
 public class RestUtilisateurController {
 
 	@Autowired
@@ -44,7 +42,7 @@ public class RestUtilisateurController {
 	@Autowired
 	@Qualifier("groupeServiceJpa")
 	private IGroupeService groupeServiceJpa;
-	
+
 	@Autowired
 	@Qualifier("contactServiceRepository")
 	private IContactService contactServiceRepository;
@@ -80,11 +78,11 @@ public class RestUtilisateurController {
 	@RequestMapping(path = "/{idUtilisateur}/groupe", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getGroupeByIdutilisateur(@PathVariable("idUtilisateur") String idUtilisateur) {
-		Utilisateur monUtilisateur =  utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
+		Utilisateur monUtilisateur = utilisateurServiceRepository.getUtilisateurById(Integer.parseInt(idUtilisateur));
 		JSONObject jObj;
 		jObj = new JSONObject();
 		jObj.put("action", "Groupe de l'utlisateur");
-		
+
 		try {
 			jObj.put("description", "Fourni le groupe dont l'utilisateur est administrateur");
 			jObj.put("userOwnedGroup", new JSONObject(groupeServiceJpa.getGroupeByUtilisateur(monUtilisateur)));
@@ -94,9 +92,9 @@ public class RestUtilisateurController {
 			jObj.put("userOwnedGroup", "");
 			return jObj.toString();
 		}
-		
+
 	}
-	
+
 	// *********************************** //
 	// ******* CREATE utilisateurs ******* //
 	// *********************************** //
@@ -157,19 +155,5 @@ public class RestUtilisateurController {
 		utilisateurServiceRepository.deleteUtilisateur(Integer.parseInt(idUtilisateur));
 
 	}
-	
-	//
-	// ************************************* //
-	// **** Get liste groupe utilisateur *** //
-	// ************************************* //
 
-	@RequestMapping(path = "/{idUtilisateur}/groupes", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Groupe> listeGroupeUtilisateur(@PathVariable("idUtilisateur") String idUtilisateur) {
-		Utilisateur utilisateur = utilisateurServiceRepository.getUtilisateurById( Integer.parseInt(idUtilisateur) );
-		System.out.println("coucou"+"\n" );
-		return utilisateurServiceJpa.getListeGroupeUtilisateur(utilisateur);
-
-	}
-	
 }

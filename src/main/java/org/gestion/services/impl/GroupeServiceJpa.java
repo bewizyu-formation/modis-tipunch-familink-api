@@ -1,6 +1,7 @@
 package org.gestion.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -57,6 +58,7 @@ public class GroupeServiceJpa implements IGroupeService {
 	public void deleteGroupe(int id) {
 		Groupe groupe = getGroupeById(id);
 		em.remove(groupe);
+
 	}
 
 	@Override
@@ -73,13 +75,32 @@ public class GroupeServiceJpa implements IGroupeService {
 	 */
 	public Groupe getGroupeByUtilisateur(Utilisateur utilisateur) {
 
-		/*TypedQuery<Groupe> query = em.createQuery("select u from Groupe u ",
-				Groupe.class);
-		return query.getResultList();*/
 		TypedQuery<Groupe> query = em.createQuery("select u from Groupe u where u.utilisateur = :Utilisateur",
 				Groupe.class);
 		return query.setParameter("Utilisateur", utilisateur).getSingleResult();
 
 	}
-	
+
+	/**
+	 * Récupération d'un groupe par l'idUtilisateur
+	 * 
+	 * @param IdUtilisateur
+	 * @return groupe
+	 */
+	public Groupe getGroupeByIdUtilisateur(Utilisateur utilisateur) {
+
+		Query query = em.createQuery("select u from Groupe u where u.utilisateur = :Utilisateur", Groupe.class);
+		query.setParameter("Utilisateur", utilisateur).getSingleResult();
+		Groupe oldGroupe = (Groupe) query.getSingleResult();
+		return oldGroupe;
+
+	}
+
+	@Override
+	@Transactional
+	public void updateListeContacts(int idGroupe, Set<Contact> listeContactsDuGroupe) {
+		Groupe monGroupe = getGroupeById(idGroupe);
+		monGroupe.setContactsDuGroupe(listeContactsDuGroupe);
+		em.persist(monGroupe);
+	}
 }

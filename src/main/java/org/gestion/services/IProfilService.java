@@ -5,8 +5,8 @@ import java.util.List;
 import org.gestion.entite.Profil;
 
 /**
- * Interface qui liste les méthodes de persistence pour la classe {@link Profil} que doit posséder une classe
- * d'implémentation
+ * Interface qui liste les méthodes de persistence pour la classe {@link Profil}
+ * que doit posséder une classe d'implémentation
  *
  * @author DIGINAMIC
  */
@@ -15,9 +15,10 @@ public interface IProfilService {
 	/**
 	 * Sauvegarde un nouveau Profil
 	 *
-	 * @param nouveauGrade nouveau Profil
-
-	 * @return 
+	 * @param nouveauGrade
+	 *            nouveau Profil
+	 * 
+	 * @return
 	 */
 	void create(Profil nouveauProfil);
 
@@ -37,13 +38,15 @@ public interface IProfilService {
 
 	/**
 	 * Récupération d'un Profil par son id
+	 * 
 	 * @param id
 	 * @return
 	 */
-	Profil getProfilById (final int id);
+	Profil getProfilById(final int id);
 
 	/**
 	 * Suppression d'un Profil
+	 * 
 	 * @param id
 	 */
 	void deleteProfil(final int id);

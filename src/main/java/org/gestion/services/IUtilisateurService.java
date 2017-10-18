@@ -6,8 +6,8 @@ import org.gestion.entite.Groupe;
 import org.gestion.entite.Utilisateur;
 
 /**
- * Interface qui liste les méthodes de persistence pour la classe {@link Utilisateur} que doit posséder une classe
- * d'implémentation
+ * Interface qui liste les méthodes de persistence pour la classe
+ * {@link Utilisateur} que doit posséder une classe d'implémentation
  *
  * @author DIGINAMIC
  */
@@ -16,7 +16,8 @@ public interface IUtilisateurService {
 	/**
 	 * Sauvegarde un nouveau utilisateur
 	 *
-	 * @param Utilisateur nouveau utilisateur
+	 * @param Utilisateur
+	 *            nouveau utilisateur
 	 */
 	Utilisateur create(Utilisateur nouveauUtilisateur);
 
@@ -36,36 +37,33 @@ public interface IUtilisateurService {
 
 	/**
 	 * Récupération d'un utilisateur par son id
+	 * 
 	 * @param id
 	 * @return
 	 */
-	Utilisateur getUtilisateurById (final int id);
-	
+	Utilisateur getUtilisateurById(final int id);
+
 	/**
 	 * Suppression d'un utilisateur par son id
+	 * 
 	 * @param id
 	 */
 	void deleteUtilisateur(final int id);
-	
-	/**
-	 * Récupération d'un utilisateur par son email
-	 * @param id
-	 * @return
-	 */
-	Utilisateur getUtilisateurByEmail (final String email);
-	
-	/**
-	 * Récupération d'un utilisateur par son mot de passe
-	 * @param id
-	 * @return
-	 */
-	Utilisateur getUtilisateurByMotDePasse (final String motDePasse);
 
 	/**
-	 * Retourne la liste des groupes auxquels l'utilisateur appartient
-	 *
-	 * @return List<Utilisateur>
+	 * Récupération d'un utilisateur par son email
+	 * 
+	 * @param id
+	 * @return
 	 */
-	List<Groupe> getListeGroupeUtilisateur( Utilisateur utilisateur );
+	Utilisateur getUtilisateurByEmail(final String email);
+
+	/**
+	 * Récupération d'un utilisateur par son mot de passe
+	 * 
+	 * @param id
+	 * @return
+	 */
+	Utilisateur getUtilisateurByMotDePasse(final String motDePasse);
 
 }

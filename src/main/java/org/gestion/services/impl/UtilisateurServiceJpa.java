@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import org.gestion.entite.Groupe;
 import org.gestion.entite.Utilisateur;
 import org.gestion.services.IUtilisateurService;
 import org.springframework.stereotype.Service;
@@ -50,40 +49,34 @@ public class UtilisateurServiceJpa implements IUtilisateurService {
 
 	@Override
 	public void deleteUtilisateur(int id) {
-		
+
 		Utilisateur utilisateur = getUtilisateurById(id);
 		em.remove(utilisateur);
-		
+
 	}
 
 	@Override
 	public Utilisateur getUtilisateurById(int id) {
-		  Utilisateur utilisateur = em.find(Utilisateur.class, id);
-			    return utilisateur;
+		Utilisateur utilisateur = em.find(Utilisateur.class, id);
+		return utilisateur;
 	}
 
-
 	/**
-		 * Récupération d'un utilisateur par son email
-		 * @param email
-		 * @return utilisateur
+	 * Récupération d'un utilisateur par son email
+	 * 
+	 * @param email
+	 * @return utilisateur
 	 */
 	@Override
 	public Utilisateur getUtilisateurByEmail(String email) {
-		TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u where u.email = :Email",Utilisateur.class);
+		TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u where u.email = :Email",
+				Utilisateur.class);
 		return query.setParameter("Email", email).getSingleResult();
-		
-	}
-	
-	public Utilisateur getUtilisateurByMotDePasse(String motDePasse) {
-		return null;
+
 	}
 
-	@Override
-	public List<Groupe> getListeGroupeUtilisateur( Utilisateur utilisateur ) {
-		int idContact = utilisateur.getContact().getIdContact();
-		TypedQuery<Groupe> query = em.createQuery("SELECT u FROM groupe_contact u",Groupe.class);
-		return query.getResultList();
+	public Utilisateur getUtilisateurByMotDePasse(String motDePasse) {
+		return null;
 	}
 
 }

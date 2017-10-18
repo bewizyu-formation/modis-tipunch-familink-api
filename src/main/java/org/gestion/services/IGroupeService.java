@@ -1,6 +1,7 @@
 package org.gestion.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.gestion.entite.Contact;
 import org.gestion.entite.Groupe;
@@ -58,14 +59,21 @@ public interface IGroupeService {
 	 * @return
 	 */
 	Groupe getGroupeByUtilisateur(final Utilisateur utilisateur);
-	
 
 	/**
-	 *Ajout d'un contact à la liste de contact d'un groupe
+	 * Ajout d'un contact à la liste de contact d'un groupe
 	 * 
 	 * @param ContactForm
 	 * @return
 	 */
 	void addContactToGroup(Contact nouveauContact, int idGroupe);
+
+	/**
+	 * Récupération d'une liste de contacts pour un groupe
+	 * 
+	 * @param ContactForm
+	 * @return
+	 */
+	void updateListeContacts(int idGroupe, Set<Contact> listeContactsGoupe);
 
 }

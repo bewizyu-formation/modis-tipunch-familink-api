@@ -29,6 +29,10 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 	private IContactService contactServiceRepository;
 	
 	@Autowired
+	@Qualifier("contactServiceJpa")
+	private IContactService contactServiceJpa;
+	
+	@Autowired
 	@Qualifier("utilisateurServiceRepository")
 	private IUtilisateurService utilisateurServiceRepository;
 	
@@ -38,7 +42,7 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 	
 	@Override
 	public void initialiserProfils() {
-		// TODO Auto-generated method stub
+
 		
 		profilServiceJpa.create(new Profil("SENIOR","#FFFF00"));
 		profilServiceJpa.create(new Profil("MEDECIN","#FFFFFF"));
@@ -48,7 +52,7 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 
 	@Override
 	public void initialiserContact() {
-		// TODO Auto-generated method stub
+
 		
 		contactServiceRepository.create(new Contact( "", "Martin", "Damien", 
 				"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50", "0612853748",
@@ -78,7 +82,6 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 
 	@Override
 	public void initialiserUtilisateur() {
-		// TODO Auto-generated method stub
 		
 		utilisateurServiceRepository.create( new Utilisateur( "vr.you@hotmail.fr", "71ec2af811cdf898bce6904a75a48d75", contactServiceRepository.getContactById(2) ) );
 		utilisateurServiceRepository.create( new Utilisateur( "celikbas.ahmet@gmail.com", "bd990c98217acc3fc01b58d119c878f4", contactServiceRepository.getContactById(3) ) );
@@ -89,7 +92,6 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 
 	@Override
 	public void initialiserGroupe() {
-		// TODO Auto-generated method stub
 		
 		Set<Contact> listeDeContacts = new HashSet<Contact>();
 		listeDeContacts.add( contactServiceRepository.getContactById( utilisateurServiceRepository.getUtilisateurById(2).getContact().getIdContact() ) );
@@ -108,13 +110,20 @@ public class InitialisationDonneesBDDJPA implements IInitialisationDonnees{
 		groupeServiceRepository.create( new Groupe( utilisateurServiceRepository.getUtilisateurById(3),
 				"Mère Theresa", date, listeDeContacts  ) );
 		
-//		listeDeContacts.clear();
-//		listeDeContacts.add( contactServiceRepository.getContactById( utilisateurServiceRepository.getUtilisateurById(3).getContact().getIdContact() ) );
-//		listeDeContacts.add( contactServiceRepository.getContactById(1) ); 
-//		date.toInstant();
-//		
-//		groupeServiceRepository.create( new Groupe( utilisateurServiceRepository.getUtilisateurById(4),
-//				"Réné Robert", date, listeDeContacts  ) );
+		
+	}
+	
+	@Override
+	public void initialiserGroupesD1Contact() {
+		
+		Set<Groupe> listeGroupeD1Contact = new HashSet<Groupe>();
+		listeGroupeD1Contact.add(groupeServiceRepository.getGroupeById(1));
+		listeGroupeD1Contact.add(groupeServiceRepository.getGroupeById(2));
+		
+		Contact monContact = contactServiceRepository.getContactById(4);
+		
+		contactServiceJpa.updateListeGroupes(monContact.getIdContact(), listeGroupeD1Contact);
+		
 		
 	}
 

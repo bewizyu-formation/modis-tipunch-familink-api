@@ -1,17 +1,18 @@
 package org.gestion.web.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import org.gestion.entite.Contact;
 import org.gestion.entite.ContactForm;
 import org.gestion.services.IContactService;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -68,24 +69,24 @@ public class RestContactController {
 
 		JSONObject jObj;
 		jObj = new JSONObject();
-		
+
 		try {
-			Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(), nouveauContact.getPrenom(),
-					nouveauContact.getGravatar(), nouveauContact.getNumTel(), nouveauContact.getAdresse(),
-					nouveauContact.getCodePostal(), nouveauContact.getVille(),
+			Contact newContact = new Contact(nouveauContact.getEmail(), nouveauContact.getNom(),
+					nouveauContact.getPrenom(), nouveauContact.getGravatar(), nouveauContact.getNumTel(),
+					nouveauContact.getAdresse(), nouveauContact.getCodePostal(), nouveauContact.getVille(),
 					restProfileController.getProfilById(Integer.toString(nouveauContact.getIdProfil())));
 			contactServiceRepository.create(newContact);
-			
+
 			jObj.put("action", "creation contact");
 			jObj.put("description", "Contact créé");
-			
-			} catch (Exception e) {
-		
-				jObj.put("action", "creation contact");
-				jObj.put("description", "Echec creation contact");
-		
-			}
-			return jObj.toString();
+
+		} catch (Exception e) {
+
+			jObj.put("action", "creation contact");
+			jObj.put("description", "Echec creation contact");
+
+		}
+		return jObj.toString();
 	}
 
 	// *********************************** //
@@ -96,7 +97,7 @@ public class RestContactController {
 	@ResponseBody
 	public String updateContact(@RequestBody ContactForm updateContact) {
 
-   		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
+		Contact upContact = new Contact(updateContact.getIdContact(), updateContact.getEmail(), updateContact.getNom(),
 				updateContact.getPrenom(), updateContact.getGravatar(), updateContact.getNumTel(),
 				updateContact.getAdresse(), updateContact.getCodePostal(), updateContact.getVille(),
 				restProfileController.getProfilById(Integer.toString(updateContact.getIdProfil())));
@@ -117,18 +118,52 @@ public class RestContactController {
 		contactServiceRepository.deleteContact(Integer.parseInt(idContact));
 
 	}
-	
+
 	//
 	// *********************************** //
 	// **** Get contact list by group **** //
 	// *********************************** //
-	
-	
+
 	@RequestMapping(path = "/group", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Contact> getContactsByGroupId() {
 
 		return contactServiceJpa.getContactsByGroupId();
 	}
-	
+
+	// ********************************** //
+	// ******* GET LIST groupes d'un contact ********** //
+	// ********************************** //
+
+	@RequestMapping(path = "/{idUtilisateur}/groupes", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public String getContactsByIdGroupe(@PathVariable("idUtilisateur") String idUtilisateur,
+			@RequestHeader(value = "Authorization", required = true) String requestToken) {
+
+		JSONObject jObj;
+		jObj = new JSONObject();
+		JSONArray jsonArrayResultat = new JSONArray();
+
+		try {
+			Contact monContact = new Contact();
+			monContact = contactServiceRepository.getContactById(Integer.parseInt(idUtilisateur));
+			contactServiceJpa.getListeGroupes(Integer.parseInt(idUtilisateur));
+
+			jObj.put("action", "lister groupes du contact");
+			jObj.put("description", "liste créé");
+			for (int i = 0; i < contactServiceJpa.getListeGroupes(Integer.parseInt(idUtilisateur)).size(); i++) {
+				jsonArrayResultat.put(contactServiceJpa.getListeGroupes(Integer.parseInt(idUtilisateur)).get(i));
+			}
+			jObj.put("groupes", jsonArrayResultat);
+
+		} catch (Exception e) {
+
+			jObj.put("action", "lister groupes du contact");
+			jObj.put("description", "liste non créée");
+
+		}
+		return jObj.toString();
+
+	}
+
 }

@@ -2,7 +2,7 @@ package org.gestion.web.controller;
 
 import org.gestion.entite.Login;
 import org.gestion.services.IUtilisateurService;
-import org.gestion.services.impl.EmailSender;
+import org.gestion.services.impl.EmailSenderService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,7 +39,7 @@ public class RestMotDePasseOublieController {
 
 		try {
 
-			EmailSender.envoyerMailSMTP( utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail()) );
+			EmailSenderService.envoyerMailSMTP( utilisateurServiceJpa.getUtilisateurByEmail(newLogin.getEmail()) );
 
 			jObj.put("description", "Email reconnu");
 

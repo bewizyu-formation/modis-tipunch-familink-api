@@ -1,6 +1,7 @@
 package org.gestion.entite;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,13 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.gestion.entite.Contact;
-import org.gestion.entite.Utilisateur;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "GROUPE")
@@ -43,14 +42,12 @@ public class Groupe {
 	 */
 	@Column(name = "DATE_DE_CREATION", nullable = false)
 	private Date dateDeCreation;
-
-	@OneToMany(fetch = FetchType.EAGER)
-    private Set<Contact> contactsDuGroupe ;
-		
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name="ID_GROUPE")
-    private Set<Favoris> listeFavorisGroupe ;
 	
+	@JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Contact> contactsDuGroupe = new HashSet<Contact>();
+
+		
 	public Groupe() {
 		super();
 	}
@@ -111,4 +108,5 @@ public class Groupe {
 	public void setContactsDuGroupe(Set<Contact> contactsDuGroupe) {
 		this.contactsDuGroupe = contactsDuGroupe;
 	}
+	
 }

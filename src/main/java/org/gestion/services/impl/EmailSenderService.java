@@ -14,9 +14,9 @@ import javax.mail.internet.MimeMessage;
 import org.gestion.entite.Token;
 import org.gestion.entite.Utilisateur;
 
-public class EmailSender {
+public class EmailSenderService {
 
-	public static boolean envoyerMailSMTP( Utilisateur utilisateur ) {
+	public static boolean envoyerMailSMTP(Utilisateur utilisateur) {
 
 		boolean result = false;
 
@@ -52,7 +52,8 @@ public class EmailSender {
 			Token monToken = new Token();
 			monToken.creerToken(utilisateur.getIdUtilisateur());
 
-			message.setText("Veuillez cliquer sur lien pour réinitialiser votre mot de passse:"+"\n"+"http://localhost:4200/update-password/" + monToken.getCorps());
+			message.setText("Veuillez cliquer sur lien pour réinitialiser votre mot de passse:" + "\n"
+					+ "http://localhost:4200/update-password/" + monToken.getCorps());
 
 			message.setSentDate(new Date());
 
